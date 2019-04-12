@@ -115,8 +115,28 @@ NUSP: 9298191
 	\begin{itemize}
 		\item[1. ]
 			$n = 21$ e $a = 5$\\
-			Fatorando $n-1$ temos: $20 = 2^2*5$
-		\item[2. ]	
+			Fatorando $n-1$ temos: $20 = 2^2*5$\\
+			Portanto $t = 2$ e $c = 5$
+			Agora calcularemos os módulos
+			$$(5^5)^1 \ mod \ 21 = 17$$
+			$$(5^5)^2 \ mod \ 21 = 16$$
+			$$(5^5)^4 \ mod \ 21 = 4$$
+			$r_0 = 17$ , $r_1 = 16$ , $r_2 = 4$\\
+			Como nenhum $r_x$ é igual a +1 ou -1 temos que o número 21 é composto.\\
+			Esta resposta final está correta, uma vez que 21 é divisível por 3 e por 7
+			ele possui mais do que os 2 divisores naturais triviais, portanto não é primo.
+		\item[2. ]
+			$n = 13$ e $a = 2$\\
+			Fatorando $n-1$ temos: $12 = 2^2*3$\\
+			Portanto $t = 2$ e $c = 3$
+			Agora calcularemos os módulos
+			$$(2^3)^1 \ mod \ 13 = 8$$
+			$$(2^3)^2 \ mod \ 13 = 12$$
+			$$(2^3)^4 \ mod \ 13 = 1$$
+			$r_0 = 8$ , $r_1 = 12 \ (-1)$, $r_2 = 1$\\
+			Como $r_2$ é igual 1 e $r_x$ imediatamente anterior a ele é 
+			$r_1 = 12 \ (-1)$ o número $n$ é dado como primo.\\
+			Esta resposta final está correta, uma vez que 13 é primo.	
 	\end{itemize}
 \subsection*{Exercício 3.}
 \subsection*{Exercício 4.}
