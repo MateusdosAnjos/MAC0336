@@ -19,13 +19,19 @@ def millerRabin(n, a):
 		modAnt = mod
 		mod = (base**(2**r))%n
 		#print("r" + str(r), "=",  mod)
+		#Pagina 139 - ITEM 5
 		if (mod == 1):
-			if (modAnt == n-1):
-				#print("É provavelmente primo")
-				return True
+			if (modAnt != n-1 and modAnt != 1):
+				#print("É composto")
+				return False
 		r = r + 1
-	#print("É composto")
-	return False
+	#Pagina 140  - ITEM 6	
+	if (mod != 1):
+		#print("É composto")
+		return False
+	#Pagina 140 - ITEM 7			
+	#print("É provavelmente primo")
+	return True
 		
 def main():
 	primo = 0
@@ -37,7 +43,7 @@ def main():
 		else:
 			composto = composto + 1	
 	print("tentativas =", a)
-	print("numero de vezes dado como primo =", primo)
+	print("numero de vezes dado como possivelmente primo =", primo)
 	print("numero de vezes dado como composto =", composto)
 	if (composto != 0):
 		print("relação primo/composto =", primo/composto)
