@@ -51,6 +51,7 @@
 \newcommand{\st}{\ni}
 \newcommand{\wh}{\widehat}
 \newcommand\ceil[1]{\lceil#1\rceil}
+\newcommand{\newqed}{{\hfill\color{black}\ensuremath{\blacksquare}}}
 
 %Pagination stuff.
 \setlength{\topmargin}{-.3 in}
@@ -72,10 +73,51 @@ Lista 1}\\
 NUSP: 9298191
 \end{center}
 
-\vspace{0.2 cm}
+\vspace{0.4 cm}
 
 \subsection*{Exercício 1.}
+	\begin{itemize}
+		\item[1. ]
+			Temos como entrada:	 $n$ e $\Phi(n)$
+		\item[2. ]	
+			Sabemos que no algoritmo do RSA: $n = p * q$ e $\Phi(n) = (p-1)*(q-1)$
+		\item[3. ]	
+			Queremos descobrir $p$ e $q$	para fatorar $n$
+	\end{itemize}
+	Podemos manipular essas equações da seguinte forma:
+	$$p - 1 = \frac{\Phi(n)}{(q - 1)}  \ \ , \ \  (q - 1) > 0$$
+	\begin{equation}
+		\label{eqn:I} \tag{I}
+			p = \frac{\Phi(n)}{q - 1} + 1 
+	\end{equation}
+	Substituindo \eqref{eqn:I} em $n = p * q$ temos:
+	$$ n = \Big(\frac{\Phi(n)}{q - 1} + 1\Big) * q $$
+	$$ n = (\Phi(n) + q - 1) * q$$
+	$$ n = \Phi(n)*q + q^2 - q$$
+	\begin{equation}
+		\label{eqn:II} \tag{II}
+			 n = q^2 + (\Phi(n) - 1) * q
+	\end{equation}
+	\textbf{Note que}, se isolássemos $q$ em \eqref{eqn:I} chegaríamos em:
+	$$n = p^2 + (\Phi(n) - 1) * p$$
+	Portanto as soluções de $p$ e $q$ são simétricas.\\
+	
+	Como temos $n$ e $\Phi(n)$ podemos achar as raízes $r_1$ e $r_2$ de
+	\eqref{eqn:II}, sendo que $p = r_1$ e $q = r_2$, uma vez que
+	$p$ e $q$ são primos a fatoração de $n$ será $p * q$, portanto temos
+	um algoritmo \textit{rápido} (solução de uma equação de segundo grau, podendo
+	utilizar $bhaskara$) para encontrar a fatoração de $n$ .
+	
+	\newqed
+
+\newpage	
 \subsection*{Exercício 2.}
+	\begin{itemize}
+		\item[1. ]
+			$n = 21$ e $a = 5$\\
+			Fatorando $n-1$ temos: $20 = 2^2*5$
+		\item[2. ]	
+	\end{itemize}
 \subsection*{Exercício 3.}
 \subsection*{Exercício 4.}
 
