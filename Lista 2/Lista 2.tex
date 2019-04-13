@@ -68,7 +68,7 @@
 
 \begin{center}
 {\Large MAC0336/5723 Criptografia para Segurança de Dados\\
-Lista 1}\\
+Lista 2}\\
 \textbf{Mateus Agostinho dos Anjos}\\
 NUSP: 9298191
 \end{center}
@@ -163,8 +163,52 @@ NUSP: 9298191
 	Portanto podemos pegar o $mdc(x-1, n)$ bem como o $mdc(x+1, n)$ como 
 	divisores  não triviais de $n$.
 	
-	$\hfill\blacksquare$
+	\newqed
 	
 \subsection*{Exercício 4.}
-
+	\textbf{Enunciado:}\\
+		Demonstre que se $q, r$ são primos distintos, $n = qr$, $0 < a < n$, 
+		e se $x, y$ são raízes quadradas de $a \ \mathrm{mod} \ n$ tais que
+		 $y \neq x \ \mathrm{mod} \ n$ e $y \neq n-x \ \mathrm{mod} \ n$, 
+		 então $mdc(x-y, n) = q$ ou $= r$.
+	\newline
+	\newline
+	\textbf{Demonstração:}\\
+		Temos:
+		\begin{itemize}
+		\item
+			$n = qr$
+		\item
+			$q, r$ são primos distintos.
+		\item
+			$x^2 \equiv a \ \mathrm{mod} \ n$
+		\item
+			$y^2 \equiv a \ \mathrm{mod} \ n$
+		\item
+			$y \neq x \ \mathrm{mod} \ n$
+		\item
+			$y \neq n-x \ \mathrm{mod} \ n$	
+		\end{itemize}
+		Operando com o que nos foi dado:
+		\begin{align*}
+			x^2 - y^2 &\equiv 0 \ \mathrm{mod} \ n\\
+			(x+y)(x-y) &\equiv 0 \ \mathrm{mod} \ n\\
+			\text{Como} \ y \neq x \ \mathrm{mod} \ &n \ 
+			\text{Então} \ (x-y) \neq 0\\
+			\text{Como} \ y \neq n-x \ \mathrm{mod} \ &n \ 
+			\text{Então} \ (x+y) \neq 0\\
+			\label{eqn:IV}\tag{I}
+			\text{Sendo assim:} \ \frac{(x+y)(x-y)}{n} &= i, 
+			\text{para algum} \  i \in \N\\
+			\text{Portanto} \ n \ \text{tem fator(es) em} \ &
+			\text{comum com} \ (x+y) \ \text{e} \ (x-y)
+		\end{align*}
+		Como $n = qr$ e $q, r$ são primos distintos, os únicos divisores de $n$ são:
+		$1, q, r, n$.\\ 
+		Podemos reescrever \eqref{eqn:IV} substituindo $n$ por $qr$:
+		$$\text{Sendo assim:} \ \frac{(x+y)(x-y)}{qr} = i, 
+		\text{para algum} \  i \in \N\\$$
+		Portanto $mdc(x-y, n) = q$ ou $= r$.
+			
+		\newqed
 \end{document}
