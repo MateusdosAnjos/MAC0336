@@ -1,0 +1,24 @@
+Arquitetura:                x86_64
+Modo(s) operacional da CPU: 32-bit, 64-bit
+Ordem dos bytes:            Little Endian
+CPU(s):                     4
+Lista de CPU(s) on-line:    0-3
+Thread(s) per núcleo:       1
+Núcleo(s) por soquete:      4
+Soquete(s):                 1
+Nó(s) de NUMA:              1
+ID de fornecedor:           GenuineIntel
+Família da CPU:             6
+Modelo:                     60
+Nome do modelo:             Intel(R) Core(TM) i5-4690 CPU @ 3.50GHz
+Step:                       3
+CPU MHz:                    883.003
+CPU MHz máx.:               3900,0000
+CPU MHz mín.:               800,0000
+BogoMIPS:                   7000.15
+Virtualização:              VT-x
+cache de L1d:               32K
+cache de L1i:               32K
+cache de L2:                256K
+cache de L3:                6144K
+CPU(s) de nó0 NUMA:         0-3
