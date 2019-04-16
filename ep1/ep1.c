@@ -13,6 +13,7 @@ int *hexaParaBinario(char *hex) {
 	int i;
 
 
+	/*printf("Em hexaParaBinario temos = %s\n", hex);*/
 	binario = malloc(8 * sizeof(int));
 
 	for (i = 0; i < 2; i++) {
@@ -188,25 +189,50 @@ char* recebeSenha() {
 	return senha;
 }
 
-int geraChaveK(char *senha) {
-	int i;
+/* Funcao que gera os bits da chave K
+*/
+int *geraChaveK(char *senha) {
+	int *chaveK;
+	int *bin = NULL;
+	int i, j, k;
+	char * c;
+
+	chaveK = malloc(128 * sizeof(int));
+	bin = malloc(8 * sizeof(int));
+	c = malloc(16 * sizeof(char));
 	for (i = 0; i < 16; i++) {
-		printf("%X ", senha[i]);
+		sprintf(c, "%02x", senha[i]);
+		bin = hexaParaBinario(c);
+		for (j = i * 8; j < (i+1)*8; j++) {
+			chaveK[j] = bin[j - (8*i)];
+		}
+		for (k = 0; k < 8; k++) {
+			bin[k] = 0;
+		}
 	}
-	return 0;
+	free(bin);
+	free(c);
+	return chaveK;
 }
 
 int main() {
 	char* senha = NULL;
+	int* chaveK = NULL;
+	int i;
 	
 	while (senha == NULL) {
 		printf("Entre com uma senha\n");
 		senha = recebeSenha();
 	}
 
-	geraChaveK(senha);
+	chaveK = geraChaveK(senha);
+	for (i = 0; i < 128; i++) {
+		if(i%8 == 0)
+			printf("\n");
+		printf("%d", chaveK[i]);
+	}	
 	printf("\n");
-
 	free(senha);
+	free(chaveK);
 	return 0;
 }
