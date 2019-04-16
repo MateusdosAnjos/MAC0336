@@ -285,7 +285,7 @@ int *gera64(char *bytes) {
 */
 int **geraSubChaves(int *chaveK, int r) {
 	int **L = NULL, **subChavesK = NULL, *offset1, *offset2, *offset3;
-	int i, j, j0 = 0, j1 = 0;
+	int i, j, x = 0, y = 0, A, B;
 	char *c1 = "9e3779b97f4a7151", *c2 = "8aed2a6bb7e15162",
 	*c3 = "7c159e3779b97f4a";
 
@@ -311,12 +311,12 @@ int **geraSubChaves(int *chaveK, int r) {
 	/*Passo 1 do algoritmo descrito no enunciado*/
 	for (i = 0; i < 128; i++) {
 		if (i%8 < 4) {
-			L[1][j1] = chaveK[i];
-			j1++;
+			L[1][y] = chaveK[i];
+			y++;
 		}
 		else {
-			L[0][j0] = chaveK[i];
-			j0++;
+			L[0][x] = chaveK[i];
+			x++;
 		}
 	}
 	/*Passo 2 do algoritmo descrito no enunciado*/
@@ -329,6 +329,15 @@ int **geraSubChaves(int *chaveK, int r) {
 	for (j = 1; j < (4*r + 2); j++) {
 		subChavesK[j] = somaBinario64(subChavesK[j-1], offset3);
 	} 
+	/*Passo 5 do algoritmo descrito no enunciado*/
+	i = 0;
+	j = 0;
+	A = 0;
+	B = 0;
+	/*Passo 6 do algoritmo descrito no enunciado
+	for (s = 1; i < (4*r + 2); i++) {
+		
+	}*/
 
 
 	/*Liberando a memória*/
