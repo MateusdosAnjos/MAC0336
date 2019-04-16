@@ -230,3 +230,27 @@ int *somaBinario64(int *a, int *b) {
 
 	return c;
 }
+
+/* Funcao que faz a rotação (deslocamento circular) de
+// alpha bits para a esquerda dos 64 bits de beta.
+*/
+int *deslocaCircular(int *beta, int alpha) {
+	int i;
+	int *deslocado;
+
+	deslocado = malloc(alpha * sizeof(int));
+
+
+	for (i = 0; i < alpha; i++) {
+		deslocado[i] = beta[i];
+	}
+	for (i = alpha; i < 64; i++) {
+		beta[i-alpha] = beta[i];
+	}
+	for (i = 64-alpha; i < 64; i++) {
+		beta[i] = deslocado[i - (64-alpha)];
+	}
+
+	free(deslocado);
+	return beta;
+}

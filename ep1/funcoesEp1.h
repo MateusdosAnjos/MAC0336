@@ -36,4 +36,9 @@ int *geraChaveK(char *senha);
 */
 int *somaBinario64(int *a, int *b);
 
+/* Funcao que faz a rotação (deslocamento circular) de
+// alpha bits para a esquerda dos 64 bits de beta.
+*/
+int *deslocaCircular(int *beta, int alpha);
+
 #endif

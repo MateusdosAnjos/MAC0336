@@ -2,8 +2,8 @@
 
 int main() {
     int *bin, *a, *b, *c;
-    int *assert;
-    int i;
+    int *assert, *circular;
+    int i, alpha;
 
     /*Conferindo hexaParaBinario
     */
@@ -63,10 +63,31 @@ int main() {
         }
     }
 
-    free(bin);
+    /*Conferindo deslocaCircular
+    */
+    circular = malloc(64 * sizeof(int));
+    assert = realloc(assert, 64 * sizeof(int));
+    alpha = 8;
+    for (i = 0; i < 64; i++) {
+        circular[i] = i; 
+    }
+    for (i = 0; i < 64; i++) {
+        assert[i] = (i+alpha)%64; 
+    }
+    circular = deslocaCircular(circular, alpha);
+    for(i = 0; i < 64; i++) {
+        /*printf("%d %d\n", circular[i], assert[i]);*/
+        if (circular[i] - assert[i] != 0) {
+            printf("%d - %d\n", circular[i], assert[i]);
+            printf("Erro em deslocaCircular!\n");
+        }
+    }
+    
     free(a);
     free(b);
     free(c);
+    free(bin);
     free(assert);
+    free(circular);
     return 0; 
 }
