@@ -4,7 +4,132 @@
 #include <stdbool.h>
 #include <ctype.h>
 
+/* Funcao que recebe um numero em hexadecimal na forma
+// XX e devolve o valor correspondente em binario
+// hex[0] é o mais significativo
+*/
+int *hexaParaBinario(char *hex) {
+	int *binario = NULL;
+	int i;
 
+
+	binario = malloc(8 * sizeof(int));
+
+	for (i = 0; i < 2; i++) {
+		switch(hex[(i+1)%2]) {
+			case '0':
+	            binario[0 + (4*i)] = 0;
+	            binario[1 + (4*i)] = 0;
+	            binario[2 + (4*i)] = 0;
+	            binario[3 + (4*i)] = 0;
+                break;
+	      	case '1':
+	            binario[0 + (4*i)] = 1;
+	            binario[1 + (4*i)] = 0;
+	            binario[2 + (4*i)] = 0;
+	            binario[3 + (4*i)] = 0;
+	            break;
+	     	case '2':
+                binario[0 + (4*i)] = 0;
+                binario[1 + (4*i)] = 1;
+                binario[2 + (4*i)] = 0;
+                binario[3 + (4*i)] = 0;
+                break;
+	    	case '3':
+                binario[0 + (4*i)] = 1;
+                binario[1 + (4*i)] = 1;
+                binario[2 + (4*i)] = 0;
+                binario[3 + (4*i)] = 0;
+                break;
+	     	case '4':
+                binario[0 + (4*i)] = 0;
+                binario[1 + (4*i)] = 0;
+                binario[2 + (4*i)] = 1;
+                binario[3 + (4*i)] = 0;
+                break;
+	        case '5':
+                binario[0 + (4*i)] = 1;
+                binario[1 + (4*i)] = 0;
+                binario[2 + (4*i)] = 1;
+                binario[3 + (4*i)] = 0;
+                break;
+	        case '6':
+                binario[0 + (4*i)] = 0;
+                binario[1 + (4*i)] = 1;
+                binario[2 + (4*i)] = 1;
+                binario[3 + (4*i)] = 0;
+                break;
+	        case '7':
+                binario[0 + (4*i)] = 1;
+                binario[1 + (4*i)] = 1;
+                binario[2 + (4*i)] = 1;
+                binario[3 + (4*i)] = 0;
+                break;
+	        case '8':
+                binario[0 + (4*i)] = 0;
+                binario[1 + (4*i)] = 0;
+                binario[2 + (4*i)] = 0;
+                binario[3 + (4*i)] = 1;
+                break;
+	        case '9':
+                binario[0 + (4*i)] = 1;
+                binario[1 + (4*i)] = 0;
+                binario[2 + (4*i)] = 0;
+                binario[3 + (4*i)] = 1;
+                break;
+	        case 'a':
+	        case 'A':
+                binario[0 + (4*i)] = 0;
+                binario[1 + (4*i)] = 1;
+                binario[2 + (4*i)] = 0;
+                binario[3 + (4*i)] = 1;
+                break;
+	        case 'b':
+	        case 'B':
+                binario[0 + (4*i)] = 1;
+                binario[1 + (4*i)] = 1;
+                binario[2 + (4*i)] = 0;
+                binario[3 + (4*i)] = 1;
+                break;
+	        case 'c':
+	        case 'C':
+                binario[0 + (4*i)] = 0;
+                binario[1 + (4*i)] = 0;
+                binario[2 + (4*i)] = 1;
+                binario[3 + (4*i)] = 1;
+                break;
+	        case 'd':
+	        case 'D':
+                binario[0 + (4*i)] = 1;
+                binario[1 + (4*i)] = 0;
+                binario[2 + (4*i)] = 1;
+                binario[3 + (4*i)] = 1;
+                break;
+	        case 'e':
+	        case 'E':
+                binario[0 + (4*i)] = 0;
+                binario[1 + (4*i)] = 1;
+                binario[2 + (4*i)] = 1;
+                binario[3 + (4*i)] = 1;
+                break;
+	        case 'f':
+	        case 'F':
+                binario[0 + (4*i)] = 1;
+                binario[1 + (4*i)] = 1;
+                binario[2 + (4*i)] = 1;
+                binario[3 + (4*i)] = 1;
+                break;
+	        default:
+	            printf("Invalid hexadecimal input.");
+	        } 
+	    }
+	
+	return binario;
+}
+
+/* Funcao que recebe uma senha de tamanho n e verifica
+// se a senha esta conforme o enunciado pede
+*/
 bool confereSenha(char *senha, int n) {
 	int numChar = 0, num09 = 0, i;
 
@@ -24,6 +149,9 @@ bool confereSenha(char *senha, int n) {
 	if (num09 < 2) return false;
 	return true;
 }
+/* Funcao que espera uma senha da entrada conforme
+// pedido no enunciado.
+*/
 char* recebeSenha() {
 	int i = 0, j;
 	char* senha;
@@ -70,11 +198,15 @@ int geraChaveK(char *senha) {
 
 int main() {
 	char* senha = NULL;
-	printf("Falta Fazer o EP :D\n");
+	
 	while (senha == NULL) {
 		printf("Entre com uma senha\n");
 		senha = recebeSenha();
 	}
+
 	geraChaveK(senha);
+	printf("\n");
+
+	free(senha);
 	return 0;
 }
