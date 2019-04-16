@@ -41,4 +41,9 @@ int *somaBinario64(int *a, int *b);
 */
 int *deslocaCircular(int *beta, int alpha);
 
+/* Algoritmo de geracao de subchaves como descrito no
+// enunciado
+*/
+int **geraSubChaves(int *chaveK, int r);
+
 #endif

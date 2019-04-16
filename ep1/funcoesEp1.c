@@ -231,7 +231,7 @@ int *somaBinario64(int *a, int *b) {
 	return c;
 }
 
-/* Funcao que faz a rotação (deslocamento circular) de
+/* Funcao que faz a rotacao (deslocamento circular) de
 // alpha bits para a esquerda dos 64 bits de beta.
 */
 int *deslocaCircular(int *beta, int alpha) {
@@ -253,4 +253,30 @@ int *deslocaCircular(int *beta, int alpha) {
 
 	free(deslocado);
 	return beta;
+}
+
+/* Algoritmo de geracao de subchaves como descrito no
+// enunciado
+*/
+int **geraSubChaves(int *chaveK, int r) {
+	int *l0, *l1, **subChaves = NULL;
+	int i, j0 = 0, j1 = 0;
+
+	l0 = malloc(64 * sizeof(int));
+	l1 = malloc(64 * sizeof(int));
+	for (i = 0; i < 128; i++) {
+		if (i%8 < 4) {
+			l1[j1] = chaveK[i];
+			j1++;
+		}
+		else {
+			l0[j0] = chaveK[i];
+			j0++;
+		}
+	}
+	subChaves = (int **)malloc(2 * sizeof(int *));
+	subChaves[0] = l0;
+	subChaves[1] = l1;
+	return subChaves;
+
 }

@@ -3,10 +3,12 @@
 int main() {
     int *bin, *a, *b, *c;
     int *assert, *circular;
+    int **subChaves = NULL, *chaveK;
     int i, alpha;
 
     /*Conferindo hexaParaBinario
     */
+    printf("Conferindo hexaParaBinario\n");
     bin = malloc(8 * sizeof(int));
     assert = malloc(8 * sizeof(int));
     assert[0] = 1;
@@ -24,11 +26,10 @@ int main() {
             printf("Erro em hexaParaBinario!\n");
         }
     }
-
-
-
+    printf("-------------------------------------\n");
     /*Conferindo somaBinario64
     */
+    printf("Conferindo somaBinario64\n");
     a = malloc(8 * sizeof(int));
     b = malloc(8 * sizeof(int));
     c = malloc(8 * sizeof(int));    
@@ -62,9 +63,10 @@ int main() {
             printf("Erro em somaBinario64!\n");
         }
     }
-
+    printf("-------------------------------------\n");
     /*Conferindo deslocaCircular
     */
+    printf("Conferindo deslocaCircular\n");
     circular = malloc(64 * sizeof(int));
     assert = realloc(assert, 64 * sizeof(int));
     alpha = 8;
@@ -82,12 +84,38 @@ int main() {
             printf("Erro em deslocaCircular!\n");
         }
     }
-    
+    printf("-------------------------------------\n");
+    /*Conferindo geraSubChaves
+    */
+    printf("Conferindo geraSubChaves\n");
+    subChaves = malloc(2 * sizeof(int *));
+    chaveK = malloc(128 * sizeof(int));
+    for (i = 0; i < 128; i++) {
+        chaveK[i] = i;
+    }
+    subChaves = geraSubChaves(chaveK, 1);
+    for (i = 0; i < 64; i++) {
+        printf("%d ", subChaves[0][i]);
+    }
+    printf("\n\n\n\n\n");
+    for (i = 0; i < 64; i++) {
+        printf("%d ", subChaves[1][i]);
+    }
+    printf("\n");
+    printf("-------------------------------------\n");
+
+
+
     free(a);
     free(b);
     free(c);
     free(bin);
     free(assert);
     free(circular);
+    free(chaveK);
+    for (i = 0; i < 2; i++) {
+        free(subChaves[i]);
+    }
+    free(subChaves);
     return 0; 
 }
