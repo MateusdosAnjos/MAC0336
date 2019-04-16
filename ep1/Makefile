@@ -12,5 +12,11 @@ ep1.o:  ep1.c funcoesEp1.h
 funcoesEp1.o:  funcoesEp1.c funcoesEp1.h 
 	$(CC) $(CFLAGS) -c funcoesEp1.c
 
+teste:	teste.o funcoesEp1.o
+	$(CC) $(CFLAGS) -o teste teste.o funcoesEp1.o
+
+teste.o:  teste.c funcoesEp1.h 
+	$(CC) $(CFLAGS) -c teste.c
+
 clean: 
 	$(RM) ep1 *.o *~
