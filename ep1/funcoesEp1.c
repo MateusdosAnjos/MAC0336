@@ -255,12 +255,46 @@ int *deslocaCircular(int *beta, int alpha) {
 	return beta;
 }
 
+/* Funcao que recebe 8 bytes em hexadecimal e devolve
+// os 64 bits correspondentes
+*/
+int *gera64(char *bytes) {
+	int *bits = NULL, *aux;
+	int i, j, k = 0;
+	char *c = NULL;
+
+	bits = malloc(64 * sizeof(int));
+	aux = malloc(8 * sizeof(int));
+	c = malloc(2 * sizeof(char));
+	for (i = 15; i > 0; i = i - 2) {
+		c[1] = bytes[i];
+		c[0] = bytes[i-1];
+		aux = hexaParaBinario(c);
+		for (j = 0; j < 8; j++) {
+			bits[k] = aux[j];
+			k++;
+		}
+	}
+	free(aux);
+	return bits;
+}
+
+
 /* Algoritmo de geracao de subchaves como descrito no
 // enunciado
 */
 int **geraSubChaves(int *chaveK, int r) {
-	int *l0, *l1, **subChaves = NULL;
+	int *l0, *l1, **subChaves = NULL, *offset1, *aux;
 	int i, j0 = 0, j1 = 0;
+	char *c = "9e3779b97f4a7151";
+
+	subChaves = (int **)malloc((4*r + 2) * sizeof(int *));
+	offset1 = malloc(64 * sizeof(int));
+	aux = malloc(8 * sizeof(int));
+
+
+	offset1 = gera64(c);
+
 
 	l0 = malloc(64 * sizeof(int));
 	l1 = malloc(64 * sizeof(int));
@@ -274,9 +308,10 @@ int **geraSubChaves(int *chaveK, int r) {
 			j0++;
 		}
 	}
-	subChaves = (int **)malloc(2 * sizeof(int *));
 	subChaves[0] = l0;
 	subChaves[1] = l1;
+	free(offset1);
+	free(aux);
 	return subChaves;
 
 }

@@ -41,6 +41,11 @@ int *somaBinario64(int *a, int *b);
 */
 int *deslocaCircular(int *beta, int alpha);
 
+/* Funcao que recebe 8 bytes em hexadecimal e devolve
+// os 64 bits correspondentes
+*/
+int *gera64(char *bytes);
+
 /* Algoritmo de geracao de subchaves como descrito no
 // enunciado
 */
