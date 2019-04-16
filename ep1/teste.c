@@ -5,6 +5,7 @@ int main() {
     int *assert, *circular;
     int **subChaves = NULL, *chaveK;
     int i, alpha;
+    char *byte8 = "010203040506AA10";
 
     /*Conferindo hexaParaBinario
     */
@@ -85,6 +86,17 @@ int main() {
         }
     }
     printf("-------------------------------------\n");
+    /*Conferindo gera64
+    */
+    printf("Conferindo gera64\n");
+        a = realloc(a, 64*sizeof(int));
+        a = gera64(byte8);
+        for (i = 0; i < 64; ++i) {
+            if (i%8 == 0) printf(" ");
+            printf("%d", a[i]);
+        }
+    printf("\n");
+    printf("-------------------------------------\n");
     /*Conferindo geraSubChaves
     */
     printf("Conferindo geraSubChaves\n");
@@ -97,7 +109,7 @@ int main() {
     for (i = 0; i < 64; i++) {
         printf("%d ", subChaves[0][i]);
     }
-    printf("\n\n\n\n\n");
+    printf("\n\n");
     for (i = 0; i < 64; i++) {
         printf("%d ", subChaves[1][i]);
     }
