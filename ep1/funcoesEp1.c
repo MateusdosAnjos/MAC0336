@@ -280,19 +280,23 @@ int *gera64(char *bytes) {
 }
 
 
-/* Algoritmo de geracao de subChaves como descrito no
+/* Algoritmo de geracao de (4*r + 2) sub Chaves como descrito no
 // enunciado
 */
 int **geraSubChaves(int *chaveK, int r) {
-	int **subChaves = NULL, *offset1, *offset2, *offset3;
+	int **L = NULL, **subChavesK = NULL, *offset1, *offset2, *offset3;
 	int i, j, j0 = 0, j1 = 0;
 	char *c1 = "9e3779b97f4a7151", *c2 = "8aed2a6bb7e15162",
 	*c3 = "7c159e3779b97f4a";
 
 	/*Alocando lugar para a resposta*/
-	subChaves = (int **)malloc((4*r + 2) * sizeof(int *));
+	L = (int **)malloc((4*r + 2) * sizeof(int *));
 	for (i = 0; i < (4*r + 2); i++) {
-		subChaves[i] = malloc(64 * sizeof(int));
+		L[i] = malloc(64 * sizeof(int));
+	}
+	subChavesK = (int **)malloc((4*r + 2) * sizeof(int *));
+	for (i = 0; i < (4*r + 2); i++) {
+		subChavesK[i] = malloc(64 * sizeof(int));
 	}
 
 	/*Utilizaremos isso para o calculo*/
@@ -307,24 +311,35 @@ int **geraSubChaves(int *chaveK, int r) {
 	/*Passo 1 do algoritmo descrito no enunciado*/
 	for (i = 0; i < 128; i++) {
 		if (i%8 < 4) {
-			subChaves[1][j1] = chaveK[i];
+			L[1][j1] = chaveK[i];
 			j1++;
 		}
 		else {
-			subChaves[0][j0] = chaveK[i];
+			L[0][j0] = chaveK[i];
 			j0++;
 		}
 	}
 	/*Passo 2 do algoritmo descrito no enunciado*/
 	for (j = 2; j < (4*r + 2); j++) {
-		subChaves[j] = somaBinario64(subChaves[j-1], offset1);
+		L[j] = somaBinario64(L[j-1], offset1);
+	} 
+	/*Passo 3 do algoritmo descrito no enunciado*/
+	subChavesK[0] = offset2;
+	/*Passo 4 do algoritmo descrito no enunciado*/
+	for (j = 1; j < (4*r + 2); j++) {
+		subChavesK[j] = somaBinario64(subChavesK[j-1], offset3);
 	} 
 
 
-
+	/*Liberando a memória*/
 	free(offset1);
 	free(offset2);
 	free(offset3);
-	return subChaves;
+	for (i = 0; i < (4*r+2); i++) {
+        free(L[i]);
+    }
+    free(L);
 
+    /*devolvendo a resposta*/
+	return subChavesK;
 }

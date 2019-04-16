@@ -102,17 +102,7 @@ int main() {
     printf("Conferindo geraSubChaves\n");
     subChaves = malloc(2 * sizeof(int *));
     chaveK = malloc(128 * sizeof(int));
-    for (i = 0; i < 128; i++) {
-        chaveK[i] = i;
-    }
-    subChaves = geraSubChaves(chaveK, 1);
-    for (i = 0; i < 64; i++) {
-        printf("%d ", subChaves[0][i]);
-    }
-    printf("\n\n");
-    for (i = 0; i < 64; i++) {
-        printf("%d ", subChaves[1][i]);
-    }
+    printf("Falta fazer o teste!!!\n");
     printf("\n");
     printf("-------------------------------------\n");
 
