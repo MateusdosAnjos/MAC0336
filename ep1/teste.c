@@ -4,7 +4,7 @@ int main() {
     int *bin, *a, *b, *c;
     int *assert, *circular;
     int **subChaves = NULL, *chaveK = NULL;
-    int i, alpha;
+    int i, j, alpha;
     char *byte8 = "010203040506AA10";
 
     /*Conferindo hexaParaBinario
@@ -121,6 +121,13 @@ int main() {
     }
     printf("\n");
     subChaves = geraSubChaves(chaveK, 4);
+    printf("\n");
+    for (i = 0; i < (4*4 + 2); i++) {
+        printf("\n");
+        for (j = 0; j < 64; j++) {
+            printf("%d ", subChaves[i][j]);
+        }
+    }
     printf("\n");
     printf("-------------------------------------\n");
 
