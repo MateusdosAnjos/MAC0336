@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdbool.h>
 #include <ctype.h>
+#include <math.h>
+
 /* Funcao que recebe um numero em hexadecimal na forma
 // XX e devolve o valor correspondente em binario
 // hex[0] é o mais significativo
@@ -221,7 +223,7 @@ int *somaBinario64(int *a, int *b) {
 	int *c;
 	int i;
 	int vaiUm = 0;
-	c = malloc(64 * sizeof(int));
+	c = calloc(64, sizeof(int));
 
 	for (i = 0; i < 64; i++) {
 		c[i] = (a[i] + b[i] + vaiUm)%2;
@@ -239,7 +241,6 @@ int *deslocaCircular(int *beta, int alpha) {
 	int *deslocado;
 
 	deslocado = malloc(alpha * sizeof(int));
-
 
 	for (i = 0; i < alpha; i++) {
 		deslocado[i] = beta[i];
@@ -279,17 +280,29 @@ int *gera64(char *bytes) {
 	return bits;
 }
 
+double binarioParaBase10(int *bin) {
+	double resp = 0;
+	int i;
+
+	for (i = 0; i < 64; i++) {
+		if (bin[i] == 1) { 
+			resp = resp + pow(2, i);
+		}
+	}
+	return resp;
+}
 
 /* Algoritmo de geracao de (4*r + 2) sub Chaves como descrito no
 // enunciado
 */
 int **geraSubChaves(int *chaveK, int r) {
-	int **L = NULL, **subChavesK = NULL, *offset1, *offset2, *offset3;
-	int i, j, x = 0, y = 0, A, B;
+	int **L = NULL, **subChavesK = NULL, *offset1, *offset2, *offset3,
+	*A, *B, *C;
+	int i, j, x = 0, y = 0, s;
 	char *c1 = "9e3779b97f4a7151", *c2 = "8aed2a6bb7e15162",
 	*c3 = "7c159e3779b97f4a";
 
-	/*Alocando lugar para a resposta*/
+	/*Alocando memórias*/
 	L = (int **)malloc((4*r + 2) * sizeof(int *));
 	for (i = 0; i < (4*r + 2); i++) {
 		L[i] = malloc(64 * sizeof(int));
@@ -332,13 +345,21 @@ int **geraSubChaves(int *chaveK, int r) {
 	/*Passo 5 do algoritmo descrito no enunciado*/
 	i = 0;
 	j = 0;
-	A = 0;
-	B = 0;
-	/*Passo 6 do algoritmo descrito no enunciado
-	for (s = 1; i < (4*r + 2); i++) {
-		
-	}*/
+	A = calloc(64, sizeof(int));
+	B = calloc(64, sizeof(int));
+	C = calloc(64, sizeof(int));
 
+	/*Passo 6 do algoritmo descrito no enunciado*/
+	for (s = 1; s < (4*r + 2); s++) {
+		C = somaBinario64(A, B);
+		subChavesK[i] = deslocaCircular(somaBinario64(subChavesK[i], C), 3);
+		A = subChavesK[i];
+		i++;
+		C = somaBinario64(A, B);
+		L[j] = deslocaCircular(somaBinario64(L[j], C), binarioParaBase10(C));
+		B = L[j];
+		j++;
+	}
 
 	/*Liberando a memória*/
 	free(offset1);
@@ -348,6 +369,9 @@ int **geraSubChaves(int *chaveK, int r) {
         free(L[i]);
     }
     free(L);
+    free(A);
+    free(B);
+    free(C);
 
     /*devolvendo a resposta*/
 	return subChavesK;

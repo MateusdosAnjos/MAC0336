@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <ctype.h>
+#include <math.h>
 
 /* Funcao que recebe um numero em hexadecimal na forma
 // XX e devolve o valor correspondente em binario
@@ -45,6 +46,11 @@ int *deslocaCircular(int *beta, int alpha);
 // os 64 bits correspondentes
 */
 int *gera64(char *bytes);
+
+/* Funcao que recebe um binario e devolve sua representacao 
+// em base 10
+*/
+double binarioParaBase10(int *bin);
 
 /* Algoritmo de geracao de subchaves como descrito no
 // enunciado

@@ -97,12 +97,25 @@ int main() {
         }
     printf("\n");
     printf("-------------------------------------\n");
+    /*Conferindo binarioParaBase10
+    */
+    printf("Conferindo binarioParaBase10\n");
+    for (i = 0; i < 64; i++) {
+        a[i] = 0;
+    }
+    for (i = 0; i < 64; i++) {
+        a[i] = rand()%2;
+        printf("%d", a[i]);
+    }
+    printf("\n");
+    printf("Em base 10 = %f\n", binarioParaBase10(a));
+    printf("-------------------------------------\n");
     /*Conferindo geraSubChaves
     */
     printf("Conferindo geraSubChaves\n");
     subChaves = malloc(2 * sizeof(int *));
     chaveK = malloc(128 * sizeof(int));
-    printf("Falta fazer o teste!!!\n");
+    geraSubChaves(chaveK, 4);
     printf("\n");
     printf("-------------------------------------\n");
 
