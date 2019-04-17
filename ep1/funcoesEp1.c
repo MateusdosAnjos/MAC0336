@@ -277,6 +277,7 @@ int *gera64(char *bytes) {
 		}
 	}
 	free(aux);
+	free(c);
 	return bits;
 }
 
@@ -373,7 +374,7 @@ int **geraSubChaves(int *chaveK, int r) {
     }
     free(L);
     free(A);
-    free(B);
+	/*free(B) liberado no L*/
     free(C);
 
     /*devolvendo a resposta*/
