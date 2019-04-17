@@ -3,7 +3,7 @@
 int main() {
     int *bin, *a, *b, *c;
     int *assert, *circular;
-    int **subChaves = NULL, *chaveK;
+    int **subChaves = NULL, *chaveK = NULL;
     int i, alpha;
     char *byte8 = "010203040506AA10";
 
@@ -113,14 +113,19 @@ int main() {
     /*Conferindo geraSubChaves
     */
     printf("Conferindo geraSubChaves\n");
-    subChaves = malloc(2 * sizeof(int *));
     chaveK = malloc(128 * sizeof(int));
-    geraSubChaves(chaveK, 4);
+    printf("chaveK = \n");
+    for (i = 0; i < 128; i++) {
+        chaveK[i] = (int)rand()%2;
+        printf("%d", chaveK[i]);
+    }
+    printf("\n");
+    subChaves = geraSubChaves(chaveK, 4);
     printf("\n");
     printf("-------------------------------------\n");
 
 
-
+    
     free(a);
     free(b);
     free(c);
@@ -128,7 +133,7 @@ int main() {
     free(assert);
     free(circular);
     free(chaveK);
-    for (i = 0; i < 2; i++) {
+    for (i = 0; i < (4*4 + 2); i++) {
         free(subChaves[i]);
     }
     free(subChaves);

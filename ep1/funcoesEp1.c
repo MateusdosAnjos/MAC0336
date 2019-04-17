@@ -301,7 +301,6 @@ int **geraSubChaves(int *chaveK, int r) {
 	int i, j, x = 0, y = 0, s;
 	char *c1 = "9e3779b97f4a7151", *c2 = "8aed2a6bb7e15162",
 	*c3 = "7c159e3779b97f4a";
-
 	/*Alocando memórias*/
 	L = (int **)malloc((4*r + 2) * sizeof(int *));
 	for (i = 0; i < (4*r + 2); i++) {
@@ -335,7 +334,7 @@ int **geraSubChaves(int *chaveK, int r) {
 	/*Passo 2 do algoritmo descrito no enunciado*/
 	for (j = 2; j < (4*r + 2); j++) {
 		L[j] = somaBinario64(L[j-1], offset1);
-	} 
+	}
 	/*Passo 3 do algoritmo descrito no enunciado*/
 	subChavesK[0] = offset2;
 	/*Passo 4 do algoritmo descrito no enunciado*/
@@ -356,6 +355,7 @@ int **geraSubChaves(int *chaveK, int r) {
 		A = subChavesK[i];
 		i++;
 		C = somaBinario64(A, B);
+		printf("Erro está AQUI!!(abaixo)\n");
 		L[j] = deslocaCircular(somaBinario64(L[j], C), binarioParaBase10(C));
 		B = L[j];
 		j++;
