@@ -47,10 +47,11 @@ int *deslocaCircular(int *beta, int alpha);
 */
 int *gera64(char *bytes);
 
-/* Funcao que recebe um binario e devolve sua representacao 
-// em base 10
+/* Funcao que recebe um vetor bin de 64 bits
+// e devolve um intero resp tal que:
+// bin%64 = resp
 */
-double binarioParaBase10(int *bin);
+int mod64(int *bin);
 
 /* Algoritmo de geracao de subchaves como descrito no
 // enunciado

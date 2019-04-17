@@ -97,9 +97,9 @@ int main() {
         }
     printf("\n");
     printf("-------------------------------------\n");
-    /*Conferindo binarioParaBase10
+    /*Conferindo mod64
     */
-    printf("Conferindo binarioParaBase10\n");
+    printf("Conferindo mod64\n");
     for (i = 0; i < 64; i++) {
         a[i] = 0;
     }
@@ -108,7 +108,7 @@ int main() {
         printf("%d", a[i]);
     }
     printf("\n");
-    printf("Em base 10 = %f\n", binarioParaBase10(a));
+    printf("mod64 = %d\n", mod64(a));
     printf("-------------------------------------\n");
     /*Conferindo geraSubChaves
     */

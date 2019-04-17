@@ -280,11 +280,15 @@ int *gera64(char *bytes) {
 	return bits;
 }
 
-double binarioParaBase10(int *bin) {
-	double resp = 0;
+/* Funcao que recebe um vetor bin de 64 bits
+// e devolve um intero resp tal que:
+// bin%64 = resp
+*/
+int mod64(int *bin) {
 	int i;
+	int resp = 0;
 
-	for (i = 0; i < 64; i++) {
+	for(i = 0; i < 6; i++) {
 		if (bin[i] == 1) { 
 			resp = resp + pow(2, i);
 		}
@@ -355,8 +359,7 @@ int **geraSubChaves(int *chaveK, int r) {
 		A = subChavesK[i];
 		i++;
 		C = somaBinario64(A, B);
-		printf("Erro está AQUI!!(abaixo)\n");
-		L[j] = deslocaCircular(somaBinario64(L[j], C), binarioParaBase10(C));
+		L[j] = deslocaCircular(somaBinario64(L[j], C), mod64(C));
 		B = L[j];
 		j++;
 	}
