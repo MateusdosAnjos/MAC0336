@@ -33,7 +33,7 @@ int *geraChaveK(char *senha);
 
 
 /* Funcao que recebe um numeros a, b em representacao
-// binaria e devolve c, tal que c = (a+b)%64
+// binaria e devolve c, tal que c = (a+b)%(2^64)
 */
 int *somaBinario64(int *a, int *b);
 
