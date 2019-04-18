@@ -401,3 +401,26 @@ int *xor(int *a, int *b, int n) {
 
 	return c;
 }
+
+/* Funcao que implementa a terceira operacao basica
+// definida no enunciado
+*/
+void galois257(int *exp, int *log) {
+	FILE *galois;
+	int i;
+
+	galois = fopen("galois257", "r");
+
+	if (galois == NULL) printf("Erro lendo arquivo de Galois\n");
+
+	for (i = 0; i < 256; i++) {
+		fscanf(galois, "%d", &exp[i]);
+	}
+	for (i = 0; i < 256; i++) {
+		fscanf(galois, "%d", &log[i]);
+	}
+
+	fclose(galois);
+
+	return;
+}

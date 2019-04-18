@@ -2,7 +2,7 @@
 
 int main() {
     int *bin, *a, *b, *c;
-    int *assert, *circular;
+    int *assert, *circular, *exp, *log;
     int **subChaves = NULL, *chaveK = NULL;
     int i, j, alpha;
     char *byte8 = "010203040506AA10";
@@ -164,7 +164,28 @@ int main() {
         }
     }
     printf("-------------------------------------\n");
-
+    /*Conferindo galois257
+    */
+    printf("Conferindo galois257\n");
+    exp = malloc(256 * sizeof(double));
+    log = malloc(256 * sizeof(double));
+    galois257(exp, log);
+    printf("exp = \n");
+    for (i = 0; i < 256; i++) {
+        printf("%d ", exp[i]);
+    }
+    printf("\n");
+    printf("log = \n");
+    for (i = 0; i < 256; i++) {
+        printf("%d ", log[i]);
+    }
+    printf("\n");
+    for (i = 0; i < 256; i ++) {
+        if (log[exp[i]] != i) {
+            printf("Erro em galois257!\n");
+        }
+    }
+    printf("-------------------------------------\n");
     
     free(a);
     free(b);
@@ -177,5 +198,7 @@ int main() {
         free(subChaves[i]);
     }
     free(subChaves);
+    free(exp);
+    free(log);
     return 0; 
 }

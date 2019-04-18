@@ -63,4 +63,9 @@ int **geraSubChaves(int *chaveK, int r);
 */ 
 int *xor(int *a, int *b, int n);
 
+/* Funcao que preenche os vetores exp e log
+// referente ao corpo de Galois(257)
+*/
+void galois257(int *exp, int *log);
+
 #endif
