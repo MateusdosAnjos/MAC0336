@@ -337,13 +337,13 @@ int **geraSubChaves(int *chaveK, int r) {
 		}
 	}
 	/*Passo 2 do algoritmo descrito no enunciado*/
-	for (j = 2; j < (4*r + 2); j++) {
+	for (j = 2; j <= (4*r + 2); j++) {
 		L[j] = somaBinario64(L[j-1], offset1);
 	}
 	/*Passo 3 do algoritmo descrito no enunciado*/
 	subChavesK[0] = offset2;
 	/*Passo 4 do algoritmo descrito no enunciado*/
-	for (j = 1; j < (4*r + 2); j++) {
+	for (j = 1; j <= (4*r + 3); j++) {
 		subChavesK[j] = somaBinario64(subChavesK[j-1], offset3);
 	} 
 	/*Passo 5 do algoritmo descrito no enunciado*/
@@ -354,7 +354,7 @@ int **geraSubChaves(int *chaveK, int r) {
 	C = calloc(64, sizeof(int));
 
 	/*Passo 6 do algoritmo descrito no enunciado*/
-	for (s = 1; s < (4*r + 2); s++) {
+	for (s = 1; s <= (4*r + 3); s++) {
 		C = somaBinario64(A, B);
 		subChavesK[i] = deslocaCircular(somaBinario64(subChavesK[i], C), 3);
 		A = subChavesK[i];
