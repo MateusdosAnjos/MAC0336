@@ -130,7 +130,40 @@ int main() {
     }
     printf("\n");
     printf("-------------------------------------\n");
-
+    /*Conferindo xor
+    */
+    printf("Conferindo xor\n");
+    a[0] = 1;
+    a[1] = 0;
+    a[2] = 0;
+    a[3] = 1;
+    a[4] = 1;
+    a[5] = 1;
+    a[6] = 0;
+    a[7] = 1;
+    b[0] = 1;
+    b[1] = 0;
+    b[2] = 0;
+    b[3] = 1;
+    b[4] = 0;
+    b[5] = 1;
+    b[6] = 1;
+    b[7] = 1;
+    assert[0] = 0;
+    assert[1] = 0;
+    assert[2] = 0;
+    assert[3] = 0;
+    assert[4] = 1;
+    assert[5] = 0;
+    assert[6] = 1;
+    assert[7] = 0;    
+    c = xor(a, b, 8);
+    for(i = 0; i < 8; i++) {
+        if (c[i] - assert[i] != 0) {
+            printf("Erro em xor!\n");
+        }
+    }
+    printf("-------------------------------------\n");
 
     
     free(a);

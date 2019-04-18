@@ -380,3 +380,24 @@ int **geraSubChaves(int *chaveK, int r) {
     /*devolvendo a resposta*/
 	return subChavesK;
 }
+
+/* Funcao que recebe 2 vetores com n bits e
+// calcula c fazendo XOR de a com b
+*/ 
+int *xor(int *a, int *b, int n) {
+	int *c;
+	int i;
+
+	c = malloc(n * sizeof(int));
+
+	for (i = 0; i < n; i++) {
+		if (a[i] == b[i]) {
+			c[i] = 0;
+		}
+		else {
+			c[i] = 1;
+		}
+	}
+
+	return c;
+}

@@ -58,4 +58,9 @@ int mod64(int *bin);
 */
 int **geraSubChaves(int *chaveK, int r);
 
+/* Funcao que recebe 2 vetores com n bits e
+// calcula c fazendo XOR de a com b
+*/ 
+int *xor(int *a, int *b, int n);
+
 #endif
