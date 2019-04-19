@@ -482,11 +482,11 @@ int **divide64BitsEm8Bytes(int *A) {
 /* Funcao que implementa a operacao basica numero 3
 // (em LaTeX \odot)
 */
-int **odot(int *B, int *C) {
+int *odot(int *B, int *C) {
 	int **bytesA, **bytesB, **bytesC;
-	int *fBi, *fCi, *exp = NULL, *log = NULL;
+	int *fBi, *fCi, *exp = NULL, *log = NULL, *resultado;
 	int decimalB, decimalC;
-	int i;
+	int i, j;
 
 	galois257(exp, log);
 
@@ -504,15 +504,23 @@ int **odot(int *B, int *C) {
 		bytesA[i] = xor(fBi, fCi, 8);
 	}
 
-	return bytesA;
+	resultado = malloc(64 * sizeof(int));
+	for (i = 0; i < 8; i++) {
+		for (j = 0; j < 8; j++) {
+			resultado[(i*8) + j] = bytesA[i][j];
+		}
+	}
+	return resultado;
 }
 
 /* Funcao que implementa o K 128 como descrito no enunciado
 */
 int *K128(int *X, int **subChavesK, int R) {
-	int *Xa, *Xb, *ka, *kb, *ke, *kf *Xe, *Xf,
-	*Y1, *Y2, *Z, *XeFINAL, *XfFINAL, *resultado;
+	int *Xa, *Xb, *ka, *kb, *ke, *kf, *Xe, *Xf;
+	int *Y1, *Y2, *Z, *XeFINAL, *XfFINAL, *resultado;
+	int i;
 
+	printf("Oi\n");
 	Xa = malloc(64 * sizeof(int));
 	Xb = malloc(64 * sizeof(int));
 
@@ -528,12 +536,12 @@ int *K128(int *X, int **subChavesK, int R) {
 		kf = subChavesK[(i*4)+3];
 		Xe = odot(Xa, ka);
 		Xf = somaBinario64(Xb, kb);
-		Y1 = xor(Xe, Xf);
+		Y1 = xor(Xe, Xf, 64);
 		Y2 = odot(somaBinario64((odot(ke, Y1)), Y1), kf);
 		Z = somaBinario64(odot(ke, Y1), Y2);
 		/*Saida de 1 iteracao eh a entrada da proxima*/
-		Xa = xor(Xe, Z);
-		Xb = xor(Xf, Z);
+		Xa = xor(Xe, Z, 64);
+		Xb = xor(Xf, Z, 64);
 	}
 	ka = subChavesK[(i*4)];
 	kb = subChavesK[(i*4)+1];

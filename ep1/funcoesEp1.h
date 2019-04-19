@@ -86,7 +86,7 @@ int **divide64BitsEm8Bytes(int *A);
 /* Funcao que implementa a operacao basica numero 3
 // (em LaTeX \odot)
 */
-int **odot(int *B, int *C);
+int *odot(int *B, int *C);
 
 /* Funcao que implementa o K 128 como descrito no enunciado
 */

@@ -2,8 +2,8 @@
 
 int main() {
     int *bin, *a, *b, *c;
-    int *assert, *circular, *exp, *log;
-    int **subChaves = NULL, **bytes = NULL, *chaveK = NULL;
+    int *assert, *circular, *exp, *log, *blocoDados;
+    int **subChaves = NULL, **bytes = NULL, *chaveK = NULL, *cripto = NULL;
     int i, j, alpha;
     char *byte8 = "010203040506AA10";
 
@@ -111,9 +111,9 @@ int main() {
         printf("%d", chaveK[i]);
     }
     printf("\n");
-    subChaves = geraSubChaves(chaveK, 4);
+    subChaves = geraSubChaves(chaveK, 12);
     printf("\n");
-    for (i = 0; i < (4*4 + 2); i++) {
+    for (i = 0; i < (4*12 + 2); i++) {
         printf("\n");
         for (j = 0; j < 64; j++) {
             printf("%d ", subChaves[i][j]);
@@ -230,7 +230,22 @@ int main() {
     }
     printf("\n");
     printf("-------------------------------------\n");
-    
+    /*Conferindo k128
+    */
+    printf("Conferindo k128\n");
+    blocoDados = malloc(128 * sizeof(int));
+    for (i = 0; i < 128; i++) {
+        blocoDados[i] = (int)rand()%2;
+        printf("%d", blocoDados[i]);
+    }
+    printf("\n");
+    cripto = K128(blocoDados, subChaves, 12);
+    printf("\n");
+    for (i = 0; i < 128; i++) {
+        printf("%d", cripto[i]);
+    }
+    printf("\n");
+    printf("-------------------------------------\n");
     free(a);
     free(b);
     free(c);
@@ -238,12 +253,13 @@ int main() {
     free(assert);
     free(circular);
     free(chaveK);
-    for (i = 0; i < (4*4 + 2); i++) {
+    for (i = 0; i < (4*12 + 2); i++) {
         free(subChaves[i]);
     }
     free(subChaves);
     free(exp);
     free(log);
     free(bytes);
+    free(blocoDados);
     return 0; 
 }
