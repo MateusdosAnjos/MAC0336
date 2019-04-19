@@ -461,3 +461,25 @@ int **divide64BitsEm8Bytes(int *A) {
 
 	return bytes;
 }
+
+/* Funcao que implementa a operacao basica numero 3
+// (em LaTeX \odot)
+*/
+int **odot(int *B, int *C) {
+	int **bytesA, **bytesB, **bytesC;
+	int decimalB, decimalC;
+	int i;
+
+	bytesA = malloc(8 * sizeof(int *));
+
+	bytesB = divide64BitsEm8Bytes(B);
+	bytesC = divide64BitsEm8Bytes(C);
+
+	for (i = 0; i < 8; i++) {
+		decimalB = binarioParaDecimal(bytesB[i], 8)
+		decimalC = binarioParaDecimal(bytesC[i], 8)
+		bytesA[i] = xor(exp[decimalB], exp[decimalC], 8);
+	}
+
+	return bytesA;
+}
