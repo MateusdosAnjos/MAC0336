@@ -73,4 +73,9 @@ void galois257(int *exp, int *log);
 */
 int binarioParaDecimal(int *bin, int n);
 
+/* Funcao que divide os 64 bits de A em 8 bytes
+// de 8 bits
+*/
+int **divide64BitsEm8Bytes(int *A);
+
 #endif

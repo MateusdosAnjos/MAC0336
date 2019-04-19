@@ -440,6 +440,24 @@ int binarioParaDecimal(int *bin, int n) {
 		}
 		potencia *= 2;
 	}
-
 	return resultado;
+}
+
+/* Funcao que divide os 64 bits de A em 8 bytes
+// de 8 bits
+*/
+int **divide64BitsEm8Bytes(int *A) {
+	int **bytes;
+	int i;
+
+	bytes = malloc(8 * sizeof(int *));
+	for (i = 0; i < 8; i++) {
+		bytes[i] = malloc(8 * sizeof(int));
+	}
+
+	for (i = 0; i < 64; i++) {
+		bytes[i/8][i%8] = A[i];
+	}
+
+	return bytes;
 }

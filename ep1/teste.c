@@ -3,7 +3,7 @@
 int main() {
     int *bin, *a, *b, *c;
     int *assert, *circular, *exp, *log;
-    int **subChaves = NULL, *chaveK = NULL;
+    int **subChaves = NULL, **bytes = NULL, *chaveK = NULL;
     int i, j, alpha;
     char *byte8 = "010203040506AA10";
 
@@ -195,6 +195,26 @@ int main() {
         a = somaBinario64(a, b);
     }
     printf("-------------------------------------\n");
+    /*Conferindo divide64BitsEm8Bytes
+    */
+    printf("Conferindo divide64BitsEm8Bytes\n");
+    printf("Gerando vetor de 64 bits:");
+    for (i = 0; i < 64; i++) {
+        circular[i] = (int)rand()%2;
+        if (i%8 == 0) printf(" ");
+        printf("%d", circular[i]);
+    }
+    printf("\n");
+    printf("Divisao dos bytes gerada: ");
+    bytes = divide64BitsEm8Bytes(circular);
+    for (i = 0; i < 8; i++) {
+        for (j = 0; j < 8; j++) {
+            printf("%d", bytes[i][j]);
+        }
+        printf(" ");
+    }
+    printf("\n");
+    printf("-------------------------------------\n");
     
     free(a);
     free(b);
@@ -209,5 +229,6 @@ int main() {
     free(subChaves);
     free(exp);
     free(log);
+    free(bytes);
     return 0; 
 }
