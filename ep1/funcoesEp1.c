@@ -484,20 +484,25 @@ int **divide64BitsEm8Bytes(int *A) {
 */
 int **odot(int *B, int *C) {
 	int **bytesA, **bytesB, **bytesC;
+	int *fBi, *fCi, *exp = NULL, *log = NULL;
 	int decimalB, decimalC;
 	int i;
+
+	galois257(exp, log);
 
 	bytesA = malloc(8 * sizeof(int *));
 
 	bytesB = divide64BitsEm8Bytes(B);
 	bytesC = divide64BitsEm8Bytes(C);
 
-	/*
+	
 	for (i = 0; i < 8; i++) {
 		decimalB = binarioParaDecimal(bytesB[i], 8);
 		decimalC = binarioParaDecimal(bytesC[i], 8);
-		bytesA[i] = xor(exp[decimalB], exp[decimalC], 8);
-	}*/
+		fBi = decimalParaBinario(exp[decimalB]);
+		fCi = decimalParaBinario(exp[decimalC]);
+		bytesA[i] = xor(fBi, fCi, 8);
+	}
 
 	return bytesA;
 }
