@@ -506,3 +506,45 @@ int **odot(int *B, int *C) {
 
 	return bytesA;
 }
+
+/* Funcao que implementa o K 128 como descrito no enunciado
+*/
+int *K128(int *X, int **subChavesK, int R) {
+	int *Xa, *Xb, *ka, *kb, *ke, *kf *Xe, *Xf,
+	*Y1, *Y2, *Z, *XeFINAL, *XfFINAL, *resultado;
+
+	Xa = malloc(64 * sizeof(int));
+	Xb = malloc(64 * sizeof(int));
+
+	for (i = 0; i < 64; i++) {
+		Xa[i] = X[i];
+		Xb[i] = X[i+64];
+	}
+
+	for (i = 0; i < R; i++) {
+		ka = subChavesK[i*4];
+		kb = subChavesK[(i*4)+1];
+		ke = subChavesK[(i*4)+2];
+		kf = subChavesK[(i*4)+3];
+		Xe = odot(Xa, ka);
+		Xf = somaBinario64(Xb, kb);
+		Y1 = xor(Xe, Xf);
+		Y2 = odot(somaBinario64((odot(ke, Y1)), Y1), kf);
+		Z = somaBinario64(odot(ke, Y1), Y2);
+		/*Saida de 1 iteracao eh a entrada da proxima*/
+		Xa = xor(Xe, Z);
+		Xb = xor(Xf, Z);
+	}
+	ka = subChavesK[(i*4)];
+	kb = subChavesK[(i*4)+1];
+	XeFINAL = odot(Xa, ka);
+	XfFINAL = somaBinario64(Xb, kb);
+
+	resultado = malloc(128 * sizeof(int));
+	for (i = 0; i < 128; i++) {
+		resultado[i] = XeFINAL[i];
+		resultado[i+64] = XfFINAL[i];
+	}
+
+	return resultado;
+}
