@@ -488,6 +488,8 @@ int *odot(int *B, int *C) {
 	int decimalB, decimalC;
 	int i, j;
 
+	exp = malloc(256 * sizeof(int));
+	log = malloc(256 * sizeof(int));
 	galois257(exp, log);
 
 	bytesA = malloc(8 * sizeof(int *));
@@ -520,7 +522,6 @@ int *K128(int *X, int **subChavesK, int R) {
 	int *Y1, *Y2, *Z, *XeFINAL, *XfFINAL, *resultado;
 	int i;
 
-	printf("Oi\n");
 	Xa = malloc(64 * sizeof(int));
 	Xb = malloc(64 * sizeof(int));
 
