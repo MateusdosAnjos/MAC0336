@@ -68,4 +68,9 @@ int *xor(int *a, int *b, int n);
 */
 void galois257(int *exp, int *log);
 
+/* Funcao que recebe um numero binario de n bits em um vetor
+// bin e devolve sua representacao em base 10
+*/
+int binarioParaDecimal(int *bin, int n);
+
 #endif

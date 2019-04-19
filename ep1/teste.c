@@ -25,6 +25,7 @@ int main() {
     for(i = 0; i < 8; i++) {
         if (bin[i] - assert[i] != 0) {
             printf("Erro em hexaParaBinario!\n");
+            return 0;
         }
     }
     printf("-------------------------------------\n");
@@ -34,36 +35,25 @@ int main() {
     a = malloc(8 * sizeof(int));
     b = malloc(8 * sizeof(int));
     c = malloc(8 * sizeof(int));    
-    a[0] = 0;
-    a[1] = 0;
-    a[2] = 0;
-    a[3] = 0;
-    a[4] = 0;
-    a[5] = 0;
-    a[6] = 0;
-    a[7] = 1;
-    b[0] = 1;
-    b[1] = 0;
-    b[2] = 0;
-    b[3] = 0;
-    b[4] = 0;
-    b[5] = 0;
-    b[6] = 0;
-    b[7] = 1;
-    assert[0] = 1;
-    assert[1] = 0;
-    assert[2] = 0;
-    assert[3] = 0;
-    assert[4] = 0;
-    assert[5] = 0;
-    assert[6] = 0;
-    assert[7] = 0;    
-    c = somaBinario64(a, b);
-    for(i = 0; i < 8; i++) {
-        if (c[i] - assert[i] != 0) {
-            printf("Erro em somaBinario64!\n");
+    for (i = 0; i < 8; i++) {
+        a[i] = 0;
+        b[i] = 0;
+        c[i] = 0;
+    }
+    a[1] = 1;
+    b[1] = 1;
+    b[4] = 1;
+    c[2] = 1;
+    c[4] = 1;
+    a = somaBinario64(a, b);
+    for (i = 0; i < 8; i++) {
+        if (a[i] - c[i] != 0) {
+            printf("Erro em somaBinario64\n");
+            return 0;
         }
     }
+    
+
     printf("-------------------------------------\n");
     /*Conferindo deslocaCircular
     */
@@ -83,6 +73,7 @@ int main() {
         if (circular[i] - assert[i] != 0) {
             printf("%d - %d\n", circular[i], assert[i]);
             printf("Erro em deslocaCircular!\n");
+            return 0;
         }
     }
     printf("-------------------------------------\n");
@@ -161,6 +152,7 @@ int main() {
     for(i = 0; i < 8; i++) {
         if (c[i] - assert[i] != 0) {
             printf("Erro em xor!\n");
+            return 0;
         }
     }
     printf("-------------------------------------\n");
@@ -183,7 +175,24 @@ int main() {
     for (i = 0; i < 256; i ++) {
         if (log[exp[i]] != i) {
             printf("Erro em galois257!\n");
+            return 0;
         }
+    }
+    printf("-------------------------------------\n");
+    /*Conferindo binarioParaDecimal
+    */
+    printf("Conferindo binarioParaDecimal\n");
+    for (i = 0; i < 8; i++) {
+        a[i] = 0;
+        b[i] = 0;
+    }
+    b[0] = 1;
+    for (i = 0; i < 256; i++) {
+        if (i != binarioParaDecimal(a, 8)) {
+            printf("Erro em binarioParaDecimal!\n");
+            return 0;
+        }
+        a = somaBinario64(a, b);
     }
     printf("-------------------------------------\n");
     

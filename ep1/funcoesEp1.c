@@ -402,8 +402,8 @@ int *xor(int *a, int *b, int n) {
 	return c;
 }
 
-/* Funcao que implementa a terceira operacao basica
-// definida no enunciado
+/* Funcao que preenche os vetores exp e log
+// referente ao corpo de Galois(257)
 */
 void galois257(int *exp, int *log) {
 	FILE *galois;
@@ -423,4 +423,23 @@ void galois257(int *exp, int *log) {
 	fclose(galois);
 
 	return;
+}
+
+/* Funcao que recebe um numero binario de n bits em um vetor
+// bin e devolve sua representacao em base 10
+*/
+int binarioParaDecimal(int *bin, int n) {
+	int resultado, i, potencia;
+
+	resultado = 0;
+	potencia = 1;
+
+	for (i = 0; i < n; i++) {
+		if (bin[i] == 1) {
+			resultado = resultado + potencia; 
+		}
+		potencia *= 2;
+	}
+
+	return resultado;
 }
