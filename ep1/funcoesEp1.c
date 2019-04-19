@@ -443,6 +443,23 @@ int binarioParaDecimal(int *bin, int n) {
 	return resultado;
 }
 
+/* Funcao que recebe um numero n (0 < n < 256) em base 10 e
+// devolve um byte (vetor de 8 bits) com sua representacao em binario
+*/
+int *decimalParaBinario(int n) {
+	int *resultado, i, divisor = 128;
+
+	resultado = malloc(8 * sizeof(int));
+
+	for (i = 7; i >= 0; i--) {
+		resultado[i] = n/divisor;
+		n = n%divisor;
+		divisor = divisor/2;
+	}
+
+	return resultado;
+}
+
 /* Funcao que divide os 64 bits de A em 8 bytes
 // de 8 bits
 */
@@ -475,11 +492,12 @@ int **odot(int *B, int *C) {
 	bytesB = divide64BitsEm8Bytes(B);
 	bytesC = divide64BitsEm8Bytes(C);
 
+	/*
 	for (i = 0; i < 8; i++) {
-		decimalB = binarioParaDecimal(bytesB[i], 8)
-		decimalC = binarioParaDecimal(bytesC[i], 8)
+		decimalB = binarioParaDecimal(bytesB[i], 8);
+		decimalC = binarioParaDecimal(bytesC[i], 8);
 		bytesA[i] = xor(exp[decimalB], exp[decimalC], 8);
-	}
+	}*/
 
 	return bytesA;
 }

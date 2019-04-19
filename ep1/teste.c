@@ -195,6 +195,21 @@ int main() {
         a = somaBinario64(a, b);
     }
     printf("-------------------------------------\n");
+    /*Conferindo decimalParaBinario
+    */
+    printf("Conferindo decimalParaBinario\n");
+    for (i = 0; i < 256; i++) {
+        a = decimalParaBinario(i);
+        if (i != binarioParaDecimal(a, 8)) {
+            printf("Erro em decimalParaBinario!\n");
+            return 0;
+        }
+        /*for (j = 0; j < 8; j++) {
+            printf("%d", a[j]);
+        }
+        printf("\n");*/
+    }
+    printf("-------------------------------------\n");
     /*Conferindo divide64BitsEm8Bytes
     */
     printf("Conferindo divide64BitsEm8Bytes\n");

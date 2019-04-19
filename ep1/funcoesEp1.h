@@ -73,6 +73,11 @@ void galois257(int *exp, int *log);
 */
 int binarioParaDecimal(int *bin, int n);
 
+/* Funcao que recebe um numero n (0 < n < 256) em base 10 e
+// devolve um byte (vetor de 8 bits) com sua representacao em binario
+*/
+int *decimalParaBinario(int n);
+
 /* Funcao que divide os 64 bits de A em 8 bytes
 // de 8 bits
 */
