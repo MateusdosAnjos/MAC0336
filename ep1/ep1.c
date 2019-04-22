@@ -14,6 +14,10 @@ programa -2 -i <arquivo de entrada> -p <senha>\n\n");
 	return;
 }
 
+void criptografar()  {
+	return;
+}
+
 int main(int argc, char *argv[]) {
 	char* senha = NULL;
 	int* chaveK = NULL;
@@ -23,19 +27,24 @@ int main(int argc, char *argv[]) {
 		instrucoesDeUso();
 		return 0;
 	}
-	while (senha == NULL) {
-		printf("Entre com uma senha\n");
-		senha = recebeSenha();
+
+	if (strcmp(argv[1], "-c") == 0) {
+		criptografar();
+		while (senha == NULL) {
+			printf("Entre com uma senha\n");
+			senha = recebeSenha();
+		}
+
+		chaveK = geraChaveK(senha);
+		for (i = 0; i < 128; i++) {
+			if(i%8 == 0)
+				printf("\n");
+			printf("%d", chaveK[i]);
+		}	
+		printf("\n");
+		free(senha);
+		free(chaveK);
 	}
 
-	chaveK = geraChaveK(senha);
-	for (i = 0; i < 128; i++) {
-		if(i%8 == 0)
-			printf("\n");
-		printf("%d", chaveK[i]);
-	}	
-	printf("\n");
-	free(senha);
-	free(chaveK);
 	return 0;
 }
