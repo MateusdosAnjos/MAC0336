@@ -33,22 +33,35 @@ void criptografar(int argc, char **argv)  {
 	FILE *entrada, *saida;
 	char *senha = NULL;
 
+	/**************************************************/
+	/* Verifica se a chamada do programa esta correta */
+	/**************************************************/
 	if (!confereChamadaCripto(argc, argv)) { 
 		printf("Para criptografar arquivos:\n\
 programa -c -i <arquivo de entrada> -o\
 <arquivo de saída> -p <senha> -a\n\n");
 		return;
 	}
+	/**************************************************/
+	/* Abre e verifica se o arquivo foi aberto        */
+	/**************************************************/
 	entrada = fopen(argv[3], "r");
 	if (!entrada) {
 		printf("Problemas ao abrir arquivo a ser criptografado!\n");
 		return;
 	}
+	/*****************************************************/
+	/* Confere se a senha esta de acordo com o enunciado */
+	/*****************************************************/
 	if (!confereSenha(argv[7], strlen(argv[7]))) {
 		printf("A senha deve conter pelo menos 8 caracteres,\n\
 com pelo menos 2 letras e 2 algarismos decimais!\n");
 		return;
 	}
+
+	/**************************************************/
+	/*     Abre arquivo de saida                      */
+	/**************************************************/
 	saida = fopen(argv[5], "w");
 
 	return;
@@ -59,27 +72,45 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 */
 int main(int argc, char *argv[]) {
 	
+	/**************************************************/
+	/*         Mostra como utilizar o programa        */
+	/**************************************************/
 	if (argc < 6) {
 		instrucoesDeUso();
 		return 0;
 	}
 
+	/**************************************************/
+	/*            Criptografar                        */
+	/**************************************************/
 	if (strcmp(argv[1], "-c") == 0) {
 		criptografar(argc, argv);
 	}
 
+	/**************************************************/
+	/*            Decriptografar                      */
+	/**************************************************/
 	else if (strcmp(argv[1], "-d") == 0) {
 		printf("Falta fazer Decriptografar!\n");
 	}
 
+	/**************************************************/
+	/*        Calculo de aleatoriedade metodo 1       */
+	/**************************************************/
 	else if (strcmp(argv[1], "-1") == 0) {
 		printf("Falta fazer aleatoriedade pelo método 1!\n");
 	}
 
+	/**************************************************/
+	/*        Calculo de aleatoriedade metodo 2       */
+	/**************************************************/
 	else if (strcmp(argv[1], "-2") == 0) {
 		printf("Falta fazer aleatoriedade pelo método 2!\n");
 	}
 
+	/**************************************************/
+	/*                   Erro                         */
+	/**************************************************/
 	else {
 		instrucoesDeUso();
 	}
