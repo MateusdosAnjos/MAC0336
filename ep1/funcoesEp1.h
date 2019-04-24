@@ -21,10 +21,10 @@ int *hexaParaBinario(char *hex);
 bool confereSenha(char *senha, int n);
 
 	
-/* Funcao que espera uma senha da entrada conforme
+/* Funcao que completa a senha da entrada conforme
 // pedido no enunciado.
 */
-char* recebeSenha();
+char *completaSenha(char *senha);
 
 
 /* Funcao que gera os bits da chave K

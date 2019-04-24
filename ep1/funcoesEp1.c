@@ -151,43 +151,28 @@ bool confereSenha(char *senha, int n) {
 	if (num09 < 2) return false;
 	return true;
 }
-/* Funcao que espera uma senha da entrada conforme
+/* Funcao que completa a senha da entrada conforme
 // pedido no enunciado.
 */
-char* recebeSenha() {
+char *completaSenha(char *senha) {
 	int i = 0, j;
-	char* senha;
-	char c;
+	char* senhaCompleta;
 
-	senha = malloc(16 * sizeof(char));
-	c = getchar();
-	/* 10 representa a tecla "ENTER"
-	// -1 representa o fim de um arquivo
-	*/
-	while (c != -1 && c != 10) {
-		senha[i] = c;
-		c = getchar();
-		i++;
+	senhaCompleta = malloc(16 * sizeof(char));
+
+	for (i = 0; i < strlen(senha); i++) {
+		senhaCompleta[i] = senha[i];
 	}
 
-	/*conferindo se a senha esta OK
-	*/
-	if (!confereSenha(senha, strlen(senha))) {
-		return NULL;
-	}
-	/*Tudo OK, completamos a senha se necessario
-	*/
 	i = strlen(senha);
 	j = i;
 
-	/*completa senha caso necessário
-	*/
 	while (i < 16) {
-		senha[i] = senha[i - j];
+		senhaCompleta[i] = senha[i - j];
 		i++;
 	}
 
-	return senha;
+	return senhaCompleta;
 }
 
 /* Funcao que gera os bits da chave K

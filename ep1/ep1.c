@@ -36,7 +36,9 @@ void criptografar(int argc, char **argv)  {
 	int *blocoCripto = NULL;
 	int *X = NULL;
 	int i;
-	printf("\n");
+	char *senha = NULL;
+	char c;
+	printf("");
 	X = malloc(128 * sizeof(int));
 	/**************************************************/
 	/* Verifica se a chamada do programa esta correta */
@@ -63,16 +65,26 @@ programa -c -i <arquivo de entrada> -o\
 com pelo menos 2 letras e 2 algarismos decimais!\n");
 		return;
 	}
-	for (i = 0; i < 128; i++) {
-		X[i] = i%2;
+	/*****************************************************/
+	/* Completa a senha para que tenha 16 bytes          */
+	/*****************************************************/
+	senha = completaSenha(argv[7]);
+
+
+
+
+
+
+
+	while((c = fgetc(entrada)) != EOF) {
+		printf("%c\n", c);
 	}
-	chaveK = geraChaveK(argv[7]);
+      
+
+	chaveK = geraChaveK(senha);
 	subChavesK = geraSubChaves(chaveK, 12);
 	blocoCripto = K128(X, subChavesK, 12);
-	for (i = 0; i < 128; i++) {
-		printf("%d", blocoCripto[i]);
-	}
-	printf("\n");
+
 	/**************************************************/
 	/*     Abre arquivo de saida                      */
 	/**************************************************/
