@@ -83,17 +83,9 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 		}
 		i++;
 	}
-	for (i = 0; i < 128; i++) {
- 	   printf("%d", X[i]);
-	}
-	printf("\n");
 	chaveK = geraChaveK(senha);
 	subChavesK = geraSubChaves(chaveK, 12);
 	blocoCripto = K128(X, subChavesK, 12);
-	for (i = 0; i < 128; i++) {
- 	   printf("%d ", blocoCripto[i]);
-	}
-	printf("\n");
 	/**************************************************/
 	/*     Abre arquivo de saida                      */
 	/**************************************************/

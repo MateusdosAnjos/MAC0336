@@ -294,7 +294,7 @@ int **geraSubChaves(int *chaveK, int r) {
 	/*Alocando memórias*/
 	L = (int **)malloc((4*r + 2) * sizeof(int *));
 	for (i = 0; i < (4*r + 2); i++) {
-		L[i] = malloc(64 * sizeof(int));
+		L[i] = calloc(64, sizeof(int));
 	}
 	subChavesK = (int **)malloc((4*r + 2) * sizeof(int *));
 	for (i = 0; i < (4*r + 2); i++) {
@@ -535,7 +535,7 @@ int *K128(int *X, int **subChavesK, int R) {
 	XfFINAL = somaBinario64(Xb, kb);
 
 	resultado = malloc(128 * sizeof(int));
-	for (i = 0; i < 128; i++) {
+	for (i = 0; i < 64; i++) {
 		resultado[i] = XeFINAL[i];
 		resultado[i+64] = XfFINAL[i];
 	}
