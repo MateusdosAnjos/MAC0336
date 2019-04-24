@@ -31,6 +31,7 @@ bool confereChamadaCripto(int argc, char **argv) {
 */
 void criptografar(int argc, char **argv)  {
 	FILE *entrada, *saida;
+	char *senha = NULL;
 
 	if (!confereChamadaCripto(argc, argv)) { 
 		printf("Para criptografar arquivos:\n\
@@ -41,6 +42,11 @@ programa -c -i <arquivo de entrada> -o\
 	entrada = fopen(argv[3], "r");
 	if (!entrada) {
 		printf("Problemas ao abrir arquivo a ser criptografado!\n");
+		return;
+	}
+	if (!confereSenha(argv[7], strlen(argv[7]))) {
+		printf("A senha deve conter pelo menos 8 caracteres,\n\
+com pelo menos 2 letras e 2 algarismos decimais!\n");
 		return;
 	}
 	saida = fopen(argv[5], "w");
