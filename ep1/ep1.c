@@ -31,8 +31,13 @@ bool confereChamadaCripto(int argc, char **argv) {
 */
 void criptografar(int argc, char **argv)  {
 	FILE *entrada, *saida;
-	char *senha = NULL;
-
+	int *chaveK = NULL;
+	int **subChavesK = NULL;
+	int *blocoCripto = NULL;
+	int *X = NULL;
+	int i;
+	printf("\n");
+	X = malloc(128 * sizeof(int));
 	/**************************************************/
 	/* Verifica se a chamada do programa esta correta */
 	/**************************************************/
@@ -58,12 +63,24 @@ programa -c -i <arquivo de entrada> -o\
 com pelo menos 2 letras e 2 algarismos decimais!\n");
 		return;
 	}
-
+	for (i = 0; i < 128; i++) {
+		X[i] = i%2;
+	}
+	chaveK = geraChaveK(argv[7]);
+	subChavesK = geraSubChaves(chaveK, 12);
+	blocoCripto = K128(X, subChavesK, 12);
+	for (i = 0; i < 128; i++) {
+		printf("%d", blocoCripto[i]);
+	}
+	printf("\n");
 	/**************************************************/
 	/*     Abre arquivo de saida                      */
 	/**************************************************/
 	saida = fopen(argv[5], "w");
 
+
+	fclose(entrada);
+	fclose(saida);
 	return;
 }
 
