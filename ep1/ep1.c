@@ -14,7 +14,21 @@ programa -2 -i <arquivo de entrada> -p <senha>\n\n");
 	return;
 }
 
-void criptografar()  {
+bool confereChamadaCripto(int argc, char *argv) {
+	if (argc < 8) return false;
+	if (strcmp(argv[2], "-i") != 0) return false;
+	if (strcmp(argv[4], "-o") != 0) return false;
+	if (strcmp(argv[6], "-p") != 0) return false;
+	return true;
+}
+
+void criptografar(int argc, char *argv)  {
+	if (!confereChamadaCripto(argc, argv)) { 
+		printf("Para criptografar arquivos:\n\
+programa -c -i <arquivo de entrada> -o\
+<arquivo de saída> -p <senha> -a\n\n");
+		return;
+	}
 	return;
 }
 
@@ -30,20 +44,22 @@ int main(int argc, char *argv[]) {
 
 	if (strcmp(argv[1], "-c") == 0) {
 		criptografar();
-		while (senha == NULL) {
-			printf("Entre com uma senha\n");
-			senha = recebeSenha();
-		}
+	}
 
-		chaveK = geraChaveK(senha);
-		for (i = 0; i < 128; i++) {
-			if(i%8 == 0)
-				printf("\n");
-			printf("%d", chaveK[i]);
-		}	
-		printf("\n");
-		free(senha);
-		free(chaveK);
+	else if (strcmp(argv[1], "-d") == 0) {
+		printf("Falta fazer Decriptografar!\n");
+	}
+
+	else if (strcmp(argv[1], "-1") == 0) {
+		printf("Falta fazer aleatoriedade pelo método 1!\n");
+	}
+
+	else if (strcmp(argv[1], "-2") == 0) {
+		printf("Falta fazer aleatoriedade pelo método 2!\n");
+	}
+
+	else {
+		instrucoesDeUso();
 	}
 
 	return 0;
