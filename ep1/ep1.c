@@ -34,9 +34,9 @@ void criptografar(int argc, char **argv)  {
 	int *chaveK = NULL;
 	int **subChavesK = NULL;
 	int *blocoCripto = NULL;
-	int *X = NULL;
-	int i;
-	char *senha = NULL;
+	int *X = NULL, *bin = NULL;
+	int i, j;
+	char *senha = NULL, *hexaC = NULL;
 	char c;
 	printf("");
 	X = malloc(128 * sizeof(int));
@@ -69,22 +69,31 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 	/* Completa a senha para que tenha 16 bytes          */
 	/*****************************************************/
 	senha = completaSenha(argv[7]);
-
-
-
-
-
-
-
-	while((c = fgetc(entrada)) != EOF) {
-		printf("%c\n", c);
+	/*****************************************************/
+	/* Preenche o bloco X a ser criptografado            */
+	/*****************************************************/
+	hexaC = malloc(2 * sizeof(char));
+	bin = malloc(8 * sizeof(int));
+	i = 0;
+	while((c = fgetc(entrada)) != EOF && i < 16) {
+		sprintf(hexaC, "%02x", c);
+		bin = hexaParaBinario(hexaC);
+		for (j = i * 8; j < (i+1)*8; j++) {
+			X[j] = bin[j - (8*i)];
+		}
+		i++;
 	}
-      
-
+	for (i = 0; i < 128; i++) {
+ 	   printf("%d", X[i]);
+	}
+	printf("\n");
 	chaveK = geraChaveK(senha);
 	subChavesK = geraSubChaves(chaveK, 12);
 	blocoCripto = K128(X, subChavesK, 12);
-
+	for (i = 0; i < 128; i++) {
+ 	   printf("%d ", blocoCripto[i]);
+	}
+	printf("\n");
 	/**************************************************/
 	/*     Abre arquivo de saida                      */
 	/**************************************************/

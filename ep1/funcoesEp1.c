@@ -181,7 +181,7 @@ int *geraChaveK(char *senha) {
 	int *chaveK;
 	int *bin = NULL;
 	int i, j, k;
-	char * c;
+	char *c;
 
 	chaveK = malloc(128 * sizeof(int));
 	bin = malloc(8 * sizeof(int));
