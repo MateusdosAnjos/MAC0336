@@ -3,9 +3,9 @@
 
 int main() {
     int *bin, *a, *b, *c, *X;
-    int *assert, *circular, *exp, *log, *blocoDados, *blocoCripto = NULL;
+    int *assert, *circular, *exp, *log, *blocoDados, **blocoCripto = NULL;
     int **subChaves = NULL, **bytes = NULL, *chaveK = NULL, *cripto = NULL;
-    int i, j, k, alpha;
+    int i, j, k, p, alpha;
     char *byte8 = "010203040506AA10", *hexa, *hexaC, *senha;
     char ce;
     unsigned int charC;
@@ -271,6 +271,11 @@ int main() {
     // sao iguais aos blocos que foram gerados na criptografia
     */
     printf("Conferindo Escrita e Leitura\n");
+    /* p serve para armazenar os blocos gerados na criptografia
+    // para podermos comparar com os blocos gerados na leitura
+    // do arquivo de saida*/
+    p = 0;
+    blocoCripto = malloc(4 * sizeof(int *));
     senha = "senha123senha123";
     chaveK = geraChaveK(senha);
     subChaves = geraSubChaves(chaveK, 12);
@@ -303,14 +308,15 @@ int main() {
         /**************************************************/
         /* Criptografa o bloco de 128 bits                */
         /**************************************************/        
-        blocoCripto = K128(X, subChaves, 12);
+        blocoCripto[p] = K128(X, subChaves, 12);
+        p++;
         /**************************************************/
         /* Transforma os bits criptografados em chars     */
         /**************************************************/    
         for (i = 0; i < 16; i++) {
             k = 0;
             for (j = i*8; j < ((i+1)*8); j++) {
-                bin[k] = blocoCripto[j];
+                bin[k] = blocoCripto[p-1][j];
                 k++; 
             }
         hexaC = binarioParaHexa(bin);
@@ -328,6 +334,34 @@ int main() {
             X[j] = 0;
         }
     }
+    fclose(entrada);
+    fclose(saida);
+    saida = fopen("saida", "r");
+    ce = fgetc(saida);
+    p = 0;
+    while (ce != EOF) {
+        i = 0;
+        while(ce != EOF && i < 16) {
+            sprintf(hexaC, "%02x", ce);
+            bin = hexaParaBinario(hexaC);
+            for (j = i * 8; j < (i+1)*8; j++) {
+                X[j] = bin[j - (8*i)];
+            }
+            i++;
+            ce = fgetc(saida);   
+        }
+        for (i = 0; i < 128; i++) {
+            if (X[i] != blocoCripto[p][i]) {
+                printf("Diferença detectada! bloco = %d \
+posição = %d letra número %d \n", p, i, ((i+1)%8)+1);
+            }
+        }
+        p++;
+        for (j = 0; j < 128; j++) {
+            X[j] = 0;
+        }        
+    }
+    fclose(saida);
     printf("-------------------------------------\n");
     free(a);
     free(b);
@@ -347,7 +381,9 @@ int main() {
     free(hexa);
     free(X);
     free(hexaC);
-    fclose(entrada);
-    fclose(saida);
+    for (i = 0; i < 2; i++) {
+        free(blocoCripto[i]);
+    }
+    free(blocoCripto);
     return 0; 
 }
