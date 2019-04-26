@@ -36,9 +36,10 @@ void criptografar(int argc, char **argv)  {
 	int **subChavesK = NULL;
 	int *blocoCripto = NULL;
 	int *X = NULL, *bin = NULL;
-	int i, j;
+	int i, j, k;
 	char *senha = NULL, *hexaC = NULL;
 	char c;
+	unsigned int charC;
 	printf("");
 	X = malloc(128 * sizeof(int));
 	/**************************************************/
@@ -58,6 +59,10 @@ programa -c -i <arquivo de entrada> -o\
 		printf("Problemas ao abrir arquivo a ser criptografado!\n");
 		return;
 	}
+	/**************************************************/
+	/*     Abre arquivo de saida                      */
+	/**************************************************/
+	saida = fopen(argv[5], "w");
 	/*****************************************************/
 	/* Confere se a senha esta de acordo com o enunciado */
 	/*****************************************************/
@@ -87,16 +92,22 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 	chaveK = geraChaveK(senha);
 	subChavesK = geraSubChaves(chaveK, 12);
 	blocoCripto = K128(X, subChavesK, 12);
-	for (i = 0; i < 128; i++) {
-		printf("%d ", blocoCripto[i]);
+	/**************************************************/
+	/* Transforma os bits criptografados em chars     */
+	/**************************************************/	
+	for (i = 0; i < 16; i++) {
+		k = 0;
+		for (j = i*8; j < ((i+1)*8); j++) {
+			bin[k] = blocoCripto[j];
+			k++; 
+		}
+		hexaC = binarioParaHexa(bin);
+		sscanf(hexaC, "%02x", &charC);
+	/**************************************************/
+	/*Escreve o char criptografado no arquivo de saida*/
+	/**************************************************/	
+		fprintf(saida, "%c", charC);
 	}
-	printf("\n");
-	/**************************************************/
-	/*     Abre arquivo de saida                      */
-	/**************************************************/
-	saida = fopen(argv[5], "w");
-
-
 	fclose(entrada);
 	fclose(saida);
 	return;

@@ -7,6 +7,7 @@ int main() {
     int **subChaves = NULL, **bytes = NULL, *chaveK = NULL, *cripto = NULL;
     int i, j, alpha;
     char *byte8 = "010203040506AA10", *hexa;
+    unsigned int charC;
 
     /*Conferindo hexaParaBinario
     */
@@ -260,6 +261,8 @@ int main() {
     hexa = binarioParaHexa(assert);
     printf("%c", hexa[0]);
     printf("%c\n", hexa[1]);
+    sscanf(hexa, "%02x", &charC);
+    printf("char = %c\n", charC);
     printf("-------------------------------------\n");
     free(a);
     free(b);
