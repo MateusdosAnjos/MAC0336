@@ -22,3 +22,6 @@ cache de L1i:               32K
 cache de L2:                256K
 cache de L3:                6144K
 CPU(s) de nó0 NUMA:         0-3
+
+
+./ep1 -c -i entrada -o saida -p senha123

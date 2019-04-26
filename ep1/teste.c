@@ -1,4 +1,5 @@
 #include "funcoesEp1.h"
+#include "conversao.h"
 
 int main() {
     int *bin, *a, *b, *c;

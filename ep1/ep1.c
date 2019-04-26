@@ -1,4 +1,5 @@
 #include "funcoesEp1.h"
+#include "conversao.h"
 
 /* Funcao que explica o uso do programa
 */
