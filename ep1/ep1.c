@@ -100,6 +100,9 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 			i++;
 			c = fgetc(entrada);
 		}
+		/**************************************************/
+		/* Criptografa o bloco de 128 bits                */
+		/**************************************************/		
 		blocoCripto = K128(X, subChavesK, 12);
 		/**************************************************/
 		/* Transforma os bits criptografados em chars     */
@@ -117,10 +120,17 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 		/**************************************************/	
 		fprintf(saida, "%c", charC);
 		}
+		/**************************************************/
+		/* Zera o bloco X (necessario para o ultimo bloco */
+		/* do arquivo)                                    */
+		/**************************************************/			
 		for (j = 0; j < 128; j++) {
 			X[j] = 0;
 		}
 	}
+	/**************************************************/
+	/* Fecha os arquivos que foram abertos            */
+	/**************************************************/		
 	fclose(entrada);
 	fclose(saida);
 	return;
