@@ -6,7 +6,7 @@ int main() {
     int *assert, *circular, *exp, *log, *blocoDados;
     int **subChaves = NULL, **bytes = NULL, *chaveK = NULL, *cripto = NULL;
     int i, j, alpha;
-    char *byte8 = "010203040506AA10";
+    char *byte8 = "010203040506AA10", *hexa;
 
     /*Conferindo hexaParaBinario
     */
@@ -247,6 +247,20 @@ int main() {
     }
     printf("\n");
     printf("-------------------------------------\n");
+    /*Conferindo binarioParaHexa
+    */
+    assert[0] = 1;
+    assert[1] = 1;
+    assert[2] = 0;
+    assert[3] = 1;
+    assert[4] = 0;
+    assert[5] = 1;
+    assert[6] = 0;
+    assert[7] = 0;
+    hexa = binarioParaHexa(assert);
+    printf("%c", hexa[0]);
+    printf("%c\n", hexa[1]);
+    printf("-------------------------------------\n");
     free(a);
     free(b);
     free(c);
@@ -262,5 +276,6 @@ int main() {
     free(log);
     free(bytes);
     free(blocoDados);
+    free(hexa);
     return 0; 
 }
