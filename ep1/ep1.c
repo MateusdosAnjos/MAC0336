@@ -76,37 +76,50 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 	/*****************************************************/
 	senha = completaSenha(argv[7]);
 	/*****************************************************/
+	/* gera a chaveK a partir da senha fornecida         */
+	/*****************************************************/	
+	chaveK = geraChaveK(senha);
+	/*****************************************************/
+	/* gera as subchaves a partir da chaveK              */
+	/*****************************************************/		
+	subChavesK = geraSubChaves(chaveK, 12);
+	/*****************************************************/
 	/* Preenche o bloco X a ser criptografado            */
 	/*****************************************************/
 	hexaC = malloc(2 * sizeof(char));
 	bin = malloc(8 * sizeof(int));
-	i = 0;
-	while((c = fgetc(entrada)) != EOF && i < 16) {
-		sprintf(hexaC, "%02x", c);
-		bin = hexaParaBinario(hexaC);
-		for (j = i * 8; j < (i+1)*8; j++) {
-			X[j] = bin[j - (8*i)];
+	c = fgetc(entrada);
+	while (c != EOF) {
+		i = 0;
+		while(c != EOF && i < 16) {
+			sprintf(hexaC, "%02x", c);
+			bin = hexaParaBinario(hexaC);
+			for (j = i * 8; j < (i+1)*8; j++) {
+				X[j] = bin[j - (8*i)];
+			}
+			i++;
+			c = fgetc(entrada);
 		}
-		i++;
-	}
-	chaveK = geraChaveK(senha);
-	subChavesK = geraSubChaves(chaveK, 12);
-	blocoCripto = K128(X, subChavesK, 12);
-	/**************************************************/
-	/* Transforma os bits criptografados em chars     */
-	/**************************************************/	
-	for (i = 0; i < 16; i++) {
-		k = 0;
-		for (j = i*8; j < ((i+1)*8); j++) {
-			bin[k] = blocoCripto[j];
-			k++; 
-		}
+		blocoCripto = K128(X, subChavesK, 12);
+		/**************************************************/
+		/* Transforma os bits criptografados em chars     */
+		/**************************************************/	
+		for (i = 0; i < 16; i++) {
+			k = 0;
+			for (j = i*8; j < ((i+1)*8); j++) {
+				bin[k] = blocoCripto[j];
+				k++; 
+			}
 		hexaC = binarioParaHexa(bin);
 		sscanf(hexaC, "%02x", &charC);
-	/**************************************************/
-	/*Escreve o char criptografado no arquivo de saida*/
-	/**************************************************/	
+		/**************************************************/
+		/*Escreve o char criptografado no arquivo de saida*/
+		/**************************************************/	
 		fprintf(saida, "%c", charC);
+		}
+		for (j = 0; j < 128; j++) {
+			X[j] = 0;
+		}
 	}
 	fclose(entrada);
 	fclose(saida);
