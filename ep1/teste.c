@@ -2,12 +2,14 @@
 #include "conversao.h"
 
 int main() {
-    int *bin, *a, *b, *c;
-    int *assert, *circular, *exp, *log, *blocoDados;
+    int *bin, *a, *b, *c, *X;
+    int *assert, *circular, *exp, *log, *blocoDados, *blocoCripto = NULL;
     int **subChaves = NULL, **bytes = NULL, *chaveK = NULL, *cripto = NULL;
-    int i, j, alpha;
-    char *byte8 = "010203040506AA10", *hexa;
+    int i, j, k, alpha;
+    char *byte8 = "010203040506AA10", *hexa, *hexaC, *senha;
+    char ce;
     unsigned int charC;
+    FILE *entrada, *saida;
 
     /*Conferindo hexaParaBinario
     */
@@ -250,6 +252,7 @@ int main() {
     printf("-------------------------------------\n");
     /*Conferindo binarioParaHexa
     */
+    printf("Conferindo binarioParaHexa\n");
     assert[0] = 1;
     assert[1] = 1;
     assert[2] = 0;
@@ -263,6 +266,68 @@ int main() {
     printf("%c\n", hexa[1]);
     sscanf(hexa, "%02x", &charC);
     printf("char = %c\n", charC);
+    printf("-------------------------------------\n");
+    /*Conferindo se os blocos recebidos do arquivo de saida
+    // sao iguais aos blocos que foram gerados na criptografia
+    */
+    printf("Conferindo Escrita e Leitura\n");
+    senha = "senha123senha123";
+    chaveK = geraChaveK(senha);
+    subChaves = geraSubChaves(chaveK, 12);
+    /**************************************************/
+    /* Abre e verifica se o arquivo foi aberto        */
+    /**************************************************/
+    entrada = fopen("entrada", "r");
+    if (!entrada) {
+        printf("Problemas ao abrir arquivo a ser criptografado!\n");
+        return 0;
+    }
+    /**************************************************/
+    /*     Abre arquivo de saida                      */
+    /**************************************************/
+    saida = fopen("saida", "w");
+    X = malloc(128 * sizeof(int));
+    hexaC = malloc(2 * sizeof(char));
+    ce = fgetc(entrada);
+    while (ce != EOF) {
+        i = 0;
+        while(ce != EOF && i < 16) {
+            sprintf(hexaC, "%02x", ce);
+            bin = hexaParaBinario(hexaC);
+            for (j = i * 8; j < (i+1)*8; j++) {
+                X[j] = bin[j - (8*i)];
+            }
+            i++;
+            ce = fgetc(entrada);
+        }
+        /**************************************************/
+        /* Criptografa o bloco de 128 bits                */
+        /**************************************************/        
+        blocoCripto = K128(X, subChaves, 12);
+        /**************************************************/
+        /* Transforma os bits criptografados em chars     */
+        /**************************************************/    
+        for (i = 0; i < 16; i++) {
+            k = 0;
+            for (j = i*8; j < ((i+1)*8); j++) {
+                bin[k] = blocoCripto[j];
+                k++; 
+            }
+        hexaC = binarioParaHexa(bin);
+        sscanf(hexaC, "%02x", &charC);
+        /**************************************************/
+        /*Escreve o char criptografado no arquivo de saida*/
+        /**************************************************/    
+        fprintf(saida, "%c", charC);
+        }
+        /**************************************************/
+        /* Zera o bloco X (necessario para o ultimo bloco */
+        /* do arquivo)                                    */
+        /**************************************************/            
+        for (j = 0; j < 128; j++) {
+            X[j] = 0;
+        }
+    }
     printf("-------------------------------------\n");
     free(a);
     free(b);
@@ -280,5 +345,9 @@ int main() {
     free(bytes);
     free(blocoDados);
     free(hexa);
+    free(X);
+    free(hexaC);
+    fclose(entrada);
+    fclose(saida);
     return 0; 
 }
