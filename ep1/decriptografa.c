@@ -85,10 +85,7 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 		/**************************************************/
 		/* Decriptografa o bloco de 128 bits              */
 		/**************************************************/		
-		
-		/* Deve implementar o K128Inv */
 		blocoCripto = K128Inv(X, subChavesK, 12);
-		
 		/**************************************************/
 		/* Transforma os bits decriptografados em chars   */
 		/**************************************************/	

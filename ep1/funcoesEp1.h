@@ -76,4 +76,8 @@ int *odot(int *B, int *C);
 */
 int *K128(int *X, int **subChavesK, int R);
 
+/* Funcao que implementa o  inverso do K 128 utilizado na decriptografia
+*/
+int *K128Inv(int *X, int **subChavesK, int R);
+
 #endif

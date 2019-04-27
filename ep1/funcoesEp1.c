@@ -384,3 +384,9 @@ int *K128(int *X, int **subChavesK, int R) {
 
 	return resultado;
 }
+
+/* Funcao que implementa o  inverso do K 128 utilizado na decriptografia
+*/
+int *K128Inv(int *X, int **subChavesK, int R) {
+	return NULL;
+}
