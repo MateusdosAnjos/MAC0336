@@ -5,7 +5,7 @@
 */
 void instrucoesDeUso() {
 	printf("Modo (1) Para criptografar arquivos:\n\
-programa -c -i <arquivo de entrada> -o\
+programa -c -i <arquivo de entrada> -o \
 <arquivo de saída> -p <senha> -a\n\n");
 	printf("Modo (2) Para decriptografar arquivos:\n\
 programa -d -i <arquivo de entrada> -o <arquivo\
@@ -46,7 +46,7 @@ void criptografar(int argc, char **argv)  {
 	/**************************************************/
 	if (!confereChamadaCripto(argc, argv)) { 
 		printf("Para criptografar arquivos:\n\
-programa -c -i <arquivo de entrada> -o\
+programa -c -i <arquivo de entrada> -o \
 <arquivo de saída> -p <senha> -a\n\n");
 		return;
 	}
