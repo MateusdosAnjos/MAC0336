@@ -36,7 +36,7 @@ void criptografar(int argc, char **argv)  {
 	int **subChavesK = NULL;
 	int *blocoCripto = NULL;
 	int *X = NULL, *bin = NULL;
-	int i, j, k;
+	int i, j, k, tamanhoArquivo = 0;
 	char *senha = NULL, *hexaC = NULL;
 	unsigned int charC, c;
 	printf("");
@@ -91,6 +91,7 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 	while (c != EOF) {
 		i = 0;
 		while(c != EOF && i < 16) {
+			tamanhoArquivo++;
 			sprintf(hexaC, "%02x", c);
 			bin = hexaParaBinario(hexaC);
 			for (j = i * 8; j < (i+1)*8; j++) {
@@ -129,9 +130,32 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 	}
 	/**************************************************/
 	/* Fecha os arquivos que foram abertos            */
-	/**************************************************/		
+	/**************************************************/
 	fclose(entrada);
 	fclose(saida);
+	/**************************************************/
+	/* Sobrescreve e apaga entrada se necessario      */
+	/**************************************************/
+	if (argc == 9) {
+		if (strcmp(argv[8], "-a") == 0) {
+			entrada = fopen(argv[3], "w");
+			if (!entrada) {
+				printf("Problemas ao deletar arquivo de entrada!\n");
+				return;
+			}
+			else {
+				for (i = 0; i < tamanhoArquivo; i++) {
+					fwrite(" ", sizeof(char), 1, entrada);
+				}
+			}
+			if (remove(argv[3]) == 0){
+    			printf("Arquivo criptografado e removido com sucesso!\n");
+  			}
+  			else {
+      			printf("Erro na remoção do arquivo!.\n");
+    		}
+		}
+	}		
 	return;
 }
 
