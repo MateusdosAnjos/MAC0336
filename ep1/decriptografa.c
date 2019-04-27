@@ -15,6 +15,11 @@ bool confereChamadaDecripto(int argc, char **argv) {
 /* Funcao que decriptografa o arquivo de entrada
 */
 void decriptografar(int argc, char **argv)  {
+	FILE *entrada, *saida;
+	int *chaveK = NULL;
+	int **subChavesK = NULL;
+	char *senha = NULL;
+
 	/**************************************************/
 	/* Verifica se a chamada do programa esta correta */
 	/**************************************************/
@@ -24,5 +29,37 @@ programa -d -i <arquivo de entrada> -o \
 <arquivo de saída> -p <senha>\n\n");
 		return;
 	}
+	/**************************************************/
+	/* Abre e verifica se o arquivo foi aberto        */
+	/**************************************************/
+	entrada = fopen(argv[3], "r");
+	if (!entrada) {
+		printf("Problemas ao abrir arquivo a ser decriptografado!\n");
+		return;
+	}
+	/**************************************************/
+	/*     Abre arquivo de saida                      */
+	/**************************************************/
+	saida = fopen(argv[5], "w");
+	/*****************************************************/
+	/* Confere se a senha esta de acordo com o enunciado */
+	/*****************************************************/
+	if (!confereSenha(argv[7], strlen(argv[7]))) {
+		printf("A senha deve conter pelo menos 8 caracteres,\n\
+com pelo menos 2 letras e 2 algarismos decimais!\n");
+		return;
+	}
+	/*****************************************************/
+	/* Completa a senha para que tenha 16 bytes          */
+	/*****************************************************/
+	senha = completaSenha(argv[7]);
+	/*****************************************************/
+	/* gera a chaveK a partir da senha fornecida         */
+	/*****************************************************/	
+	chaveK = geraChaveK(senha);
+	/*****************************************************/
+	/* gera as subchaves a partir da chaveK              */
+	/*****************************************************/		
+	subChavesK = geraSubChaves(chaveK, 12);
 	return;
 }

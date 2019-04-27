@@ -16,14 +16,12 @@ bool confereChamadaCripto(int argc, char **argv) {
 */
 void criptografar(int argc, char **argv)  {
 	FILE *entrada, *saida;
-	int *chaveK = NULL;
+	int *chaveK = NULL, *blocoCripto = NULL, *X = NULL, *bin = NULL;
 	int **subChavesK = NULL;
-	int *blocoCripto = NULL;
-	int *X = NULL, *bin = NULL;
 	int i, j, k, tamanhoArquivo = 0;
-	char *senha = NULL, *hexaC = NULL;
 	unsigned int charC, c;
-	printf("");
+	char *senha = NULL, *hexaC = NULL;
+	printf("\n");
 	X = malloc(128 * sizeof(int));
 	/**************************************************/
 	/* Verifica se a chamada do programa esta correta */
