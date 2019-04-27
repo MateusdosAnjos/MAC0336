@@ -367,7 +367,6 @@ int main() {
     free(bin);
     free(assert);
     free(circular);
-    free(chaveK);
     for (i = 0; i < (4*12 + 2); i++) {
         free(subChaves[i]);
     }
