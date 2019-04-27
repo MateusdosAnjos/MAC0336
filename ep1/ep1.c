@@ -1,6 +1,7 @@
 #include "funcoesEp1.h"
 #include "conversao.h"
 #include "criptografa.h"
+#include "decriptografa.h"
 
 /* Funcao que explica o uso do programa
 */
@@ -41,7 +42,7 @@ int main(int argc, char *argv[]) {
 	/*            Decriptografar                      */
 	/**************************************************/
 	else if (strcmp(argv[1], "-d") == 0) {
-		printf("Falta fazer Decriptografar!\n");
+		decriptografar(argc, argv);
 	}
 
 	/**************************************************/
