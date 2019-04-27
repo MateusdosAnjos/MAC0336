@@ -38,8 +38,7 @@ void criptografar(int argc, char **argv)  {
 	int *X = NULL, *bin = NULL;
 	int i, j, k;
 	char *senha = NULL, *hexaC = NULL;
-	char c;
-	unsigned int charC;
+	unsigned int charC, c;
 	printf("");
 	X = malloc(128 * sizeof(int));
 	/**************************************************/

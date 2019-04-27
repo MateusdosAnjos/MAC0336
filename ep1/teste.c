@@ -7,8 +7,7 @@ int main() {
     int **subChaves = NULL, **bytes = NULL, *chaveK = NULL, *cripto = NULL;
     int i, j, k, p, alpha;
     char *byte8 = "010203040506AA10", *hexa, *hexaC, *senha;
-    char ce;
-    unsigned int charC;
+    unsigned int charC, ce;
     FILE *entrada, *saida;
 
     /*Conferindo hexaParaBinario
@@ -342,7 +341,7 @@ int main() {
     while (ce != EOF) {
         i = 0;
         while(ce != EOF && i < 16) {
-            sprintf(hexaC, "%02x", ce);
+            sprintf(hexaC, "%02x", ce);       
             bin = hexaParaBinario(hexaC);
             for (j = i * 8; j < (i+1)*8; j++) {
                 X[j] = bin[j - (8*i)];
@@ -352,8 +351,7 @@ int main() {
         }
         for (i = 0; i < 128; i++) {
             if (X[i] != blocoCripto[p][i]) {
-                printf("Diferença detectada! bloco = %d \
-posição = %d letra número %d \n", p, i, ((i+1)%8)+1);
+                printf("erro! letra número %d\n", i);
             }
         }
         p++;
