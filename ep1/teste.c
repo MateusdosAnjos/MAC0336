@@ -202,7 +202,7 @@ int main() {
     */
     printf("Conferindo decimalParaBinario\n");
     for (i = 0; i < 256; i++) {
-        a = decimalParaBinario(i);
+        a = decimalParaBinario(i, 8);
         if (i != binarioParaDecimal(a, 8)) {
             printf("Erro em decimalParaBinario!\n");
             return 0;
@@ -365,16 +365,25 @@ int main() {
     */
     printf("Conferindo somaBinario64Inv\n");
     free(a); free(b); free(c); free(assert);
-    a = malloc(64 * sizeof(int));
-    b = malloc(64 * sizeof(int));
-    for (i = 0; i < 64; i++) {
+    a = calloc(64, sizeof(int));
+    b = calloc(64, sizeof(int));
+    for (i = 0; i < 10; i++) {
         a[i] = (int)rand()%2;
         b[i] = (int)rand()%2;
     }
     c = somaBinario64(a, b);
+    printf("a = \n");
+    for (i = 0; i < 64; i++) {
+        printf("%d", a[i]);
+    }
+    printf("\nassert = ");
     assert = somaBinario64Inv(c, b);
     for (i = 0; i < 64; i++) {
-        if (assert[i] != c[i]) {
+        printf("%d", assert[i]);
+    }
+    printf("\n");
+    for (i = 0; i < 64; i++) {
+        if (assert[i] != a[i]) {
             printf("Erro em somaBinario64Inv\n");
             return 0;
         }

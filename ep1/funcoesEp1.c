@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <ctype.h>
 #include <math.h>
+#include <stdint.h>
 #include "conversao.h"
 
 /* Funcao que recebe uma senha de tamanho n e verifica
@@ -100,12 +101,12 @@ int *somaBinario64(int *a, int *b) {
 */
 int *somaBinario64Inv(int *a, int *b) {
 	int *resultado;
-	long int aDec, bDec;
+	uint64_t aDec, bDec;
 
 	aDec = binarioParaDecimal(a, 64);
 	bDec = binarioParaDecimal(b, 64);
 	printf("aDec = %ld bDec = %ld\n", aDec, bDec);
-	resultado = decimalParaBinario((aDec - bDec)%64);
+	resultado = decimalParaBinario((aDec - bDec), 64);
 
 	return resultado;
 }
@@ -343,8 +344,8 @@ int *odot(int *B, int *C) {
 	for (i = 0; i < 8; i++) {
 		decimalB = binarioParaDecimal(bytesB[i], 8);
 		decimalC = binarioParaDecimal(bytesC[i], 8);
-		fBi = decimalParaBinario(exp[decimalB]);
-		fCi = decimalParaBinario(exp[decimalC]);
+		fBi = decimalParaBinario(exp[decimalB], 8);
+		fCi = decimalParaBinario(exp[decimalC], 8);
 		bytesA[i] = xor(fBi, fCi, 8);
 	}
 
