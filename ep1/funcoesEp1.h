@@ -77,6 +77,11 @@ int **divide64BitsEm8Bytes(int *A);
 */
 int *odot(int *B, int *C);
 
+/* Funcao que implementa a inversa da operacao basica numero 3
+// (em LaTeX \odot)
+*/
+int *odotInv(int *A, int *C);
+
 /* Funcao que implementa o K 128 como descrito no enunciado
 */
 int *K128(int *X, int **subChavesK, int R);

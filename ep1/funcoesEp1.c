@@ -357,6 +357,13 @@ int *odot(int *B, int *C) {
 	return resultado;
 }
 
+/* Funcao que implementa a inversa da operacao basica numero 3
+// (em LaTeX \odot)
+*/
+int *odotInv(int *A, int *C) {
+	return NULL;
+}
+
 /* Funcao que implementa o K 128 como descrito no enunciado
 */
 int *K128(int *X, int **subChavesK, int R) {
