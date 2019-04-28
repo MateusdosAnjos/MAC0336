@@ -19,7 +19,7 @@ char *binarioParaHexa(int *bin);
 /* Funcao que recebe um numero binario de n bits em um vetor
 // bin e devolve sua representacao em base 10
 */
-int binarioParaDecimal(int *bin, int n);
+long int binarioParaDecimal(int *bin, int n);
 
 /* Funcao que recebe um numero n (0 < n < 256) em base 10 e
 // devolve um byte (vetor de 8 bits) com sua representacao em binario

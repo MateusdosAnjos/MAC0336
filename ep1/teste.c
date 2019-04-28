@@ -361,6 +361,28 @@ int main() {
     }
     fclose(saida);
     printf("-------------------------------------\n");
+    /* Conferindo somaBinario64Inv
+    */
+    printf("Conferindo somaBinario64Inv\n");
+    free(a); free(b); free(c); free(assert);
+    a = malloc(64 * sizeof(int));
+    b = malloc(64 * sizeof(int));
+    for (i = 0; i < 64; i++) {
+        a[i] = (int)rand()%2;
+        b[i] = (int)rand()%2;
+    }
+    c = somaBinario64(a, b);
+    assert = somaBinario64Inv(c, b);
+    for (i = 0; i < 64; i++) {
+        if (assert[i] != c[i]) {
+            printf("Erro em somaBinario64Inv\n");
+            return 0;
+        }
+    }
+
+
+    printf("\n");
+    printf("-------------------------------------\n");    
     free(a);
     free(b);
     free(c);

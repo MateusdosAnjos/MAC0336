@@ -171,8 +171,8 @@ char *binarioParaHexa(int *bin) {
 /* Funcao que recebe um numero binario de n bits em um vetor
 // bin e devolve sua representacao em base 10
 */
-int binarioParaDecimal(int *bin, int n) {
-        int resultado, i, potencia;
+long int binarioParaDecimal(int *bin, int n) {
+        long int resultado, i, potencia;
 
         resultado = 0;
         potencia = 1;

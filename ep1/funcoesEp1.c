@@ -95,6 +95,21 @@ int *somaBinario64(int *a, int *b) {
 	return c;
 }
 
+/* Funcao que calcula a soma binaria inversa mod 2^64
+// necessaria para a decriptografia
+*/
+int *somaBinario64Inv(int *a, int *b) {
+	int *resultado;
+	long int aDec, bDec;
+
+	aDec = binarioParaDecimal(a, 64);
+	bDec = binarioParaDecimal(b, 64);
+	printf("aDec = %ld bDec = %ld\n", aDec, bDec);
+	resultado = decimalParaBinario((aDec - bDec)%64);
+
+	return resultado;
+}
+
 /* Funcao que faz a rotacao (deslocamento circular) de
 // alpha bits para a esquerda dos 64 bits de beta.
 */
