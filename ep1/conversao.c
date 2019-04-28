@@ -191,7 +191,13 @@ uint64_t binarioParaDecimal(int *bin, int n) {
 // devolve um vetor de t bits com sua representacao em binario
 */
 int *decimalParaBinario(int n, int t) {
-        int *resultado, i, divisor = 128;
+        int *resultado, i;
+        uint64_t divisor;
+
+        divisor = 1;
+        for (i = 0; i < t-1; i++) {
+            divisor *= 2;
+        }
 
         resultado = malloc(t * sizeof(int));
 
