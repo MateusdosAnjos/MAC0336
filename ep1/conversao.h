@@ -25,6 +25,6 @@ uint64_t binarioParaDecimal(int *bin, int n);
 /* Funcao que recebe um numero n em base 10 e
 // devolve um vetor de t bits com sua representacao em binario
 */
-int *decimalParaBinario(int n, int t);
+int *decimalParaBinario(uint64_t n, int t);
 
 #endif

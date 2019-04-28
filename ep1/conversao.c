@@ -175,6 +175,7 @@ char *binarioParaHexa(int *bin) {
 uint64_t binarioParaDecimal(int *bin, int n) {
         uint64_t resultado, i, potencia;
 
+        if (n == 64) n = n-1;
         resultado = 0;
         potencia = 1;
 
@@ -190,7 +191,7 @@ uint64_t binarioParaDecimal(int *bin, int n) {
 /* Funcao que recebe um numero n em base 10 e
 // devolve um vetor de t bits com sua representacao em binario
 */
-int *decimalParaBinario(int n, int t) {
+int *decimalParaBinario(uint64_t n, int t) {
         int *resultado, i;
         uint64_t divisor;
 
@@ -198,7 +199,6 @@ int *decimalParaBinario(int n, int t) {
         for (i = 0; i < t-1; i++) {
             divisor *= 2;
         }
-
         resultado = malloc(t * sizeof(int));
 
         for (i = t-1; i >= 0; i--) {

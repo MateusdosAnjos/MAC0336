@@ -367,17 +367,17 @@ int main() {
     free(a); free(b); free(c); free(assert);
     a = calloc(64, sizeof(int));
     b = calloc(64, sizeof(int));
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < 64; i++) {
         a[i] = (int)rand()%2;
         b[i] = (int)rand()%2;
     }
     c = somaBinario64(a, b);
-    printf("a = \n");
+    assert = somaBinario64Inv(c, b);
+    printf("a      = ");
     for (i = 0; i < 64; i++) {
         printf("%d", a[i]);
     }
     printf("\nassert = ");
-    assert = somaBinario64Inv(c, b);
     for (i = 0; i < 64; i++) {
         printf("%d", assert[i]);
     }
