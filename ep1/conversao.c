@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+#include <inttypes.h>
 
 /* Funcao que recebe um numero em hexadecimal na forma
 // XX e devolve o valor correspondente em binario
@@ -175,7 +176,6 @@ char *binarioParaHexa(int *bin) {
 uint64_t binarioParaDecimal(int *bin, int n) {
         uint64_t resultado, i, potencia;
 
-        if (n == 64) n = n-1;
         resultado = 0;
         potencia = 1;
 
@@ -202,9 +202,9 @@ int *decimalParaBinario(uint64_t n, int t) {
         resultado = malloc(t * sizeof(int));
 
         for (i = t-1; i >= 0; i--) {
-                resultado[i] = n/divisor;
-                n = n%divisor;
-                divisor = divisor/2;
+            resultado[i] = n/divisor;
+            n = n%divisor;
+            divisor = divisor/2;
         }
 
         return resultado;

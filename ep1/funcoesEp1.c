@@ -105,8 +105,6 @@ int *somaBinario64Inv(int *a, int *b) {
 
 	aDec = binarioParaDecimal(a, 64);
 	bDec = binarioParaDecimal(b, 64);
-	printf("aDec = %ld, bDec = %ld\n", aDec, bDec);
-	printf("aDec - bDec = %ld\n", (aDec - bDec));
 	resultado = decimalParaBinario((aDec - bDec), 64);
 
 	return resultado;

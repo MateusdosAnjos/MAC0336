@@ -365,6 +365,7 @@ int main() {
     */
     printf("Conferindo somaBinario64Inv\n");
     free(a); free(b); free(c); free(assert);
+    srand(300);
     a = calloc(64, sizeof(int));
     b = calloc(64, sizeof(int));
     for (i = 0; i < 64; i++) {
@@ -388,7 +389,6 @@ int main() {
             return 0;
         }
     }
-
 
     printf("\n");
     printf("-------------------------------------\n");    
