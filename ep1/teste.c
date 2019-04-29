@@ -14,6 +14,7 @@ int main() {
     /*********Variaveis Para criptografar e decriptografar**************/
     /**/int *Xa, *Xb, *ka, *kb, *ke, *kf, *Xe, *Xf;                  /**/
     /**/int *Y1, *Y2, *Z, *XeFINAL, *XfFINAL, *resultado;            /**/
+    /**/int *Y1decri, *Y2decri, *Zdecri;                             /**/    
     /**/int *XeLinha, *XfLinha, R = 12;                              /**/
     /*******************************************************************/
 
@@ -491,11 +492,23 @@ int main() {
     i = 0;
     kf = subChavesK[(4*R) - ((4*i) + 1)];
     ke = subChavesK[(4*R) - ((4*i) + 2)];
-    Y1 = xor(XeLinha, XfLinha, 64);
-    Y2 = odot(somaBinario64((odot(ke, Y1)), Y1), kf);
-    Z = somaBinario64(odot(ke, Y1), Y2);
-    Xe = xor(XeLinha, Z, 64);
-    Xf = xor(XfLinha, Z, 64);
+    Y1decri = xor(XeLinha, XfLinha, 64);
+    for (i = 0; i < 64; i++) {
+        if (Y1decri[i] != Y1[i]) {
+            printf("Erro na inversao de Y1!\n");
+            return 0;
+        }
+    }
+    Y2decri = odot(somaBinario64((odot(ke, Y1decri)), Y1decri), kf);
+    for (i = 0; i < 64; i++) {
+        if (Y2decri[i] != Y2[i]) {
+            printf("Erro na inversao de Y2!\n");
+            return 0;
+        }
+    }    
+    Zdecri = somaBinario64(odot(ke, Y1decri), Y2decri);
+    Xe = xor(XeLinha, Zdecri, 64);
+    Xf = xor(XfLinha, Zdecri, 64);
     kb = subChavesK[(4*R) - ((4*i) + 3)];
     ka = subChavesK[(4*R) - ((4*i) + 4)];
     Xa = odotInv(Xe, ka);
