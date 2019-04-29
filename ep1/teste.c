@@ -441,7 +441,7 @@ int main() {
         Xb[i] = X[i+64];
     }
 
-    i= R-1;
+    i = R-1;
     ka = subChavesK[i*4];
     kb = subChavesK[(i*4)+1];
     ke = subChavesK[(i*4)+2];
@@ -533,7 +533,8 @@ int main() {
             printf("Erro na inversao de Xf!\n");
             return 0;
         }
-    }         
+    }
+    i = 0;         
     kb = subChavesK[(4*R) - ((4*i) + 3)];
     ka = subChavesK[(4*R) - ((4*i) + 4)];
     Xa = odotInv(Xe, ka);
