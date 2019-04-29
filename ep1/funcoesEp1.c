@@ -361,7 +361,35 @@ int *odot(int *B, int *C) {
 // (em LaTeX \odot)
 */
 int *odotInv(int *A, int *C) {
-	return NULL;
+	int **bytesA, **bytesB, **bytesC;
+	int *exp = NULL, *log = NULL, *resultado, *expBin = NULL;
+	int decimalC, indiceDoLog;
+	int i, j;
+
+	exp = malloc(256 * sizeof(int));
+	log = malloc(256 * sizeof(int));
+	galois257(exp, log);
+
+	bytesB = malloc(8 * sizeof(int *));
+
+	bytesA = divide64BitsEm8Bytes(A);
+	bytesC = divide64BitsEm8Bytes(C);
+
+	
+	for (i = 0; i < 8; i++) {
+		decimalC = binarioParaDecimal(bytesC[i], 8);
+		expBin = decimalParaBinario(exp[decimalC], 8);
+		indiceDoLog = binarioParaDecimal(xor(bytesA[i], expBin, 8), 8);
+		bytesB[i] = decimalParaBinario(log[indiceDoLog], 8);
+	}
+
+	resultado = malloc(64 * sizeof(int));
+	for (i = 0; i < 8; i++) {
+		for (j = 0; j < 8; j++) {
+			resultado[(i*8) + j] = bytesB[i][j];
+		}
+	}
+	return resultado;
 }
 
 /* Funcao que implementa o K 128 como descrito no enunciado

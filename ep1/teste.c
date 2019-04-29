@@ -391,6 +391,27 @@ int main() {
     }
 
     printf("\n");
+    printf("-------------------------------------\n");
+    /* Conferindo odotInv
+    */
+    printf("Conferindo odotInv\n");
+    c = odot(a, b);
+    assert = odotInv(c, a);
+    printf("b      = ");
+    for (i = 0; i < 64; i++) {
+        printf("%d", b[i]);
+    }
+    printf("\nassert = ");
+    for (i = 0; i < 64; i++) {
+        printf("%d", assert[i]);
+    }
+    printf("\n");
+    for (i = 0; i < 64; i++) {
+        if (assert[i] != b[i]) {
+            printf("Erro em odotInv\n");
+            return 0;
+        }
+    }
     printf("-------------------------------------\n");    
     free(a);
     free(b);
