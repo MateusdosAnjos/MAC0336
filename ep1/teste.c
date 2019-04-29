@@ -2,13 +2,20 @@
 #include "conversao.h"
 
 int main() {
+    /*****************Variaveis dos testes gerais de funcoes*************/
     int *bin, *a, *b, *c, *X;
     int *assert, *circular, *exp, *log, *blocoDados, **blocoCripto = NULL;
-    int **subChaves = NULL, **bytes = NULL, *chaveK = NULL, *cripto = NULL;
+    int **subChavesK = NULL, **bytes = NULL, *chaveK = NULL, *cripto = NULL;
     int i, j, k, p, alpha;
     char *byte8 = "010203040506AA10", *hexa, *hexaC, *senha;
     unsigned int charC, ce;
     FILE *entrada, *saida;
+    /*******************************************************************/
+    /*********Variaveis Para criptografar e decriptografar**************/
+    /**/int *Xa, *Xb, *ka, *kb, *ke, *kf, *Xe, *Xf;                  /**/
+    /**/int *Y1, *Y2, *Z, *XeFINAL, *XfFINAL, *resultado;            /**/
+    /**/int *XeLinha, *XfLinha, R = 12;                              /**/
+    /*******************************************************************/
 
     /*Conferindo hexaParaBinario
     */
@@ -114,12 +121,12 @@ int main() {
         printf("%d", chaveK[i]);
     }
     printf("\n");
-    subChaves = geraSubChaves(chaveK, 12);
+    subChavesK = geraSubChaves(chaveK, 12);
     printf("\n");
     for (i = 0; i < (4*12 + 2); i++) {
         printf("\n");
         for (j = 0; j < 64; j++) {
-            printf("%d ", subChaves[i][j]);
+            printf("%d ", subChavesK[i][j]);
         }
     }
     printf("\n");
@@ -242,7 +249,7 @@ int main() {
         printf("%d", blocoDados[i]);
     }
     printf("\n");
-    cripto = K128(blocoDados, subChaves, 12);
+    cripto = K128(blocoDados, subChavesK, 12);
     printf("\n");
     for (i = 0; i < 128; i++) {
         printf("%d", cripto[i]);
@@ -277,7 +284,7 @@ int main() {
     blocoCripto = malloc(4 * sizeof(int *));
     senha = "senha123senha123";
     chaveK = geraChaveK(senha);
-    subChaves = geraSubChaves(chaveK, 12);
+    subChavesK = geraSubChaves(chaveK, 12);
     /**************************************************/
     /* Abre e verifica se o arquivo foi aberto        */
     /**************************************************/
@@ -307,7 +314,7 @@ int main() {
         /**************************************************/
         /* Criptografa o bloco de 128 bits                */
         /**************************************************/        
-        blocoCripto[p] = K128(X, subChaves, 12);
+        blocoCripto[p] = K128(X, subChavesK, 12);
         p++;
         /**************************************************/
         /* Transforma os bits criptografados em chars     */
@@ -413,6 +420,99 @@ int main() {
         }
     }
     printf("-------------------------------------\n");    
+    /* Conferindo Decriptografia
+    */
+    printf("Conferindo Decriptografia\n");
+    /* Começo da criptografia */
+    srand(20);
+    printf("X = \n");
+    for (i = 0; i < 128; i++) {
+        X[i] = (int)rand()%2;
+        printf("%d", X[i]);
+    }
+    printf("\n");
+    Xa = malloc(64 * sizeof(int));
+    Xb = malloc(64 * sizeof(int));
+
+    for (i = 0; i < 64; i++) {
+        Xa[i] = X[i];
+        Xb[i] = X[i+64];
+    }
+
+    i= 0;
+    ka = subChavesK[i*4];
+    kb = subChavesK[(i*4)+1];
+    ke = subChavesK[(i*4)+2];
+    kf = subChavesK[(i*4)+3];
+    Xe = odot(Xa, ka);
+    Xf = somaBinario64(Xb, kb);
+    Y1 = xor(Xe, Xf, 64);
+    Y2 = odot(somaBinario64((odot(ke, Y1)), Y1), kf);
+    Z = somaBinario64(odot(ke, Y1), Y2);
+    /*Saida de 1 iteracao eh a entrada da proxima*/
+    Xa = xor(Xe, Z, 64);
+    Xb = xor(Xf, Z, 64);
+    i = R;
+    ka = subChavesK[(i*4)];
+    kb = subChavesK[(i*4)+1];
+    XeFINAL = odot(Xa, ka);
+    XfFINAL = somaBinario64(Xb, kb);
+
+    resultado = malloc(128 * sizeof(int));
+    for (i = 0; i < 64; i++) {
+        resultado[i] = XeFINAL[i];
+        resultado[i+64] = XfFINAL[i];
+    }
+    printf("Resultado da cripto = \n");
+    for (i = 0; i < 128; i++) {
+        printf("%d", resultado[i]);
+    }
+    printf("\n");
+    /* Fim da criptografia */
+
+    /*Começo da decriptografia */
+    XeFINAL = malloc(64 * sizeof(int));
+    XfFINAL = malloc(64 * sizeof(int));
+
+    for (i = 0; i < 64; i++) {
+        XeFINAL[i] = resultado[i];
+        XfFINAL[i] = resultado[i+64];
+    }
+    XeLinha = somaBinario64Inv(XfFINAL, subChavesK[((4*R) + 1)]);
+    XfLinha = odotInv(XeFINAL, subChavesK[4*R]);
+
+    i = 0;
+    kf = subChavesK[(4*R) - ((4*i) + 1)];
+    ke = subChavesK[(4*R) - ((4*i) + 2)];
+    Y1 = xor(XeLinha, XfLinha, 64);
+    Y2 = odot(somaBinario64((odot(ke, Y1)), Y1), kf);
+    Z = somaBinario64(odot(ke, Y1), Y2);
+    Xe = xor(XeLinha, Z, 64);
+    Xf = xor(XfLinha, Z, 64);
+    kb = subChavesK[(4*R) - ((4*i) + 3)];
+    ka = subChavesK[(4*R) - ((4*i) + 4)];
+    Xa = odotInv(Xe, ka);
+    Xb = somaBinario64Inv(Xf, kb);
+    XeLinha = Xa;
+    XfLinha = Xb;
+
+    resultado = malloc(128 * sizeof(int));
+    for (i = 0; i < 64; i++) {
+        resultado[i] = XeLinha[i];
+        resultado[i+64] = XfLinha[i];
+    }
+    /* Fim da decriptografia */
+
+    /* Verificando se o resultado da decriptografia é
+    // igual ao bloco que entrou para ser criptografado
+    */
+    for (i = 0; i < 128; i++) {
+        if (X[i] != resultado[i]) {
+            printf("Erro em decriptografia\n");
+            return 0;
+        }
+    }
+    printf("-------------------------------------\n");        
     free(a);
     free(b);
     free(c);
@@ -420,9 +520,9 @@ int main() {
     free(assert);
     free(circular);
     for (i = 0; i < (4*12 + 2); i++) {
-        free(subChaves[i]);
+        free(subChavesK[i]);
     }
-    free(subChaves);
+    free(subChavesK);
     free(exp);
     free(log);
     free(bytes);
