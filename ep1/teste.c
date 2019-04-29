@@ -12,7 +12,8 @@ int main() {
     FILE *entrada, *saida;
     /*******************************************************************/
     /*********Variaveis Para criptografar e decriptografar**************/
-    /**/int *Xa, *Xb, *ka, *kb, *ke, *kf, *Xe, *Xf;                  /**/
+    /**/int *Xa, *Xb, *ka, *kb, *ke, *kf, *kfCript, *keCript;        /**/
+    /**/int *Xe, *Xf, *XeCrip, *XfCrip;                              /**/
     /**/int *Y1, *Y2, *Z, *XeFINAL, *XfFINAL, *resultado;            /**/
     /**/int *Y1decri, *Y2decri, *Zdecri;                             /**/    
     /**/int *XeLinha, *XfLinha, R = 12;                              /**/
@@ -440,7 +441,7 @@ int main() {
         Xb[i] = X[i+64];
     }
 
-    i= 0;
+    i= R-1;
     ka = subChavesK[i*4];
     kb = subChavesK[(i*4)+1];
     ke = subChavesK[(i*4)+2];
@@ -490,9 +491,15 @@ int main() {
     }
 
     i = 0;
-    kf = subChavesK[(4*R) - ((4*i) + 1)];
-    ke = subChavesK[(4*R) - ((4*i) + 2)];
+    kfCript = subChavesK[(4*R) - ((4*i) + 1)];
+    keCript = subChavesK[(4*R) - ((4*i) + 2)];
     Y1decri = xor(XeLinha, XfLinha, 64);
+    for (i = 0; i < 64; i++) {
+        if (kfCript[i] != kf[i] || keCript[i] != ke[i]) {
+            printf("Erro nas chaves ke, kf!\n");
+            return 0;
+        }
+    }
     for (i = 0; i < 64; i++) {
         if (Y1decri[i] != Y1[i]) {
             printf("Erro na inversao de Y1!\n");
@@ -507,8 +514,26 @@ int main() {
         }
     }    
     Zdecri = somaBinario64(odot(ke, Y1decri), Y2decri);
-    Xe = xor(XeLinha, Zdecri, 64);
-    Xf = xor(XfLinha, Zdecri, 64);
+    for (i = 0; i < 64; i++) {
+        if (Zdecri[i] != Z[i]) {
+            printf("Erro na inversao de Z!\n");
+            return 0;
+        }
+    }   
+    XeCrip = xor(XeLinha, Zdecri, 64);
+    XfCrip = xor(XfLinha, Zdecri, 64);
+    for (i = 0; i < 64; i++) {
+        if (XeCrip[i] != Xe[i]) {
+            printf("Erro na inversao de Xe!\n");
+            return 0;
+        }
+    }
+    for (i = 0; i < 64; i++) {
+        if (XfCrip[i] != Xf[i]) {
+            printf("Erro na inversao de Xf!\n");
+            return 0;
+        }
+    }         
     kb = subChavesK[(4*R) - ((4*i) + 3)];
     ka = subChavesK[(4*R) - ((4*i) + 4)];
     Xa = odotInv(Xe, ka);
