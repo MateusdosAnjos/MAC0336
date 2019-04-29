@@ -454,8 +454,7 @@ int *K128Inv(int *X, int **subChavesK, int R) {
 	XeLinha = somaBinario64Inv(XfFINAL, subChavesK[((4*R) + 1)]);
 	XfLinha = odotInv(XeFINAL, subChavesK[4*R]);
 
-	for (i = 1; i < R; i++) {
-		printf("Oi i = %d\n", i);
+	for (i = 0; i < R; i++) {
 		kf = subChavesK[(4*R) - ((4*i) + 1)];
 		ke = subChavesK[(4*R) - ((4*i) + 2)];
 		Y1 = xor(XeLinha, XfLinha, 64);
