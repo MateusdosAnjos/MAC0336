@@ -438,7 +438,10 @@ int *K128(int *X, int **subChavesK, int R) {
 /* Funcao que implementa o  inverso do K 128 utilizado na decriptografia
 */
 int *K128Inv(int *X, int **subChavesK, int R) {
-	int *XeFINAL, *XfFINAL, *Xe, *Xf;
+	int *XeFINAL, *XfFINAL, *XeLinha, *XfLinha, *Xe, *Xf, *Xa, *Xb;
+	int *Y1, *Y2, *Z;
+	int *ka, *kb, *ke, *kf;
+	int *resultado;
 	int i;
 
 	XeFINAL = malloc(64 * sizeof(int));
@@ -448,7 +451,31 @@ int *K128Inv(int *X, int **subChavesK, int R) {
 		XeFINAL[i] = X[i];
 		XfFINAL[i] = X[i+64];
 	}
-	Xe = somaBinario64Inv(XfFINAL, subChavesK[((4*R) + 1)]);
-	Xf = odotInv(XeFINAL, subChavesK[4*R]);
-	return NULL;
+	XeLinha = somaBinario64Inv(XfFINAL, subChavesK[((4*R) + 1)]);
+	XfLinha = odotInv(XeFINAL, subChavesK[4*R]);
+
+	for (i = 1; i < R; i++) {
+		printf("Oi i = %d\n", i);
+		kf = subChavesK[(4*R) - ((4*i) + 1)];
+		ke = subChavesK[(4*R) - ((4*i) + 2)];
+		Y1 = xor(XeLinha, XfLinha, 64);
+		Y2 = odot(somaBinario64((odot(ke, Y1)), Y1), kf);
+		Z = somaBinario64(odot(ke, Y1), Y2);
+		Xe = xor(XeLinha, Z, 64);
+		Xf = xor(XfLinha, Z, 64);
+		kb = subChavesK[(4*R) - ((4*i) + 3)];
+		ka = subChavesK[(4*R) - ((4*i) + 4)];
+		Xa = odotInv(Xe, ka);
+		Xb = somaBinario64Inv(Xf, kb);
+		XeLinha = Xa;
+		XfLinha = Xb;
+	}
+
+	resultado = malloc(128 * sizeof(int));
+	for (i = 0; i < 64; i++) {
+		resultado[i] = XeLinha[i];
+		resultado[i+64] = XfLinha[i];
+	}
+
+	return resultado;
 }
