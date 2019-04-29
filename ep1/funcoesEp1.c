@@ -438,5 +438,17 @@ int *K128(int *X, int **subChavesK, int R) {
 /* Funcao que implementa o  inverso do K 128 utilizado na decriptografia
 */
 int *K128Inv(int *X, int **subChavesK, int R) {
+	int *XeFINAL, *XfFINAL, *Xe, *Xf;
+	int i;
+
+	XeFINAL = malloc(64 * sizeof(int));
+	XfFINAL = malloc(64 * sizeof(int));
+
+	for (i = 0; i < 64; i++) {
+		XeFINAL[i] = X[i];
+		XfFINAL[i] = X[i+64];
+	}
+	Xe = somaBinario64Inv(XfFINAL, subChavesK[((4*R) + 1)]);
+	Xf = odotInv(XeFINAL, subChavesK[4*R]);
 	return NULL;
 }
