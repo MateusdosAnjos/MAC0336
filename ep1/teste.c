@@ -455,8 +455,8 @@ int main() {
     i = R;
     ka = subChavesK[(i*4)];
     kb = subChavesK[(i*4)+1];
-    XeFINAL = odot(Xa, ka);
-    XfFINAL = somaBinario64(Xb, kb);
+    XeFINAL = odot(Xb, ka);
+    XfFINAL = somaBinario64(Xa, kb);
 
     resultado = malloc(128 * sizeof(int));
     for (i = 0; i < 64; i++) {
@@ -480,6 +480,13 @@ int main() {
     }
     XeLinha = somaBinario64Inv(XfFINAL, subChavesK[((4*R) + 1)]);
     XfLinha = odotInv(XeFINAL, subChavesK[4*R]);
+
+    for (i = 0; i < 64; i++) {
+        if (Xa[i] != XeLinha[i] || Xb[i] != XfLinha[i]) {
+            printf("Erro na primeira inversão!\n");
+            return 0;
+        }
+    }
 
     i = 0;
     kf = subChavesK[(4*R) - ((4*i) + 1)];

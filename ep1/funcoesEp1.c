@@ -423,8 +423,8 @@ int *K128(int *X, int **subChavesK, int R) {
 	}
 	ka = subChavesK[(i*4)];
 	kb = subChavesK[(i*4)+1];
-	XeFINAL = odot(Xa, ka);
-	XfFINAL = somaBinario64(Xb, kb);
+	XeFINAL = odot(Xb, ka);
+	XfFINAL = somaBinario64(Xa, kb);
 
 	resultado = malloc(128 * sizeof(int));
 	for (i = 0; i < 64; i++) {
