@@ -12,17 +12,34 @@ bool confereChamadaDecripto(int argc, char **argv) {
 	return true;
 }
 
+/* Funcao que recebe um bloco X de n bits (128) e verifica
+// se este bloco tem todas as posicoes iguais a zero (0)
+// sinalizando que este eh o bloco que marca o termino
+// do arquivo
+*/
+bool blocoFinal(int *X, int n) {
+	int i;
+
+	for (i = 0; i < n; i++) {
+		if (X[i] != 0) return false;
+	}
+
+	return true;
+}
+
 /* Funcao que decriptografa o arquivo de entrada
 */
 void decriptografar(int argc, char **argv)  {
 	FILE *entrada, *saida;
-	int *chaveK = NULL, *blocoCripto = NULL, *X = NULL, *bin = NULL;
+	int *chaveK = NULL, *blocoDecripto = NULL, *X = NULL, *bin = NULL,
+	*blocoTeste = NULL;
 	int **subChavesK = NULL;
-	int i, j, k, tamanhoArquivo = 0;
+	int i, j, k, tamanhoAtual = 0, tamanhoOriginal;
 	unsigned int charC, c;
-	char *senha = NULL, *hexaC = NULL;
+	char *senha = NULL, *hexaC = NULL, *buffer = NULL;
 	printf("\n");
 	X = malloc(128 * sizeof(int));
+	blocoTeste = malloc(128 * sizeof(int));
 	/**************************************************/
 	/* Verifica se a chamada do programa esta correta */
 	/**************************************************/
@@ -69,45 +86,114 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 	/*****************************************************/
 	hexaC = malloc(2 * sizeof(char));
 	bin = malloc(8 * sizeof(int));
+	buffer = malloc(16 * sizeof(char));
+	/*****************************************************/
+	/* Le o primeiro bloco do arquivo                    */
+	/*****************************************************/	
 	c = fgetc(entrada);
+	for (i = 0; c != EOF && i < 16; i++) {
+		sprintf(hexaC, "%02x", c);
+		bin = hexaParaBinario(hexaC);
+		for (j = i * 8; j < (i+1)*8; j++) {
+			X[j] = bin[j - (8*i)];
+		}
+		c = fgetc(entrada);
+	}
 	while (c != EOF) {
-		i = 0;
-		while(c != EOF && i < 16) {
-			tamanhoArquivo++;
+		/*****************************************************/
+		/* Le o bloco que dira se o arquivo acabou ou nao    */
+		/*****************************************************/		
+		for (i = 0; c != EOF && i < 16; i++) {
 			sprintf(hexaC, "%02x", c);
 			bin = hexaParaBinario(hexaC);
 			for (j = i * 8; j < (i+1)*8; j++) {
-				X[j] = bin[j - (8*i)];
+				blocoTeste[j] = bin[j - (8*i)];
 			}
-			i++;
 			c = fgetc(entrada);
 		}
-		/**************************************************/
-		/* Decriptografa o bloco de 128 bits              */
-		/**************************************************/		
-		blocoCripto = K128Inv(X, subChavesK, 12);
-		/**************************************************/
-		/* Transforma os bits decriptografados em chars   */
-		/**************************************************/	
-		for (i = 0; i < 16; i++) {
-			k = 0;
-			for (j = i*8; j < ((i+1)*8); j++) {
-				bin[k] = blocoCripto[j];
-				k++; 
-			}
-		hexaC = binarioParaHexa(bin);
-		sscanf(hexaC, "%02x", &charC);
 		/*****************************************************/
-		/*Escreve o char decriptografado no arquivo de saida */
-		/*****************************************************/	
-		fprintf(saida, "%c", charC);
+		/* Testa se o bloco de teste eh o bloco que marca o  */
+		/* termino do arquivo a ser decriptografado          */
+		/*****************************************************/		
+		if (!blocoFinal(blocoTeste, 128)) {
+			/*NAO EH O BLOCO DE TERMINO*/
+			/**************************************************/
+			/* Decriptografa o bloco de 128 bits              */
+			/**************************************************/		
+			blocoDecripto = K128Inv(X, subChavesK, 12);
+			/**************************************************/
+			/* Transforma os bits decriptografados em chars   */
+			/**************************************************/	
+			for (i = 0; i < 16; i++) {
+				k = 0;
+				for (j = i*8; j < ((i+1)*8); j++) {
+					bin[k] = blocoDecripto[j];
+					k++; 
+				}
+				hexaC = binarioParaHexa(bin);
+				sscanf(hexaC, "%02x", &charC);
+				/*****************************************************/
+				/*Coloca o char decriptografado no buffer            */
+				/*****************************************************/	
+				buffer[i] = charC;
+			}
+			/*****************************************************/
+			/*Escreve o buffer no arquivo de saida               */
+			/*****************************************************/			
+			fwrite(buffer, 16, sizeof(char), saida);
+			tamanhoAtual += 16;
+			/*OBS: Se o bloco de teste NAO era o bloco final, entao*/
+			/*podemos escrever os 16 caracteres no arquivo de saida*/
+			/*******************************************************/
+			/*Agora copiamos o bloco de teste anterior para o X    */
+			/*ja que sempre decriptografamos o bloco que esta em X */
+			/*******************************************************/
+			for (i = 0; i < 128; i++) {
+				X[i] = blocoTeste[i];
+			}
 		}
-		/**************************************************/
-		/* Zera o bloco X (necessario para o ultimo bloco */
-		/* do arquivo)                                    */
-		/**************************************************/			
-		for (j = 0; j < 128; j++) {
-			X[j] = 0;
+		else {
+			/*EH O BLOCO DE TERMINO*/
+			/********************************************************/
+			/*Devemos ler agora o bloco que guarda o tamanho do     */
+			/*arquivo original, para termos uma saida sem restos    */
+			/*(lixo) no final do arquivo de saida.                  */			
+			/********************************************************/						
+			for (i = 0; c != EOF && i < 16; i++) {
+				sprintf(hexaC, "%02x", c);
+				bin = hexaParaBinario(hexaC);
+				for (j = i * 8; j < (i+1)*8; j++) {
+					blocoTeste[j] = bin[j - (8*i)];
+				}
+				c = fgetc(entrada);
+			}
+			/********************************************************/
+			/* Recuperamos o tamanho do arquivo original            */
+			/********************************************************/
+			blocoDecripto = K128Inv(blocoTeste, subChavesK, 12);
+			tamanhoOriginal = binarioParaDecimal(blocoDecripto, 64);
+			/********************************************************/
+			/* Decriptografamos o ultimo bloco real do arquivo      */
+			/********************************************************/
+			blocoDecripto = K128Inv(X, subChavesK, 12);
+			for (i = 0; i < 16; i++) {
+				k = 0;
+				for (j = i*8; j < ((i+1)*8); j++) {
+					bin[k] = blocoDecripto[j];
+					k++; 
+				}
+				hexaC = binarioParaHexa(bin);
+				sscanf(hexaC, "%02x", &charC);
+				/*****************************************************/
+				/*Coloca o char decriptografado no buffer            */
+				/*****************************************************/	
+				buffer[i] = charC;
+			}
+			/*****************************************************/
+			/*Escreve apenas os caracteres restantes que compoem */
+			/*o arquivo original no arquivo de saida             */
+			/*****************************************************/		
+			fwrite(buffer, tamanhoOriginal - tamanhoAtual, sizeof(char), saida);
 		}
 	}
 	/**************************************************/
@@ -115,5 +201,21 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 	/**************************************************/
 	fclose(entrada);
 	fclose(saida);
+	/**************************************************/
+	/* Libera memoria                                 */
+	/**************************************************/
+	free(chaveK);	
+	free(blocoDecripto);	
+	free(X);	
+	free(bin);	
+	free(blocoTeste);	
+	free(senha);	
+	free(hexaC);
+	free(buffer);
+	for (i = 0; i < (4*12) + 2; i++) {
+		free(subChavesK[i]);
+	}
+	free(subChavesK);
+	
 	return;
 }

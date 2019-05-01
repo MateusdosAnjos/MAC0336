@@ -96,12 +96,12 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 				bin[k] = blocoCripto[j];
 				k++; 
 			}
-		hexaC = binarioParaHexa(bin);
-		sscanf(hexaC, "%02x", &charC);
-		/**************************************************/
-		/*Escreve o char criptografado no arquivo de saida*/
-		/**************************************************/	
-		fprintf(saida, "%c", charC);
+			hexaC = binarioParaHexa(bin);
+			sscanf(hexaC, "%02x", &charC);
+			/**************************************************/
+			/*Escreve o char criptografado no arquivo de saida*/
+			/**************************************************/	
+			fprintf(saida, "%c", charC);
 		}
 		/**************************************************/
 		/* Zera o bloco X (necessario para o ultimo bloco */
@@ -169,6 +169,21 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
       			printf("Erro na remoção do arquivo!.\n");
     		}
 		}
-	}		
+	}
+	/**************************************************/
+	/* Libera memoria                                 */
+	/**************************************************/
+	free(chaveK);	
+	free(blocoCripto);	
+	free(X);	
+	free(bin);	
+	free(tamArqBin);	
+	free(senha);	
+	free(hexaC);
+	for (i = 0; i < (4*12) + 2; i++) {
+		free(subChavesK[i]);
+	}
+	free(subChavesK);
+
 	return;
 }
