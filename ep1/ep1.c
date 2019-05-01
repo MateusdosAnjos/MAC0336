@@ -2,6 +2,7 @@
 #include "conversao.h"
 #include "criptografa.h"
 #include "decriptografa.h"
+#include "aleatorioMetodo1.h"
 
 /* Funcao que explica o uso do programa
 */

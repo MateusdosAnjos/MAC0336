@@ -3,10 +3,10 @@ CFLAGS  = -g -Wall -ansi -pedantic
 
 default: ep1
 
-ep1:  ep1.o funcoesEp1.o conversao.o criptografa.o decriptografa.o
-	$(CC) $(CFLAGS) -o ep1 ep1.o funcoesEp1.o conversao.o criptografa.o decriptografa.o -lm
+ep1:  ep1.o funcoesEp1.o conversao.o criptografa.o decriptografa.o aleatorioMetodo1.o
+	$(CC) $(CFLAGS) -o ep1 ep1.o funcoesEp1.o conversao.o criptografa.o decriptografa.o aleatorioMetodo1.o -lm
 
-ep1.o:  ep1.c funcoesEp1.h conversao.h criptografa.h
+ep1.o:  ep1.c funcoesEp1.h conversao.h criptografa.h aleatorioMetodo1.h
 	$(CC) $(CFLAGS) -c ep1.c
 
 criptografa.o:  criptografa.c criptografa.h 
@@ -20,6 +20,9 @@ funcoesEp1.o:  funcoesEp1.c funcoesEp1.h
 
 conversao.o:  conversao.c conversao.h 
 	$(CC) $(CFLAGS) -c conversao.c -lm	
+
+aleatorioMetodo1.o:  aleatorioMetodo1.c aleatorioMetodo1.h
+	$(CC) $(CFLAGS) -c aleatorioMetodo1.c -lm		
 
 teste:	teste.o funcoesEp1.o conversao.o
 	$(CC) $(CFLAGS) -o teste teste.o funcoesEp1.o conversao.o -lm
