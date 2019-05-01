@@ -15,14 +15,14 @@ criptografa.o:  criptografa.c criptografa.h
 decriptografa.o:  decriptografa.c decriptografa.h 
 	$(CC) $(CFLAGS) -c decriptografa.c -lm		
 
+aleatorioMetodo1.o:  aleatorioMetodo1.c aleatorioMetodo1.h
+	$(CC) $(CFLAGS) -c aleatorioMetodo1.c -lm
+
 funcoesEp1.o:  funcoesEp1.c funcoesEp1.h 
 	$(CC) $(CFLAGS) -c funcoesEp1.c -lm
 
 conversao.o:  conversao.c conversao.h 
 	$(CC) $(CFLAGS) -c conversao.c -lm	
-
-aleatorioMetodo1.o:  aleatorioMetodo1.c aleatorioMetodo1.h
-	$(CC) $(CFLAGS) -c aleatorioMetodo1.c -lm		
 
 teste:	teste.o funcoesEp1.o conversao.o
 	$(CC) $(CFLAGS) -o teste teste.o funcoesEp1.o conversao.o -lm

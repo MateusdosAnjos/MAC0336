@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
 	/*        Calculo de aleatoriedade metodo 1       */
 	/**************************************************/
 	else if (strcmp(argv[1], "-1") == 0) {
-		printf("Falta fazer aleatoriedade pelo método 1!\n");
+		aleatorioMetodo1(argc, argv);
 	}
 
 	/**************************************************/
