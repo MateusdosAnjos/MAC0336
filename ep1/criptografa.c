@@ -16,10 +16,11 @@ bool confereChamadaCripto(int argc, char **argv) {
 */
 void criptografar(int argc, char **argv)  {
 	FILE *entrada, *saida;
-	int *chaveK = NULL, *blocoCripto = NULL, *X = NULL, *bin = NULL;
+	int *chaveK = NULL, *blocoCripto = NULL, *X = NULL, *bin = NULL,
+	*tamArqBin = NULL;
 	int **subChavesK = NULL;
-	int i, j, k, tamanhoArquivo = 0;
-	unsigned int charC, c;
+	int i, j, k;
+	unsigned int charC, c, tamanhoArquivo = 0;
 	char *senha = NULL, *hexaC = NULL;
 	printf("\n");
 	X = malloc(128 * sizeof(int));
@@ -110,6 +111,37 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 			X[j] = 0;
 		}
 	}
+	/**************************************************/
+	/* Adiciona o bloco que indica termino do arquivo */
+	/**************************************************/
+	for (i = 0; i < 16; i++) {
+		k = 0;
+		for (j = i*8; j < ((i+1)*8); j++) {
+			bin[k] = X[j];
+			k++; 
+		}
+		hexaC = binarioParaHexa(bin);
+		sscanf(hexaC, "%02x", &charC);	
+		fprintf(saida, "%c", charC);
+	}
+	/**************************************************/
+	/*Adiciona o bloco que indica o tamanho do arquivo*/
+	/**************************************************/
+	tamArqBin = decimalParaBinario(tamanhoArquivo, 64);
+	for (i = 0; i < 64; i++) {
+		X[i] = tamArqBin[i];
+	}
+	blocoCripto = K128(X, subChavesK, 12);
+	for (i = 0; i < 16; i++) {
+		k = 0;
+		for (j = i*8; j < ((i+1)*8); j++) {
+			bin[k] = blocoCripto[j];
+			k++; 
+		}
+		hexaC = binarioParaHexa(bin);
+		sscanf(hexaC, "%02x", &charC);	
+		fprintf(saida, "%c", charC);
+	}		
 	/**************************************************/
 	/* Fecha os arquivos que foram abertos            */
 	/**************************************************/
