@@ -21,7 +21,7 @@ bool blocoFinal(int *X, int n) {
 	int i;
 
 	for (i = 0; i < n; i++) {
-		if (X[i] != 0) return false;
+		if (X[i] != 1) return false;
 	}
 
 	return true;
@@ -32,7 +32,7 @@ bool blocoFinal(int *X, int n) {
 void decriptografar(int argc, char **argv)  {
 	FILE *entrada, *saida;
 	int *chaveK = NULL, *blocoDecripto = NULL, *X = NULL, *bin = NULL,
-	*blocoTeste = NULL;
+	*blocoTeste = NULL, *Y = NULL;
 	int **subChavesK = NULL;
 	int i, j, k, tamanhoAtual = 0, tamanhoOriginal;
 	unsigned int charC, c;
@@ -40,6 +40,13 @@ void decriptografar(int argc, char **argv)  {
 	printf("\n");
 	X = malloc(128 * sizeof(int));
 	blocoTeste = malloc(128 * sizeof(int));
+	Y = malloc(128 * sizeof(int));
+	/**************************************************/
+	/* Inicializa Y(V1) para o xor inicial            */
+	/**************************************************/
+	for (i = 0; i < 128; i++) {
+		Y[i] = 1;
+	}
 	/**************************************************/
 	/* Verifica se a chamada do programa esta correta */
 	/**************************************************/
@@ -121,6 +128,13 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 			/* Decriptografa o bloco de 128 bits              */
 			/**************************************************/		
 			blocoDecripto = K128Inv(X, subChavesK, 12);
+			blocoDecripto = xor(blocoDecripto, Y, 128);
+			/**************************************************/
+			/* preenche Y para proxima iteracao              */
+			/**************************************************/			
+			for (i = 0; i < 128; i++) {
+				Y[i] = X[i];
+			}
 			/**************************************************/
 			/* Transforma os bits decriptografados em chars   */
 			/**************************************************/	
@@ -176,6 +190,7 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 			/* Decriptografamos o ultimo bloco real do arquivo      */
 			/********************************************************/
 			blocoDecripto = K128Inv(X, subChavesK, 12);
+			blocoDecripto = xor(blocoDecripto, Y, 128);
 			for (i = 0; i < 16; i++) {
 				k = 0;
 				for (j = i*8; j < ((i+1)*8); j++) {

@@ -17,13 +17,20 @@ bool confereChamadaCripto(int argc, char **argv) {
 void criptografar(int argc, char **argv)  {
 	FILE *entrada, *saida;
 	int *chaveK = NULL, *blocoCripto = NULL, *X = NULL, *bin = NULL,
-	*tamArqBin = NULL;
+	*tamArqBin = NULL, *Y = NULL;
 	int **subChavesK = NULL;
 	int i, j, k;
 	unsigned int charC, c, tamanhoArquivo = 0;
 	char *senha = NULL, *hexaC = NULL;
 	printf("\n");
 	X = malloc(128 * sizeof(int));
+	/**************************************************/
+	/* Inicializa Y(V1) para o xor inicial            */
+	/**************************************************/	
+	Y = malloc(128 * sizeof(int));
+	for (i = 0; i < 128; i++) {
+		Y[i] = 1;
+	}
 	/**************************************************/
 	/* Verifica se a chamada do programa esta correta */
 	/**************************************************/
@@ -84,9 +91,19 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 			c = fgetc(entrada);
 		}
 		/**************************************************/
+		/* modo CBC efetua xor com o bloco anterior       */
+		/**************************************************/		
+		X = xor(X, Y, 128);
+		/**************************************************/
 		/* Criptografa o bloco de 128 bits                */
 		/**************************************************/		
 		blocoCripto = K128(X, subChavesK, 12);
+		/**************************************************/
+		/* preenche Y para proxima iteracao              */
+		/**************************************************/
+		for (i = 0; i < 128; i++) {
+			Y[i] = blocoCripto[i];
+		}
 		/**************************************************/
 		/* Transforma os bits criptografados em chars     */
 		/**************************************************/	
@@ -104,11 +121,11 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 			fprintf(saida, "%c", charC);
 		}
 		/**************************************************/
-		/* Zera o bloco X (necessario para o ultimo bloco */
-		/* do arquivo)                                    */
+		/* Preenche o bloco X  com valores iguais a 1     */
+		/* (necessario para o ultimo bloco do arquivo)    */
 		/**************************************************/			
 		for (j = 0; j < 128; j++) {
-			X[j] = 0;
+			X[j] = 1;
 		}
 	}
 	/**************************************************/
@@ -184,6 +201,7 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 		free(subChavesK[i]);
 	}
 	free(subChavesK);
+	free(Y);
 
 	return;
 }
