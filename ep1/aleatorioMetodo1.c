@@ -17,7 +17,8 @@ bool confereChamadaAleatorio1(int argc, char **argv) {
 void aleatorioMetodo1(int argc, char **argv) {
 	FILE *entrada;
 	int *chaveK = NULL;
-	int **subChavesK = NULL;
+	int **subChavesK = NULL, **vetEntra = NULL, **vetAlter = NULL,
+	**vetEntraC = NULL, **vetAlterC = NULL;
 	char *senha = NULL;
 
 	if (!confereChamadaAleatorio1(argc, argv)) { 
@@ -30,7 +31,7 @@ programa -1 -i <arquivo de entrada> -p <senha>\n\n");
 	/**************************************************/
 	entrada = fopen(argv[3], "r");
 	if (!entrada) {
-		printf("Problemas ao abrir arquivo a ser criptografado!\n");
+		printf("Problemas ao abrir arquivo a ser calculada a aleatoriedade!\n");
 		return;
 	}
 	/*****************************************************/
@@ -53,5 +54,7 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 	/* gera as subchaves a partir da chaveK              */
 	/*****************************************************/		
 	subChavesK = geraSubChaves(chaveK, 12);
+
+
 	return ;
 }
