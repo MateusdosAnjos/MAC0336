@@ -19,6 +19,7 @@ void aleatorioMetodo1(int argc, char **argv) {
 	int *chaveK = NULL;
 	int **subChavesK = NULL, **vetEntra = NULL, **vetAlter = NULL,
 	**vetEntraC = NULL, **vetAlterC = NULL;
+	int i, j, k, numBlocos;
 	char *senha = NULL;
 
 	if (!confereChamadaAleatorio1(argc, argv)) { 

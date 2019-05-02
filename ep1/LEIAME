@@ -25,3 +25,5 @@ CPU(s) de nó0 NUMA:         0-3
 
 
 ./ep1 -c -i entrada -o saida -p senha123
+
+
