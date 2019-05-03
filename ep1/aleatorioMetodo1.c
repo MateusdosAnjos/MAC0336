@@ -54,9 +54,10 @@ int hamming(int *a, int *b) {
 void imprimeTabelaDeResultados(int numBlocos, int *maxH, int *minH, int *somaH) {
 	int i;
 
+	printf("Número do Bloco \tMax de Hamming() \tMin de Hamming() \tMédia \n");
+
 	for (i = 0; i < numBlocos; i++) {
-		printf("bloco = %d max = %d min = %d\
- media = %d\n", i+1, maxH[i], minH[i], somaH[i]/(128*(i+1)));
+		printf("\t%d\t\t\t%d\t\t\t%d\t\t%d\n", i+1, maxH[i], minH[i], somaH[i]/(128*(i+1)));
 	}	
 
 	return;	
