@@ -144,8 +144,10 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 			for (k = 0; k < 128; k++) {
 				Y[k] = 1;
 			}
-			/* Bit modificado */
+			/* Bits modificados */
 			vetAlter[i][j] = (vetAlter[i][j] + 1) % 2;
+			if (j < 120)
+				vetAlter[i][j+8] = (vetAlter[i][j+8] + 1) % 2;
 			/*****************************************************/
 			/* Criptografa vetAlter e armazena em vetAlterC      */
 			/*****************************************************/
@@ -168,8 +170,10 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 				if (dist > maxH[l]) maxH[l] = dist;
 				else if (dist < minH[l]) minH[l] = dist;
 			}				
-			/*Retorna o bit modificado para o original*/
+			/*Retorna os bits modificados para os originais*/
 			vetAlter[i][j] = (vetAlter[i][j] + 1) % 2;
+			if (j < 120)
+				vetAlter[i][j+8] = (vetAlter[i][j+8] + 1) % 2;
 		}
 	}
 
