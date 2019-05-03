@@ -14,10 +14,15 @@ bool confereChamadaAleatorio1(int argc, char **argv);
 */
 int **realocaMatriz(int **a, int n);
 
+/* Funcao que imprime a tabela dos resultados
+*/
+void imprimeTabelaDeResultados(int numBlocos, int *maxH, int *minH, int *somaH);
+
 /* Funcao que calcula o valor de aleatoriedade (entropia)
 // pelo metodo 1 descrito no enunciado
 */
 void aleatorioMetodo1(int argc, char **argv);
+
 
 
 

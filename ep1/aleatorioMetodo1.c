@@ -49,6 +49,19 @@ int hamming(int *a, int *b) {
 	return dist;
 }
 
+/* Funcao que imprime a tabela dos resultados
+*/
+void imprimeTabelaDeResultados(int numBlocos, int *maxH, int *minH, int *somaH) {
+	int i;
+
+	for (i = 0; i < numBlocos; i++) {
+		printf("bloco = %d max = %d min = %d\
+ media = %d\n", i+1, maxH[i], minH[i], somaH[i]/(128*(i+1)));
+	}	
+
+	return;	
+}
+
 /* Funcao que calcula o valor de aleatoriedade (entropia)
 // pelo metodo 1 descrito no enunciado
 */
@@ -173,8 +186,11 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 	/* Modifica bit a bit de vetAlter e criptografa o    */
 	/* novo bloco armazenando em vetAlterC               */
 	/*****************************************************/	
+	/*Para cada bloco i*/
 	for (i = 0; i < numBlocos; i++) {
+		/*Altera o bit j*/
 		for (j = 0; j < 128; j++) {
+			/*reconstroi Y inicial, para primeiro xor */
 			for (k = 0; k < 128; k++) {
 				Y[k] = 1;
 			}
@@ -193,6 +209,8 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 			/* hamming entre o original criptografado e o bloco  */
 			/* com a alteracao de 1 bit criptografado e acumula  */
 			/* em somaH. Guarda o maximo e minimo de cada bloco. */
+			/* guarda cada valor calculado em desvio para calculo*/
+			/* do desvio padrao                                  */
 			/*****************************************************/			
 			for (l = i; l < numBlocos; l++) {
 				dist = hamming(vetEntraC[l], vetAlterC[l]);
@@ -204,8 +222,9 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 			vetAlter[i][j] = (vetAlter[i][j] + 1) % 2;
 		}
 	}
-	for (l = 0; l < numBlocos; l++) {
-		printf("bloco = %d max = %d min = %d media = %d\n", l+1, maxH[l], minH[l], somaH[l]/(128*(l+1)));
-	}		
+
+	imprimeTabelaDeResultados(numBlocos, maxH, minH, somaH);
+
+
 	return ;
 }
