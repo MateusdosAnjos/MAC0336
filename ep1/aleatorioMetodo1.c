@@ -226,6 +226,30 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 
 	imprimeTabelaDeResultados(numBlocos, maxH, minH, somaH);
 
+	fclose(entrada);
+	free(chaveK);
+	free(bin);
+	free(X);
+	free(Y);
+	free(somaH);
+	free(maxH);
+	free(minH);
+	free(senha);
+	free(hexaC);
+	for (i = 0; i < (4*12) + 2; i++) {
+		free(subChavesK[i]);
+	}
+	free(subChavesK);	
+	for (i = 0; i < numBlocos; i++) {
+		free(vetEntra[i]);
+		free(vetAlter[i]);
+		free(vetEntraC[i]);
+		free(vetAlterC[i]);
+	}
+	free(vetEntra);
+	free(vetAlter);
+	free(vetEntraC);
+	free(vetAlterC);
 
 	return ;
 }
