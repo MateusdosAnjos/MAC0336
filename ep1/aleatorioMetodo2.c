@@ -146,8 +146,15 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 			}
 			/* Bits modificados */
 			vetAlter[i][j] = (vetAlter[i][j] + 1) % 2;
+			/* Alteracao de consecutivos no mesmo bloco*/
 			if (j < 120)
 				vetAlter[i][j+8] = (vetAlter[i][j+8] + 1) % 2;
+			/* Alteracao em blocos diferentes, desde que nao seja
+			// o ultimo bloco*/
+			else if (i < numBlocos - 1)
+				vetAlter[i+1][j-120] = (vetAlter[i+1][j-120] + 1) % 2;
+			/* "Else" seria apenas para o ultimo bloco, porem o CBC nao
+			// tera efeito, portanto sem correlacao */
 			/*****************************************************/
 			/* Criptografa vetAlter e armazena em vetAlterC      */
 			/*****************************************************/
@@ -172,8 +179,13 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 			}				
 			/*Retorna os bits modificados para os originais*/
 			vetAlter[i][j] = (vetAlter[i][j] + 1) % 2;
+			/* Retorno de consecutivos no mesmo bloco*/
 			if (j < 120)
 				vetAlter[i][j+8] = (vetAlter[i][j+8] + 1) % 2;
+			/* Retorno em blocos diferentes, desde que nao seja
+			// o ultimo bloco*/
+			else if (i < numBlocos - 1)
+				vetAlter[i+1][j-120] = (vetAlter[i+1][j-120] + 1) % 2;
 		}
 	}
 
