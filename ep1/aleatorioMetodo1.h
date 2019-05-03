@@ -9,10 +9,16 @@
 */
 bool confereChamadaAleatorio1(int argc, char **argv);
 
+/* Funcao que realoca uma matriz com n posicoes
+// de 128 bits
+*/
+int **realocaMatriz(int **a, int n);
+
 /* Funcao que calcula o valor de aleatoriedade (entropia)
 // pelo metodo 1 descrito no enunciado
 */
 void aleatorioMetodo1(int argc, char **argv);
+
 
 
 #endif

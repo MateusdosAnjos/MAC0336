@@ -79,13 +79,20 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 	/* gera as subchaves a partir da chaveK              */
 	/*****************************************************/		
 	subChavesK = geraSubChaves(chaveK, 12);
-
+	/******************************************************/
+	/* Inicializa o bloco que guarda os valores da        */
+	/* entrada, o numero de blocos e o tamanho do vetor de*/
+	/* entrada.                                           */
+	/******************************************************/		
 	numBlocos = 0;
 	k = 2;
 	vetEntra = malloc(k * sizeof(int *));
 	for (i = 0; i < k; i++) {
 		vetEntra[i] = calloc(128, sizeof(int));
 	}
+	/*****************************************************/
+	/* Preenche os blocos de entrada                     */
+	/*****************************************************/		
 	hexaC = malloc(2 * sizeof(char));
 	bin = malloc(8 * sizeof(int));
 	c = fgetc(entrada);
@@ -104,6 +111,17 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 		}
 		numBlocos++;
 	}
+	/*****************************************************/
+	/* Copia para vetAlter os valores da entrada         */
+	/*****************************************************/		
+	vetAlter = malloc(numBlocos * sizeof(int *));
+	for (i = 0; i < numBlocos; i++) {
+		vetAlter[i] = malloc(128 * sizeof(int));
+		for (j = 0; j < 128; j++) {
+			vetAlter[i][j] = vetEntra[i][j];
+		}
+	}
+
 
 	return ;
 }
