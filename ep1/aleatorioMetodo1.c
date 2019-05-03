@@ -54,10 +54,11 @@ int hamming(int *a, int *b) {
 */
 void aleatorioMetodo1(int argc, char **argv) {
 	FILE *entrada;
-	int *chaveK = NULL, *bin = NULL, *X = NULL, *Y = NULL, *somaH = NULL;
+	int *chaveK = NULL, *bin = NULL, *X = NULL, *Y = NULL, *somaH = NULL,
+	*maxH = NULL, *minH = NULL;
 	int **subChavesK = NULL, **vetEntra = NULL, **vetAlter = NULL,
 	**vetEntraC = NULL, **vetAlterC = NULL;
-	int i, j, k, l, numBlocos;
+	int i, j, k, l, dist, numBlocos;
 	unsigned int c;
 	char *senha = NULL, *hexaC = NULL;
 
@@ -158,9 +159,16 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 	}
 	/*****************************************************/
 	/* Aloca espaco para as somas acumuladas das         */
-	/* distancias de Hamming (somaH)                     */
+	/* distancias de Hamming (somaH) bem como valor      */
+	/* maximo e minimo das distancias entre 2 blocos     */
 	/*****************************************************/
-	somaH = calloc(numBlocos, sizeof(int));			
+	somaH = calloc(numBlocos, sizeof(int));
+	maxH = calloc(numBlocos, sizeof(int));
+	minH = calloc(numBlocos, sizeof(int));
+	/* 128 eh a distancia maxima entre 2 blocos */
+	for (i = 0; i < numBlocos; i++) {
+		minH[i] = 128;
+	}			
 	/*****************************************************/
 	/* Modifica bit a bit de vetAlter e criptografa o    */
 	/* novo bloco armazenando em vetAlterC               */
@@ -184,17 +192,20 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 			/* Para cada bloco (Bl) calcula a distancia de       */
 			/* hamming entre o original criptografado e o bloco  */
 			/* com a alteracao de 1 bit criptografado e acumula  */
-			/* em somaH                                          */
+			/* em somaH. Guarda o maximo e minimo de cada bloco. */
 			/*****************************************************/			
 			for (l = i; l < numBlocos; l++) {
-				somaH[l] += hamming(vetEntraC[l], vetAlterC[l]);
+				dist = hamming(vetEntraC[l], vetAlterC[l]);
+				somaH[l] += dist;
+				if (dist > maxH[l]) maxH[l] = dist;
+				else if (dist < minH[l]) minH[l] = dist;
 			}				
 			/*Retorna o bit modificado para o original*/
 			vetAlter[i][j] = (vetAlter[i][j] + 1) % 2;
 		}
 	}
 	for (l = 0; l < numBlocos; l++) {
-		printf("%d\n", somaH[l]/(128*(i+1)));
+		printf("bloco = %d max = %d min = %d media = %d\n", l+1, maxH[l], minH[l], somaH[l]/(128*(l+1)));
 	}		
 	return ;
 }
