@@ -54,10 +54,10 @@ int hamming(int *a, int *b) {
 */
 void aleatorioMetodo1(int argc, char **argv) {
 	FILE *entrada;
-	int *chaveK = NULL, *bin = NULL, *X = NULL, *Y = NULL;
+	int *chaveK = NULL, *bin = NULL, *X = NULL, *Y = NULL, *somaH = NULL;
 	int **subChavesK = NULL, **vetEntra = NULL, **vetAlter = NULL,
 	**vetEntraC = NULL, **vetAlterC = NULL;
-	int i, j, k, numBlocos;
+	int i, j, k, l, numBlocos;
 	unsigned int c;
 	char *senha = NULL, *hexaC = NULL;
 
@@ -155,32 +155,46 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 		X = xor(vetEntra[i], Y, 128);	
 		vetEntraC[i] = K128(X, subChavesK, 12);
 		Y = vetEntraC[i];
-	}			
+	}
 	/*****************************************************/
-	/* Modifica bit a bit de vetAlter                    */
+	/* Aloca espaco para as somas acumuladas das         */
+	/* distancias de Hamming (somaH)                     */
+	/*****************************************************/
+	somaH = calloc(numBlocos, sizeof(int));			
+	/*****************************************************/
+	/* Modifica bit a bit de vetAlter e criptografa o    */
+	/* novo bloco armazenando em vetAlterC               */
 	/*****************************************************/	
 	for (i = 0; i < numBlocos; i++) {
 		for (j = 0; j < 128; j++) {
-				for (k = 0; k < 128; k++) {
-					Y[k] = 1;
-				}
+			for (k = 0; k < 128; k++) {
+				Y[k] = 1;
+			}
 			/* Bit modificado */
 			vetAlter[i][j] = (vetAlter[i][j] + 1) % 2;
 			/*****************************************************/
 			/* Criptografa vetAlter e armazena em vetAlterC      */
 			/*****************************************************/
 			for (k = 0; k < numBlocos; k++) {		
-				X = xor(vetAlter[i], Y, 128);	
-				vetAlterC[i] = K128(X, subChavesK, 12);
-				Y = vetAlterC[i];
+				X = xor(vetAlter[k], Y, 128);	
+				vetAlterC[k] = K128(X, subChavesK, 12);
+				Y = vetAlterC[k];
+			}
+			/*****************************************************/
+			/* Para cada bloco (Bl) calcula a distancia de       */
+			/* hamming entre o original criptografado e o bloco  */
+			/* com a alteracao de 1 bit criptografado e acumula  */
+			/* em somaH                                          */
+			/*****************************************************/			
+			for (l = i; l < numBlocos; l++) {
+				somaH[l] += hamming(vetEntraC[l], vetAlterC[l]);
 			}				
-
-
-
-
-
+			/*Retorna o bit modificado para o original*/
 			vetAlter[i][j] = (vetAlter[i][j] + 1) % 2;
 		}
 	}
+	for (l = 0; l < numBlocos; l++) {
+		printf("%d\n", somaH[l]/(128*(i+1)));
+	}		
 	return ;
 }
