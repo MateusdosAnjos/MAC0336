@@ -11,16 +11,40 @@ bool confereChamadaAleatorio1(int argc, char **argv) {
 	return true;
 }
 
+/* Funcao que realoca uma matriz com n posicoes
+// de 128 bits
+*/
+int **realocaMatriz(int **a, int n) {
+	int **realoc = NULL;
+	int i, j;
+
+	realoc = calloc(n, sizeof(int *));
+	for (i = 0; i < n; i++) {
+		realoc[i] = calloc(128, sizeof(int));
+	}
+	for (i = 0; i < n/2; i++) {
+		for (j = 0; j < 128; j++) {
+			realoc[i][j] = a[i][j];
+		}
+	}
+	for (i = 0; i < n/2; i++) {
+		free(a[i]);
+	}
+
+	return realoc;	
+}
+
 /* Funcao que calcula o valor de aleatoriedade (entropia)
 // pelo metodo 1 descrito no enunciado
 */
 void aleatorioMetodo1(int argc, char **argv) {
 	FILE *entrada;
-	int *chaveK = NULL;
+	int *chaveK = NULL, *bin = NULL;
 	int **subChavesK = NULL, **vetEntra = NULL, **vetAlter = NULL,
 	**vetEntraC = NULL, **vetAlterC = NULL;
 	int i, j, k, numBlocos;
-	char *senha = NULL;
+	unsigned int c;
+	char *senha = NULL, *hexaC = NULL;
 
 	if (!confereChamadaAleatorio1(argc, argv)) { 
 		printf("Para calcuo de entropia do arquivo:\n\
@@ -56,6 +80,30 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 	/*****************************************************/		
 	subChavesK = geraSubChaves(chaveK, 12);
 
+	numBlocos = 0;
+	k = 2;
+	vetEntra = malloc(k * sizeof(int *));
+	for (i = 0; i < k; i++) {
+		vetEntra[i] = calloc(128, sizeof(int));
+	}
+	hexaC = malloc(2 * sizeof(char));
+	bin = malloc(8 * sizeof(int));
+	c = fgetc(entrada);
+	while (c != EOF) {
+		for(i = 0; c != EOF && i < 16; i++) {
+			sprintf(hexaC, "%02x", c);
+			bin = hexaParaBinario(hexaC);
+			for (j = i * 8; j < (i+1)*8; j++) {
+				if (k == numBlocos) {
+					vetEntra = realocaMatriz(vetEntra, 2*k);
+					k = k * 2;
+				}
+				vetEntra[numBlocos][j] = bin[j - (8*i)];
+			}
+			c = fgetc(entrada);
+		}
+		numBlocos++;
+	}
 
 	return ;
 }
