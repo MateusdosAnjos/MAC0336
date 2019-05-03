@@ -3,6 +3,7 @@
 #include "criptografa.h"
 #include "decriptografa.h"
 #include "aleatorioMetodo1.h"
+#include "aleatorioMetodo2.h"
 
 /* Funcao que explica o uso do programa
 */
@@ -57,7 +58,7 @@ int main(int argc, char *argv[]) {
 	/*        Calculo de aleatoriedade metodo 2       */
 	/**************************************************/
 	else if (strcmp(argv[1], "-2") == 0) {
-		printf("Falta fazer aleatoriedade pelo método 2!\n");
+		aleatorioMetodo2(argc, argv);
 	}
 
 	/**************************************************/

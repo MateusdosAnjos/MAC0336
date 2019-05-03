@@ -14,6 +14,11 @@ bool confereChamadaAleatorio1(int argc, char **argv);
 */
 int **realocaMatriz(int **a, int n);
 
+/* Funcao que calcula a distancia de Hamming entre 2 blocos
+// de 128 bits
+*/
+int hamming(int *a, int *b);
+
 /* Funcao que imprime a tabela dos resultados
 */
 void imprimeTabelaDeResultados(int numBlocos, int *maxH, int *minH, int *somaH);
