@@ -4,6 +4,74 @@ Nome:
 NUSP: 
 	9298191
 
+Arquivos que compõem o ep1:
+
+	ep1 = É o código executável.
+	
+	ep1.c = contém a main do ep1, apenas mostra instruções de uso do programa
+	e delega o trabalho para as bibliotecas corretas.
+
+	criptografa.c = executa todo trabalho de criptografia de um arquivo.
+
+	decriptografa.c = executa todo trabalho de decriptografia de um arquivo.
+
+	aleatorioMetodo1.c = executa o calculo da entropia, mudando apenas 1 bit
+	por vez, como descrito no enunciado.
+
+	aleatorioMetodo2.c = executa o calculo da entropia, mudando dois bits por
+	vez, cada um de bytes consecutivos, como descrito no enunciado.
+
+	funcoesEp1.c = Código que contém as funções que foram utilizadas para
+	criptografar, decriptografar e calcular as medidas de entropia.
+
+	conversao.c = Código que contém as funções que fazem conversões da
+	representação de números (binário para hexadecimal, hexadecimal para
+	binario, base 10 para binário e binario para base 10).
+
+	*.h = Os arquivos "header" funcionam como bibliotecas e contém as 
+	assinaturas	das funções definidas no respectivo arquivo .c que podem ser
+	utilizadas por arquivos que importarem essas bibliotecas.
+
+	*.o = O código objeto dos arquivos .c, gerados pelo Makefile.
+
+	Makefile = script que facilita a compilação do programa ep1.
+
+Arquivos que estão indiretamente relacionados ao ep1:
+
+	galois257.py = programa em python3 que faz o cálculo do corpo de galois
+	definido no enunciado, armazenando os valores no arquivo galois257. Este
+	arquivo será lido em "funcoesEp1.c".
+
+	galois257 = arquivo de texto que contém os valores do corpo de Galois
+	definido no enunciado.
+
+	teste.c = Código que contém as funções que testam as partes individuais
+	do Exercício Programa.
+
+Arquivos para testes:
+
+	ENT1 = pequeno TEXTO para ser criptografado.
+
+	ENT2 = pequena IMAGEM para ser criptografada.
+
+	ENT3 = pequeno AUDIO para ser criptografado.
+
+	SAI1 = texto ENT1 criptografado.
+
+	SAI2 = imagem ENT2 criptografada.
+
+	SAI3 = audio ENT3 criptografado.
+	
+	SAI1DECRIPT = texto SAI1 decriptografado (igual a ENT1 se tudo estiver OK).
+
+	SAI2DECRIPT = imagem ENT2 decriptografada (igual a ENT2 se tudo estiver
+	OK).
+
+	SAI3DECRIPT = audio ENT3 decriptografado (igual a ENT3 se tudo estiver OK).
+
+	ENT4 = arquivo para análise da entropia.
+
+
 Como utilizar o programa:
 	O parâmetro "-a" é opcional e serve para gravar brancos no arquivo de
 	entrada deletá-lo após a execução.
@@ -19,6 +87,9 @@ Como utilizar o programa:
 
 	Modo (4) Para calcular aleatoriedade pelo método 2:
 		./ep1 -2 -i <arquivo de entrada> -p <senha> -a
+
+	(Existem <arquivo de entrada> dentro da pasta do EP, chamados ENT1, ENT2, 
+	ENT3. São texto, imagem e música, respectivamente.) 
 
 Descrição dos equipamentos (computador, compilador e sistema operacional) 
 utilizado:
@@ -37,4 +108,14 @@ utilizado:
 
 	Sistema Operacional: 
 		Linux - Ubuntu 18.04.2 LTS
+
+Como compilar o arquivo fonte:
+	
+	Para compilar o programa basta digitar "make" no terminal enquanto estiver
+	dentro da pasta contendo os arquivos referentes ao ep1. (Para maiores
+	informações verifique o Makefile).		
+
+
+OBSERVAÇÕES IMPORTANTES:
+
 
