@@ -36,6 +36,8 @@ Arquivos que compõem o ep1:
 
 	Makefile = script que facilita a compilação do programa ep1.
 
+	crproj2019.pdf = enunciado do ep.
+
 Arquivos que estão indiretamente relacionados ao ep1:
 
 	galois257.py = programa em python3 que faz o cálculo do corpo de galois
@@ -113,9 +115,15 @@ Como compilar o arquivo fonte:
 	
 	Para compilar o programa basta digitar "make" no terminal enquanto estiver
 	dentro da pasta contendo os arquivos referentes ao ep1. (Para maiores
-	informações verifique o Makefile).		
+	informações verifique o Makefile).
+	Para remover os arquivos .o basta digitar "make clean" no terminal enquanto
+	estiver dentro da pasta contendo o Makefile e os arquivos ".o".
+	Para compilar o arquivo de testes basta digitar "make teste". Para rodar
+	os testes faça: ./teste 		
 
 
 OBSERVAÇÕES IMPORTANTES:
+
+
 
 
