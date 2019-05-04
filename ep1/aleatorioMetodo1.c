@@ -72,7 +72,7 @@ void aleatorioMetodo1(int argc, char **argv) {
 	*maxH = NULL, *minH = NULL;
 	int **subChavesK = NULL, **vetEntra = NULL, **vetAlter = NULL,
 	**vetEntraC = NULL, **vetAlterC = NULL;
-	int i, j, k, l, dist, numBlocos;
+	int i, j, k, l, dist, numBlocos, tamanhoArquivo = 0;
 	unsigned int c;
 	char *senha = NULL, *hexaC = NULL;
 
@@ -137,6 +137,7 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 				}
 				vetEntra[numBlocos][j] = bin[j - (8*i)];
 			}
+			tamanhoArquivo++;
 			c = fgetc(entrada);
 		}
 		numBlocos++;
@@ -226,6 +227,29 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 
 	imprimeTabelaDeResultados(numBlocos, maxH, minH, somaH);
 
+	/**************************************************/
+	/* Sobrescreve e apaga entrada se necessario      */
+	/**************************************************/
+	if (argc == 7) {
+		if (strcmp(argv[6], "-a") == 0) {
+			entrada = fopen(argv[3], "w");
+			if (!entrada) {
+				printf("Problemas ao deletar arquivo de entrada!\n");
+				return;
+			}
+			else {
+				for (i = 0; i < tamanhoArquivo; i++) {
+					fwrite(" ", sizeof(char), 1, entrada);
+				}
+			}
+			if (remove(argv[3]) == 0){
+    			printf("Arquivo de entrada removido com sucesso!\n");
+  			}
+  			else {
+      			printf("Erro na remoção do arquivo!.\n");
+    		}
+		}
+	}
 	fclose(entrada);
 	free(chaveK);
 	free(bin);

@@ -1,29 +1,40 @@
-Arquitetura:                x86_64
-Modo(s) operacional da CPU: 32-bit, 64-bit
-Ordem dos bytes:            Little Endian
-CPU(s):                     4
-Lista de CPU(s) on-line:    0-3
-Thread(s) per núcleo:       1
-Núcleo(s) por soquete:      4
-Soquete(s):                 1
-Nó(s) de NUMA:              1
-ID de fornecedor:           GenuineIntel
-Família da CPU:             6
-Modelo:                     60
-Nome do modelo:             Intel(R) Core(TM) i5-4690 CPU @ 3.50GHz
-Step:                       3
-CPU MHz:                    883.003
-CPU MHz máx.:               3900,0000
-CPU MHz mín.:               800,0000
-BogoMIPS:                   7000.15
-Virtualização:              VT-x
-cache de L1d:               32K
-cache de L1i:               32K
-cache de L2:                256K
-cache de L3:                6144K
-CPU(s) de nó0 NUMA:         0-3
+Nome: 
+	Mateus Agostinho dos Anjos
 
+NUSP: 
+	9298191
 
-./ep1 -c -i entrada -o saida -p senha123
+Como utilizar o programa:
+	O parâmetro "-a" é opcional e serve para gravar brancos no arquivo de
+	entrada deletá-lo após a execução.
 
+	Modo (1) Para criptografar arquivos:
+		./ep1 -c -i <arquivo de entrada> -o <arquivo de saída> -p <senha> -a
+
+	Modo (2) Para decriptografar arquivos:
+		./ep1 -d -i <arquivo de entrada> -o <arquivo de saída> -p <senha> -a
+
+	Modo (3) Para calcular aleatoriedade pelo método 1:
+		./ep1 -1 -i <arquivo de entrada> -p <senha> -a
+
+	Modo (4) Para calcular aleatoriedade pelo método 2:
+		./ep1 -2 -i <arquivo de entrada> -p <senha> -a
+
+Descrição dos equipamentos (computador, compilador e sistema operacional) 
+utilizado:
+
+	Info do Computador:
+		Arquitetura:                x86_64
+		Modo(s) operacional da CPU: 32-bit, 64-bit
+		Ordem dos bytes:            Little Endian
+		Nome do modelo:             Intel(R) Core(TM) i5-4690 CPU @ 3.50GHz
+		CPU MHz:                    883.003
+		BogoMIPS:                   7000.15
+		Memória RAM:				8GB
+
+	Compilador: 
+		gcc
+
+	Sistema Operacional: 
+		Linux - Ubuntu 18.04.2 LTS
 

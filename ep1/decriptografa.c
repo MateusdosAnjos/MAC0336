@@ -217,6 +217,29 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 	fclose(entrada);
 	fclose(saida);
 	/**************************************************/
+	/* Sobrescreve e apaga entrada se necessario      */
+	/**************************************************/
+	if (argc == 9) {
+		if (strcmp(argv[8], "-a") == 0) {
+			entrada = fopen(argv[3], "w");
+			if (!entrada) {
+				printf("Problemas ao deletar arquivo de entrada!\n");
+				return;
+			}
+			else {
+				for (i = 0; i < tamanhoOriginal; i++) {
+					fwrite(" ", sizeof(char), 1, entrada);
+				}
+			}
+			if (remove(argv[3]) == 0){
+    			printf("Arquivo decriptografado e removido com sucesso!\n");
+  			}
+  			else {
+      			printf("Erro na remoção do arquivo!.\n");
+    		}
+		}
+	}
+	/**************************************************/
 	/* Libera memoria                                 */
 	/**************************************************/
 	free(chaveK);	
