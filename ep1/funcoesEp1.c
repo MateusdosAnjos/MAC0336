@@ -36,7 +36,7 @@ char *completaSenha(char *senha) {
 	int i = 0, j;
 	char* senhaCompleta;
 
-	senhaCompleta = malloc(16 * sizeof(char));
+	senhaCompleta = malloc(16 * sizeof(int));
 
 	for (i = 0; i < strlen(senha); i++) {
 		senhaCompleta[i] = senha[i];
@@ -184,7 +184,7 @@ int **geraSubChaves(int *chaveK, int r) {
 	char *c1 = "9e3779b97f4a7151", *c2 = "8aed2a6bb7e15162",
 	*c3 = "7c159e3779b97f4a";
 	/*Alocando memórias*/
-	L = (int **)malloc((4*r + 2) * sizeof(int *));
+	L = malloc((4*r + 2) * sizeof(int *));
 	for (i = 0; i < (4*r + 2); i++) {
 		L[i] = calloc(64, sizeof(int));
 	}
@@ -354,6 +354,11 @@ int *odot(int *B, int *C) {
 			resultado[(i*8) + j] = bytesA[i][j];
 		}
 	}
+	free(exp);
+	free(log);
+	free(bytesA);
+	free(bytesB);
+	free(bytesC);	
 	return resultado;
 }
 
@@ -389,6 +394,11 @@ int *odotInv(int *A, int *C) {
 			resultado[(i*8) + j] = bytesB[i][j];
 		}
 	}
+	free(exp);
+	free(log);
+	free(bytesA);
+	free(bytesB);
+	free(bytesC);		
 	return resultado;
 }
 
@@ -431,6 +441,16 @@ int *K128(int *X, int **subChavesK, int R) {
 		resultado[i] = XeFINAL[i];
 		resultado[i+64] = XfFINAL[i];
 	}
+
+	free(XeFINAL);
+	free(XfFINAL);
+	free(Y1);
+	free(Y2);
+	free(Z);
+	free(Xa);
+	free(Xb);
+	free(Xe);
+	free(Xf);
 
 	return resultado;
 }
@@ -475,6 +495,16 @@ int *K128Inv(int *X, int **subChavesK, int R) {
 		resultado[i] = XeLinha[i];
 		resultado[i+64] = XfLinha[i];
 	}
+
+	free(XeFINAL);
+	free(XfFINAL);
+	free(Y1);
+	free(Y2);
+	free(Z);
+	free(Xa);
+	free(Xb);
+	free(Xe);
+	free(Xf);
 
 	return resultado;
 }
