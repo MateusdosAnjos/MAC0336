@@ -290,7 +290,7 @@ int main() {
     /**************************************************/
     /* Abre e verifica se o arquivo foi aberto        */
     /**************************************************/
-    entrada = fopen("entrada", "r");
+    entrada = fopen("ENT1", "r");
     if (!entrada) {
         printf("Problemas ao abrir arquivo a ser criptografado!\n");
         return 0;
