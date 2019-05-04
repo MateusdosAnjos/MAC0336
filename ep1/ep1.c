@@ -8,16 +8,18 @@
 /* Funcao que explica o uso do programa
 */
 void instrucoesDeUso() {
+	printf("INSTRUÇÕES DE USO DO PROGRAMA EP1:\n");
+	printf("\"-a\" é opcional e irá deletar o arquivo de entrada!\n\n");
 	printf("Modo (1) Para criptografar arquivos:\n\
-programa -c -i <arquivo de entrada> -o \
+./ep1 -c -i <arquivo de entrada> -o \
 <arquivo de saída> -p <senha> -a\n\n");
 	printf("Modo (2) Para decriptografar arquivos:\n\
-programa -d -i <arquivo de entrada> -o <arquivo\
-de saída> -p <senha>\n\n");
+./ep1 -d -i <arquivo de entrada> -o <arquivo\
+de saída> -p <senha> -a\n\n");
 	printf("Modo (3) Para calcular aleatoriedade pelo método 1:\n\
-programa -1 -i <arquivo de entrada> -p <senha>\n\n");
+./ep1 -1 -i <arquivo de entrada> -p <senha> -a\n\n");
 	printf("Modo (4) Para calcular aleatoriedade pelo método 2:\n\
-programa -2 -i <arquivo de entrada> -p <senha>\n\n");
+./ep1 -2 -i <arquivo de entrada> -p <senha> -a\n\n");
 	return;
 }
 

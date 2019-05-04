@@ -77,8 +77,8 @@ void aleatorioMetodo1(int argc, char **argv) {
 	char *senha = NULL, *hexaC = NULL;
 
 	if (!confereChamadaAleatorio1(argc, argv)) { 
-		printf("Para calcuo de entropia do arquivo:\n\
-programa -1 -i <arquivo de entrada> -p <senha>\n\n");
+		printf("Para calcuo de entropia (1) do arquivo:\n\
+./ep1 -1 -i <arquivo de entrada> -p <senha> -a\n\n");
 		return;
 	}
 	/**************************************************/

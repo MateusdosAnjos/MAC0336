@@ -52,8 +52,8 @@ void decriptografar(int argc, char **argv)  {
 	/**************************************************/
 	if (!confereChamadaDecripto(argc, argv)) { 
 		printf("Para decriptografar arquivos:\n\
-programa -d -i <arquivo de entrada> -o \
-<arquivo de saída> -p <senha>\n\n");
+./ep1 -d -i <arquivo de entrada> -o \
+<arquivo de saída> -p <senha> -a\n\n");
 		return;
 	}
 	/**************************************************/

@@ -36,7 +36,7 @@ void criptografar(int argc, char **argv)  {
 	/**************************************************/
 	if (!confereChamadaCripto(argc, argv)) { 
 		printf("Para criptografar arquivos:\n\
-programa -c -i <arquivo de entrada> -o \
+./ep1 -c -i <arquivo de entrada> -o \
 <arquivo de saída> -p <senha> -a\n\n");
 		return;
 	}
