@@ -49,7 +49,7 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 	/*****************************************************/
 	/* Completa a senha para que tenha 16 bytes          */
 	/*****************************************************/
-	senha = completaSenha(argv[7]);
+	senha = completaSenha(argv[5]);
 	/*****************************************************/
 	/* gera a chaveK a partir da senha fornecida         */
 	/*****************************************************/	

@@ -100,7 +100,7 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 	/*****************************************************/
 	/* Completa a senha para que tenha 16 bytes          */
 	/*****************************************************/
-	senha = completaSenha(argv[7]);
+	senha = completaSenha(argv[5]);
 	/*****************************************************/
 	/* gera a chaveK a partir da senha fornecida         */
 	/*****************************************************/	
@@ -227,6 +227,7 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
 
 	imprimeTabelaDeResultados(numBlocos, maxH, minH, somaH);
 
+	fclose(entrada);
 	/**************************************************/
 	/* Sobrescreve e apaga entrada se necessario      */
 	/**************************************************/
@@ -250,7 +251,6 @@ com pelo menos 2 letras e 2 algarismos decimais!\n");
     		}
 		}
 	}
-	fclose(entrada);
 	free(chaveK);
 	free(bin);
 	free(X);
