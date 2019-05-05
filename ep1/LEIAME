@@ -124,6 +124,30 @@ Como compilar o arquivo fonte:
 
 OBSERVAÇÕES IMPORTANTES:
 
+ - Os acentos foram evitados nos comentários para evitar possíveis erros
+ quanto ao ENCODING.(mesmo que isso não faça muito sentido).
 
+ - Apesar do arquivo hexdump disponibilizado para a execução do EP foram 
+criadas funções que fazem a transformação de um caracter lido da entrada para 
+um vetor de bits, sendo que a posição 0 do vetor codifica o bit menos 
+significativo do caracter, isso foi feito para facilitar a visualização e o
+entendimento sobre as operações individuais do EP (tive dificuldades em 
+entender os processos e isso me ajudou bastante apesar do trabalho extra
+e dos efeitos colaterais), porém acarretou em uma grande perda de desempenho
+do programa. Devido a isso os testes são feitos com arquivos de tamanho
+reduzido que são criptografados e decriptografados com êxito.
 
+ - Apesar dos arquivos criptografa.c e decriptografa.c serem bem parecidos
+e terem trechos de código iguais a decisão de criar arquivos separados
+para isso teve como objetivos não só facilitar o desenvolvimento do programa 
+como facilitar a correção, pois permite uma melhor visualização de como a
+criptografia e a decriptografia foram implementadas individualmente. O mesmo
+ocorre para os metodos que calculam entropia.
 
+ - Colocar as funções que foram utilizadas no ep em um arquivo separado serviu
+para diminuir o tamanho dos arquivos em geral, facilitando a correção, testes e
+a divisão em módulos dos diferentes modos de operação do EP.
+
+ - No cálculo de entropia temos como média dos blocos o valor próximo de 30
+o que parece estranho, além disso foi visto em aula que outros alunos
+encontraram o mesmo resultado.
