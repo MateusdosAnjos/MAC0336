@@ -298,7 +298,7 @@ int main() {
     /**************************************************/
     /*     Abre arquivo de saida                      */
     /**************************************************/
-    saida = fopen("saida", "w");
+    saida = fopen("SAI1", "w");
     X = malloc(128 * sizeof(int));
     hexaC = malloc(2 * sizeof(char));
     ce = fgetc(entrada);
@@ -344,7 +344,7 @@ int main() {
     }
     fclose(entrada);
     fclose(saida);
-    saida = fopen("saida", "r");
+    saida = fopen("SAI1", "r");
     ce = fgetc(saida);
     p = 0;
     while (ce != EOF) {
