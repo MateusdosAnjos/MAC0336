@@ -9,6 +9,8 @@
 #include <math.h>
 #include "conversao.h"
 
+void atribui(int *a, int *b);
+
 /* Funcao que recebe uma senha de tamanho n e verifica
 // se a senha esta conforme o enunciado pede
 */

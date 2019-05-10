@@ -7,6 +7,17 @@
 #include <stdint.h>
 #include "conversao.h"
 
+void atribui(int **a, int *b) {
+	if (*a == NULL) {
+		*a = b;
+	}
+	else {
+		free(*a);
+		*a = b;
+	}
+	return;
+}
+
 /* Funcao que recebe uma senha de tamanho n e verifica
 // se a senha esta conforme o enunciado pede
 */
@@ -405,7 +416,7 @@ int *odotInv(int *A, int *C) {
 /* Funcao que implementa o K 128 como descrito no enunciado
 */
 int *K128(int *X, int **subChavesK, int R) {
-	int *Xa, *Xb, *ka, *kb, *ke, *kf, *Xe, *Xf;
+	int *Xa, *Xb, *ka, *kb, *ke, *kf, *Xe = NULL, *Xf;
 	int *Y1, *Y2, *Z, *XeFINAL, *XfFINAL, *resultado;
 	int i;
 
@@ -416,20 +427,19 @@ int *K128(int *X, int **subChavesK, int R) {
 		Xa[i] = X[i];
 		Xb[i] = X[i+64];
 	}
-
 	for (i = 0; i < R; i++) {
 		ka = subChavesK[i*4];
 		kb = subChavesK[(i*4)+1];
 		ke = subChavesK[(i*4)+2];
 		kf = subChavesK[(i*4)+3];
-		Xe = odot(Xa, ka);
+		atribui(&Xe, odot(Xa, ka));
 		Xf = somaBinario64(Xb, kb);
 		Y1 = xor(Xe, Xf, 64);
 		Y2 = odot(somaBinario64((odot(ke, Y1)), Y1), kf);
-		Z = somaBinario64(odot(ke, Y1), Y2);
+		atribui(&Z, somaBinario64(odot(ke, Y1), Y2));
 		/*Saida de 1 iteracao eh a entrada da proxima*/
-		Xa = xor(Xe, Z, 64);
-		Xb = xor(Xf, Z, 64);
+		atribui(&Xa, xor(Xe, Z, 64));
+		atribui(&Xb, xor(Xf, Z, 64));
 	}
 	ka = subChavesK[(i*4)];
 	kb = subChavesK[(i*4)+1];
