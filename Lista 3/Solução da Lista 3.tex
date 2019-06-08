@@ -75,6 +75,68 @@
 	\vspace{0.4 cm}
 	
 	\subsection*{Exercício 1.}
-	
+		Dado os passos de 1 a 6 na página 182 temos:
+		\begin{itemize}			
+			\item[1 -]
+				No passo 3 Beto escolhe um $0 < x < n$ e envia $a$ para
+				Alice, tal que $x^2 mod \ n = a$. No passo 4 Alice calcula as 
+				quatro raízes quadradas de $a \ mod \ n$ e envia uma delas 
+				para Beto. \textbf{Ele ganha} caso \textbf{não receber} $x$ ou 
+				$x - n$ (passo 5).\\
+				A justificativa do porque Beto ganha e Alice aceita é explicada
+				no passo 6. Se Beto receber outra raiz quadrada $y$ ou
+				$n - y$ ele consegue fatorar $n$ com facilidade calculando
+				$mdc(x+y, n) = p$ e envia a fatoração de $n$ para Alice, que
+				aceita a vitória de Beto.
+			\item[2 -]
+				Alice ganha o jogo caso enviar para Beto $x$ ou $n - x$, pois
+				com essas informações ele não consegue calcular a fatoração
+				de $n$ e assim provar que ganhou. (Descrito no passo 5)
+			\item[3 -]		
+				Beto rejeita o caso de $y = 0$, pois caso $y = 0$ fosse válido
+				Beto conseguiria calcular a fatoração de $n$ apenas com
+				o $x$ escolhido por ele, uma vez que $mdc(x+y, n) = p$ ou $q$ e 
+				$n = pq$. Com $y = 0$ teríamos $mdc(x+0, n) = p$ ou $q$, ou
+				seja $mdc(x, n) = p$ ou $q$, sendo que Beto conhece $x$ e $n$.
+				Como não é possível obter $p$ ou $q$ apenas com $mdc(x, n)$,
+				$y = 0$ daria a vitória sempre para Alice.
+			\item[4 -]
+				$p = 3$, $q = 7$, $x = 4$, $a = ?$, $y = ?$, $mdc(x + y, n) = ?$\\
+				$n = pq = 21$\\
+				$x^2 \ mod \ n = a$, portanto $4^2 \ mod \ 21  = a$ então $a =  16$
+				\newline
+				\begin{center}
+					Cálculo das raízes:\\
+					$x_1 = a^{\frac{p+1}{4}} mod \ p$	e 
+					$x_2 = a^{\frac{q+1}{4}} mod \ q$,
+					sendo assim temos:\\
+					$x_1 = 16^{\frac{3+1}{4}} mod \ 3$, $x_1 = 1$\\
+					$x_2 = 16^{\frac{7+1}{4}} mod \ 7$, $x_2 = 4$\\
+					Utilizando o Teorema Chinês do resto calcula-se $x_0$
+					solução do sistema:
+					$ \begin{cases} 
+							x_0 = x_1 \ mod \ p \\ x_0 = x_2 \ mod \ q 
+						\end{cases}
+					$\\
+					Simplificando temos:\\
+					$x_0 = (x_2pp^{-1} + x_1qq^{-1}) \ mod \ pq$\\
+					Calculamos $p^{-1}$ e $q^{-1}$ utilizando o algoritmo
+					de Euclides estendido, chegando em:\\
+					$p^{-1} = 5 $ e $q^{-1} = 1 $\\
+					Portanto: $x_0 = (4*3*5 + 1*7*1) \ mod \ 21$\\
+					$x_0 = 4$\\
+					Agora para o cálculo das outras 3 raízes temos:\\
+					$x_0^{'} = (x_2pp^{-1} - x_1qq^{-1}) \ mod \ pq$, $(pq - x_0)$,
+					$(pq - x_0^{'})$\\
+					$x_0^{'} = (4*3*5 - 1*7*1) \ mod \ 21 = 11$\\
+					$x_0^{''} = 21 - 4 = 17$\\
+					$x_0^{'''} = 21 - 11 = 10$\\
+					Pegando $y = 11$ temos $mdc(4+11, 21) = mdc(15, 21) = 3 = p$				
+				\end{center} 	
+				Terminado temos: 
+				$p = 3$, $q = 7$, $x = 4$, $\mathbf{a = 16, y = 11, mdc(x + y, n) = 3}$,
+				$n = 21$
+		\end{itemize}
+	\subsection*{Exercício 2.}
 
 \end{document}
