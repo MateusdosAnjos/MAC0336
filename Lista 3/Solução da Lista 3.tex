@@ -45,14 +45,19 @@
 				Alice ganha o jogo caso enviar para Beto $x$ ou $n - x$, pois
 				com essas informações ele não consegue calcular a fatoração
 				de $n$ e assim provar que ganhou. (Descrito no passo 5)
-			\item[3 -]		
-				Beto rejeita o caso de $y = 0$, pois caso $y = 0$ fosse válido
+			\item[3 -]
+				Sabemos que $n = pq$.\\		
+				Assumindo que $y = 0$ fosse uma raiz válida que permitisse
+				a Beto obter a fatoração de $n$, uma vez que $y \neq x$ e
+				$y \neq n - x$.\\
 				Beto conseguiria calcular a fatoração de $n$ apenas com
-				o $x$ escolhido por ele, uma vez que $mdc(x+y, n) = p$ ou $q$ e 
-				$n = pq$. Com $y = 0$ teríamos $mdc(x+0, n) = p$ ou $q$, ou
+				o $x$ escolhido por ele, uma vez que $mdc(x+y, n) = p$ ou $q$, 
+				com $y = 0$ teríamos $mdc(x+0, n) = p$ ou $q$, ou
 				seja $mdc(x, n) = p$ ou $q$, sendo que Beto conhece $x$ e $n$.
 				Como não é possível obter $p$ ou $q$ apenas com $mdc(x, n)$,
-				$y = 0$ daria a vitória sempre para Alice.
+				$y = 0$ é inválido, caracterizando trapaça de Alice que sempre daria a
+				vitória a ela, pelo fato de Beto não conseguir provar que venceu 
+				(obter a fatoração de $n$).
 			\item[4 -]
 				$p = 3$, $q = 7$, $x = 4$, $a = ?$, $y = ?$, $mdc(x + y, n) = ?$\\
 				$n = pq = 21$\\
@@ -68,7 +73,8 @@
 					Utilizando o Teorema Chinês do resto calcula-se $x_0$
 					solução do sistema:
 					$ \begin{cases} 
-							x_0 = x_1 \ mod \ p \\ x_0 = x_2 \ mod \ q 
+							x_0 = x_1 \ mod \ p \\
+							x_0 = x_2 \ mod \ q 
 						\end{cases}
 					$\\
 					Simplificando temos:\\
@@ -91,5 +97,43 @@
 				$n = 21$
 		\end{itemize}
 	\subsection*{Exercício 2.}
-
+		\begin{itemize}
+			\item[1 -]
+				Sabemos que o testemunho $x = r^2 \ mod \ n $\\
+				Sabemos que $v = s^2 \ mod \ n$\\
+				$y$ é autêntico, portanto vale que:
+				\begin{center}								
+					$ \begin{cases} 
+					y = r \ mod \ n, & e = 0 \\ 
+					y = rs \ mod \ n, & e = 1
+					\end{cases}
+					$
+				\end{center}
+				Para $e = 0$:\\
+				$xv^{e} \ mod \ n = xv^{0} \ mod \ n = x \ mod \ n$\\
+				\begin{center} 
+					$y^2 = r^2 \ mod \ n$\\
+					$y^2 = x \ mod \ n$\\
+				\end{center}
+				Vemos que:
+				$ \begin{cases} 
+					xv^{e} \ mod \ n =  x \ mod \ n \\ y^2 = x \ mod \ n
+					\end{cases}
+				$\\
+				Concluindo que, para $e = 0$ e $y$ autêntico, vale que $y^2 = xv^{e} \
+				mod \ n$\\
+				\newline
+				Para $e = 1$:\\
+				$xv^{e} \ mod \ n = xv \ mod \ n$\\
+				\begin{center} 
+					$y^2 = (rs)^2 \ mod \ n$\\
+					$y^2 = r^2s^2 \ mod \ n$\\
+					$y^2 = (r^2 \ mod \ n) \ (s^2 \ mod \ n)$\\
+					$y^2 = (x \ mod \ n) \ (v \ mod \ n)$\\
+					$y^2 = xv \ mod \ n$\\					
+				\end{center}
+				Concluindo que, para $e = 1$ e $y$ autêntico, vale que $y^2 = xv^{e} \
+				mod \ n$
+			\item[2 -]					
+		\end{itemize}
 \end{document}
