@@ -173,6 +173,68 @@
 				mensagens sem obter conhecimento sobre nenhuma informação
 				privada dela, ou seja Beto não precisa saber qual a chave 
 				$s$ utilizada por Alice para efetuar a verificação.
-			\item[4 -]					
-		\end{itemize}
+			\item[4 -]
+				Para $t = 1$, $p = 3$, $q = 7$, $s = 17$, $r = 13$\\
+				Temos:
+				\begin{center}
+					Cálculo de $n$:\\
+					$n = pq$\\
+					$n = 3*7$\\
+					$\mathbf{n = 21}$\\
+				\end{center}
+				\begin{center}
+					Cálculo de $v$:\\					
+					$v = s^2 \ mod \ n$\\
+					$v = 17^2 \ mod \ 21$\\
+					$\mathbf{v = 16}$\\
+				\end{center}
+				\begin{center}
+					Cálculo de $x$:\\					
+					$x = r^2 \ mod \ n$\\
+					$x = 13^2 \ mod \ 21$\\
+					$\mathbf{x = 1}$\\
+				\end{center}
+				\newpage
+				Para $e = 0$:
+				\begin{center}
+					Cálculo de $y$:\\					
+					$y = rs^{e} \ mod \ n$\\
+					$y = 13*17^{0} \ mod \ 21$\\					
+					$\mathbf{y = 13}$\\
+				\end{center}		
+				\begin{center}
+					Cálculo de $y^2$:\\					
+					$y^2 \ mod \ n$\\
+					$13^2 \ mod \ 21$\\
+					$\mathbf{y^2 = 1}$\\
+				\end{center}
+				\begin{center}
+					Cálculo de $xv^e \ mod \ n$:\\					
+					$1*16^0 \ mod \ 21$\\
+					$\mathbf{xv^e \ mod \ n = 1}$\\
+				\end{center}
+				Verificando, portanto, que $y^2 = xv^e \ mod \ n$ para $e = 0$\\
+				Para $e = 1$:
+				\begin{center}
+					Cálculo de $y$:\\					
+					$y = rs^{e} \ mod \ n$\\
+					$y = 13*17^{1} \ mod \ 21$\\					
+					$\mathbf{y = 11}$\\
+				\end{center}		
+				\begin{center}
+					Cálculo de $y^2$:\\					
+					$y^2 \ mod \ n$\\
+					$11^2 \ mod \ 21$\\
+					$\mathbf{y^2 = 16}$\\
+				\end{center}
+				\begin{center}
+					Cálculo de $xv^e \ mod \ n$:\\					
+					$1*16^1 \ mod \ 21$\\
+					$\mathbf{xv^e \ mod \ n = 16}$\\
+				\end{center}
+				Verificando, portanto, que $y^2 = xv^e \ mod \ n$ para $e = 1$	
+		\end{itemize}				
+	\subsection*{Exercício 3.}
+																					
+
 \end{document}
