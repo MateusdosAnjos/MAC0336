@@ -134,6 +134,45 @@
 				\end{center}
 				Concluindo que, para $e = 1$ e $y$ autêntico, vale que $y^2 = xv^{e} \
 				mod \ n$
-			\item[2 -]					
+			\item[2 -]
+				Para o protocolo de identificação Feige, Fiet e Shamir os parâmetros
+				de segurança são:
+					\begin{itemize}
+						\item[•]
+							O inteiro $\mathbf{s}$ relativamente primo a $n$, escolhido por 
+							Alice, protegido pelo problema da fatoração de $n$, sendo 
+							computacionalmente difícil calcular $s$ conhecendo-se apenas
+							$v$ e $n$. O conhecimento de $\mathbf{s}$ facilitaria a
+							personificação de Alice (no passo do envio de $y = rs$ para
+							Beto) por algum mal intencionado.
+						\item[•]
+							O inteiro $\mathbf{r}$, protegido pela fatoração de $n$.
+							Conhecendo-se $\mathbf{r}$ algum mal intencionado
+							poderia enviar o testemunho $x$ para Beto, pois 
+							$x = r^2 \ mod \ n$ com $n$ conhecido e personificar
+							Alice.
+						\item[•]
+							O desafio $e$ pode ser considerado um parâmetro de
+							segurança, pois impede o ataque de um espião que mapeou
+							todos os pares $x = r^2, y = rs$ a fim de responder
+							$y = rs$ no passo 3, já que para $e = 1$ o passo 4
+							seria $y^2 = xv = r^2s^2$. Com o desafio $e = 0$, 
+							mapear todos os valores não auxilia o espião, já que a
+							resposta exige $y = \sqrt{x} \ mod \ n$ e fazer este
+							cálculo sem a fatoração de $n$ é computacionalmente
+							difícil. Portanto, pode-se dizer que o problema da fatoração
+							de $n$ também protege a verificação quando é feito o
+							desafio $e$.						
+					\end{itemize}	
+				Portanto conhecer $\mathbf{s}$ ou $\mathbf{r}$ facilita para um
+				mal feitor personificar Alice, porém é necessário ter o conhecimento
+				dos dois parâmetros para obter total sucesso na personificação.
+			\item[3 -]
+				O protocolo Feige, Fiet e Shamir é do tipo Zero Knowledge, pois
+				permite a Beto verificar que é Alice verdadeira que manda as
+				mensagens sem obter conhecimento sobre nenhuma informação
+				privada dela, ou seja Beto não precisa saber qual a chave 
+				$s$ utilizada por Alice para efetuar a verificação.
+			\item[4 -]					
 		\end{itemize}
 \end{document}
