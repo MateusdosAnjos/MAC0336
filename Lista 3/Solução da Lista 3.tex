@@ -297,7 +297,33 @@
 				e de $J_A$, possibilitando o processo de verificação (protocolo
 				de identificação).
 			\item[5 -]
+				Os parâmetros de segurança são:
+				\begin{itemize}
+					\item[]
+						\textbf{Fatoração} de $n = pq$. Caso o intruso
+						obtenha a \textbf{fatoração} de $n$, ou seja $p$ e $q$,
+						o trabalho de recuperação
+						da informação sobre as operações "mod n" e \\
+						"mod $\Phi(n)$" são facilitadas.
+					\item[]
+						$\mathbf{s}$, protegido pelo problema da fatoração de $n$,
+						assim o intruso não obtém $\Phi(n)$ além de ser 
+						computacionalmente difícil recuperar $s$ a partir de
+						$v^{-1} \modd \Phi(n)$. Caso o intruso conheça o $s$ ele
+						pode calcular $s_A$ se grampear a informação $I_A$ e
+						aplicar a função pública $f()$ em $I_A$, pois $J_A = f(I_A)$
+						e $s_A = (J_A)^{-s} \modd n$.
+					\item[]
+						$\mathbf{s_A}$, protegido pela fatoração de $n$. Caso
+						o intruso conheça $s_A$ ele pode escolher $r$ e fraudar 
+						$y = r(s_A)^{e} \modd n$, se passando por uma falsa
+						Alice.
+				\end{itemize}
 			\item[6 -]
+				O protocolo é do tipo Zero Knowledge, pois Alice não revela
+				nenhuma de suas informações particulares (secretas) para Beto.
+				Ao final do processo Beto confirma que Alice conhece as chaves
+				privadas, porém sem saber quais seus valores.
 			\item[7 -]
 				Para: $p = 7$, $q = 13$, $v = 11$, $J_A = 29$, $r = 13$, $e = 6$\\
 				Calcular: $n$, $\Phi(n)$, $s$, $s_A$, $x$, $y$, $z$\\
