@@ -281,7 +281,20 @@
 				informação que valide os parâmetros possuídos por Alice e chagando
 				no resultado $z = x$ facilitando o trabalho de um invasor.
 			\item[3 -]
-				Pela escolha da entidade idônea $T$, $mdc[v, \Phi(n)] = 1$\\
+				Pela escolha da entidade idônea $T$, $mdc[v, \Phi(n)] = 1$.\\
+				A partir dos valores do item 3.7, temos $v = 11$ e
+				$\Phi(n) = 72$, como 11 é primo e não divide 72, então o
+				$mdc[v, \Phi(n)] = 1$ é verdadeiro e está verificado.
+				\newpage
+				Para $mdc[J_A, \Phi(n)] = 1$ temos $J_A = 29$ e $\Phi(n) = 72$,
+				executando o algoritmo de Euclides chegamos em:\\
+				$72/29 = 2*29 +  14$\\
+				$29/14 = 2*14 + 1$\\
+				$14/1 = 14 + 0$\\
+				Portanto $mdc[29, 72] = 1$ é verdadeiro e está verificado .
+				Esta condição do mdc = 1 é exigida para que haja inversa de $v$
+				e de $J_A$, possibilitando o processo de verificação (protocolo
+				de identificação).
 			\item[4 -]
 			\item[5 -]
 			\item[6 -]
