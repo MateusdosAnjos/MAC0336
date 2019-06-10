@@ -2,11 +2,14 @@
 
 %These tell TeX which packages to use.
 \usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{amssymb}
 \usepackage[utf8]{inputenc}
 
 %New commands
 \newcommand{\ceil[1]}{\lceil#1\rceil}
 \newcommand{\modd}{\ \text{mod}\ }
+\newcommand*{\QED}{\hfill\ensuremath{\blacksquare}}
 
 %Pagination stuff.
 \setlength{\topmargin}{-.3 in}
@@ -233,20 +236,41 @@
 					$\mathbf{xv^e \modd n = 16}$\\
 				\end{center}
 				Verificando, portanto, que $y^2 = xv^e \modd n$ para $e = 1$	
-		\end{itemize}				
+		\end{itemize}	
+	\newpage				
 	\subsection*{Exercício 3.}
 		\begin{itemize}
 			\item[1 -]
 				Se $\mathit{s_A}$ for autêntico, então vale que:\\
 				\begin{center}
 					$\mathit{s_A} = (J_A)^{-s}$\\
-					$J_A = (\mathit{s_A})^{-v} \modd n$
+					$J_A = (s_A)^{-v} \modd n$
 				\end{center}
 				Sabemos que, no protocolo de identificação vale que:\\
 				\begin{center}
-					$x = r^v \modd n$
-
+					$x = r^v \modd n$\\
+					$y = r(s_A)^{e} \modd n$\\
+					$z = J_A^{e} \ y^v \modd n$
 				\end{center}
+				Partindo de $z = J_A^{e} \ y^v \modd n$ temos:\\
+				\begin{center}
+					$z = J_A^{e} \ y^v \modd n$\\
+					Substituindo $y$ por $ r(s_A)^{e} \modd n$:\\
+					$z = J_A^{e} \  [r(s_A)^{e}]^v \modd n$\\
+					Distribuindo o expoente $v$:\\
+					$z = J_A^{e} \  r^v(s_A)^{e*v} \modd n$\\
+					Unindo os termos com expoente $e$:\\
+					$z = r^v [J_A \ (s_A)^{v}]^{e} \modd n$\\
+					Substituindo $J_A$ por $(s_A)^{-v}$:\\
+					$z = r^v [(s_A)^{-v} \ (s_A)^{v}]^{e} \modd n$\\
+					Percebemos que o termo $[(s_A)^{-v} \ (s_A)^{v}]^{e}$ é igual
+					a $[(s_A)^{-v + v}]^{e}$, ou seja $[(s_A)^{0}]^{e} = 1$\\
+					$z = r^v \modd n$\\
+					Como sabemos que $x = r^v \modd n$\\
+					$z = x$\\
+					$\QED$
+				\end{center}
+			\item[2 -]	
 		\end{itemize}																		
 
 \end{document}
