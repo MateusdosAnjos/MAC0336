@@ -281,7 +281,55 @@
 				informação que valide os parâmetros possuídos por Alice e chagando
 				no resultado $z = x$ facilitando o trabalho de um invasor.
 			\item[3 -]
-				
+				Pela escolha da entidade idônea $T$, $mdc[v, \Phi(n)] = 1$\\
+			\item[4 -]
+			\item[5 -]
+			\item[6 -]
+			\item[7 -]
+				Para: $p = 7$, $q = 13$, $v = 11$, $J_A = 29$, $r = 13$, $e = 6$\\
+				Calcular: $n$, $\Phi(n)$, $s$, $s_A$, $x$, $y$, $z$\\
+				Verificar: $z = x$
+				\begin{center}
+					\begin{itemize}
+						\item[]
+							Cálculo de $n$:\\
+							$n = pq$\\
+							$n = 7*13$\\
+							$\mathbf{n = 91}$
+						\item[]
+							Cálculo de $\Phi(n)$:\\
+							$\Phi(n) = (p-1)(q-1)$\\
+							$n = 6*12$\\
+							$\mathbf{\Phi(n) = 72}$
+						\item[]
+							Cálculo de $s$:\\
+							$s = v^{-1} \modd \Phi(n)$\\
+							$s = 11^{-1} \modd \Phi(n)$\\
+							$\mathbf{s  = 59}$
+						\item[]
+							Cálculo de $s_A$:\\
+							$s_A = (J_A)^{-s} \modd n$\\
+							$s_A = 29^{-59} \modd 91$\\
+							$s_A = 29^{32} \modd 91$\\							
+							$\mathbf{s_A  = 22}$
+						\item[]
+							Cálculo de $x$:\\
+							$x = r^{v} \modd n$\\
+							$x = 13^{11} \modd 91$\\						
+							$\mathbf{x  = 13}$
+						\item[]
+							Cálculo de $y$:\\
+							$y = r(s_A)^{e} \modd n$\\
+							$y = 13*(22)^{6} \modd 91$\\						
+							$\mathbf{y  = 13}$
+						\item[]
+							Cálculo de $z$:\\
+							$z = J_A^{e} \ y^{v} \modd n$\\
+							$z = 29^{6} * 13^{11} \modd 91$\\						
+							$\mathbf{z  = 13}$
+					\end{itemize}	
+				 \end{center}
+			Conferimos que $x = z = 13$.	 
 		\end{itemize}																		
 
 \end{document}
