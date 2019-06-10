@@ -270,7 +270,18 @@
 					$z = x$\\
 					$\QED$
 				\end{center}
-			\item[2 -]	
+			\item[2 -]
+				O caso $z = 0$ deve ser rejeitado, pois seria facilmente obtido
+				por qualquer pessoa que escolhesse $r = 0$.\\
+				Note que, se $r = 0$, então $x = r^v \modd n = 0$, no passo
+				$y = r(s_A)^{e} \modd n$ se $r = 0$, independentemente de
+				qual o segredo $(s_A)$, o valor de $y$ será 0, portanto, ao
+				calcular $z = J_A^{e} \ y^v \modd n$, teríamos 
+				$z = J_A^{e} \ 0^v \modd n$, logo $z = 0$ sem utilizar nenhuma
+				informação que valide os parâmetros possuídos por Alice e chagando
+				no resultado $z = x$ facilitando o trabalho de um invasor.
+			\item[3 -]
+				
 		\end{itemize}																		
 
 \end{document}
