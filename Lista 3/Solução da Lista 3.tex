@@ -5,8 +5,8 @@
 \usepackage[utf8]{inputenc}
 
 %New commands
-\newcommand\ceil[1]{\lceil#1\rceil}
-\newcommand{\newqed}{{\hfill\color{black}\ensuremath{\blacksquare}}}
+\newcommand{\ceil[1]}{\lceil#1\rceil}
+\newcommand{\modd}{\ \text{mod}\ }
 
 %Pagination stuff.
 \setlength{\topmargin}{-.3 in}
@@ -32,8 +32,8 @@
 		\begin{itemize}			
 			\item[1 -]
 				No passo 3 Beto escolhe um $0 < x < n$ e envia $a$ para
-				Alice, tal que $x^2 mod \ n = a$. No passo 4 Alice calcula as 
-				quatro raízes quadradas de $a \ mod \ n$ e envia uma delas 
+				Alice, tal que $x^2 \modd n = a$. No passo 4 Alice calcula as 
+				quatro raízes quadradas de $a \modd n$ e envia uma delas 
 				para Beto. \textbf{Ele ganha} caso \textbf{não receber} $x$ ou 
 				$x - n$ (passo 5).\\
 				A justificativa do porque Beto ganha e Alice aceita é explicada
@@ -61,33 +61,33 @@
 			\item[4 -]
 				$p = 3$, $q = 7$, $x = 4$, $a = ?$, $y = ?$, $mdc(x + y, n) = ?$\\
 				$n = pq = 21$\\
-				$x^2 \ mod \ n = a$, portanto $4^2 \ mod \ 21  = a$ então $a =  16$
+				$x^2 \modd n = a$, portanto $4^2 \modd 21  = a$ então $a =  16$
 				\newline
 				\begin{center}
 					Cálculo das raízes:\\
-					$x_1 = a^{\frac{p+1}{4}} mod \ p$	e 
-					$x_2 = a^{\frac{q+1}{4}} mod \ q$,
+					$x_1 = a^{\frac{p+1}{4}} \modd p$	e 
+					$x_2 = a^{\frac{q+1}{4}} \modd q$,
 					sendo assim temos:\\
-					$x_1 = 16^{\frac{3+1}{4}} mod \ 3$, $x_1 = 1$\\
-					$x_2 = 16^{\frac{7+1}{4}} mod \ 7$, $x_2 = 4$\\
+					$x_1 = 16^{\frac{3+1}{4}} \modd 3$, $x_1 = 1$\\
+					$x_2 = 16^{\frac{7+1}{4}} \modd 7$, $x_2 = 4$\\
 					Utilizando o Teorema Chinês do resto calcula-se $x_0$
 					solução do sistema:
 					$ \begin{cases} 
-							x_0 = x_1 \ mod \ p \\
-							x_0 = x_2 \ mod \ q 
+							x_0 = x_1 \modd p \\
+							x_0 = x_2 \modd q 
 						\end{cases}
 					$\\
 					Simplificando temos:\\
-					$x_0 = (x_2pp^{-1} + x_1qq^{-1}) \ mod \ pq$\\
+					$x_0 = (x_2pp^{-1} + x_1qq^{-1}) \modd pq$\\
 					Calculamos $p^{-1}$ e $q^{-1}$ utilizando o algoritmo
 					de Euclides estendido, chegando em:\\
 					$p^{-1} = 5 $ e $q^{-1} = 1 $\\
-					Portanto: $x_0 = (4*3*5 + 1*7*1) \ mod \ 21$\\
+					Portanto: $x_0 = (4*3*5 + 1*7*1) \modd 21$\\
 					$x_0 = 4$\\
 					Agora para o cálculo das outras 3 raízes temos:\\
-					$x_0^{'} = (x_2pp^{-1} - x_1qq^{-1}) \ mod \ pq$, $(pq - x_0)$,
+					$x_0^{'} = (x_2pp^{-1} - x_1qq^{-1}) \modd pq$, $(pq - x_0)$,
 					$(pq - x_0^{'})$\\
-					$x_0^{'} = (4*3*5 - 1*7*1) \ mod \ 21 = 11$\\
+					$x_0^{'} = (4*3*5 - 1*7*1) \modd 21 = 11$\\
 					$x_0^{''} = 21 - 4 = 17$\\
 					$x_0^{'''} = 21 - 11 = 10$\\
 					Pegando $y = 11$ temos $mdc(4+11, 21) = mdc(15, 21) = 3 = p$				
@@ -99,41 +99,41 @@
 	\subsection*{Exercício 2.}
 		\begin{itemize}
 			\item[1 -]
-				Sabemos que o testemunho $x = r^2 \ mod \ n $\\
-				Sabemos que $v = s^2 \ mod \ n$\\
+				Sabemos que o testemunho $x = r^2 \modd n $\\
+				Sabemos que $v = s^2 \modd n$\\
 				$y$ é autêntico, portanto vale que:
 				\begin{center}								
 					$ \begin{cases} 
-					y = r \ mod \ n, & e = 0 \\ 
-					y = rs \ mod \ n, & e = 1
+					y = r \modd n, & e = 0 \\ 
+					y = rs \modd n, & e = 1
 					\end{cases}
 					$
 				\end{center}
 				Para $e = 0$:\\
-				$xv^{e} \ mod \ n = xv^{0} \ mod \ n = x \ mod \ n$\\
+				$xv^{e} \modd n = xv^{0} \modd n = x \modd n$\\
 				\begin{center} 
-					$y^2 = r^2 \ mod \ n$\\
-					$y^2 = x \ mod \ n$\\
+					$y^2 = r^2 \modd n$\\
+					$y^2 = x \modd n$\\
 				\end{center}
 				Vemos que:
 				$ \begin{cases} 
-					xv^{e} \ mod \ n =  x \ mod \ n \\ y^2 = x \ mod \ n
+					xv^{e} \modd n =  x \modd n \\ y^2 = x \modd n
 					\end{cases}
 				$\\
-				Concluindo que, para $e = 0$ e $y$ autêntico, vale que $y^2 = xv^{e} \
-				mod \ n$\\
+				Concluindo que, para $e = 0$ e $y$ autêntico, vale que $y^2 = xv^{e} 
+				\modd n$\\
 				\newline
 				Para $e = 1$:\\
-				$xv^{e} \ mod \ n = xv \ mod \ n$\\
+				$xv^{e} \modd n = xv \modd n$\\
 				\begin{center} 
-					$y^2 = (rs)^2 \ mod \ n$\\
-					$y^2 = r^2s^2 \ mod \ n$\\
-					$y^2 = (r^2 \ mod \ n) \ (s^2 \ mod \ n)$\\
-					$y^2 = (x \ mod \ n) \ (v \ mod \ n)$\\
-					$y^2 = xv \ mod \ n$\\					
+					$y^2 = (rs)^2 \modd n$\\
+					$y^2 = r^2s^2 \modd n$\\
+					$y^2 = (r^2 \modd n) \ (s^2 \modd n)$\\
+					$y^2 = (x \modd n) \ (v \modd n)$\\
+					$y^2 = xv \modd n$\\					
 				\end{center}
-				Concluindo que, para $e = 1$ e $y$ autêntico, vale que $y^2 = xv^{e} \
-				mod \ n$
+				Concluindo que, para $e = 1$ e $y$ autêntico, vale que $y^2 = xv^{e}
+				\modd n$
 			\item[2 -]
 				Para o protocolo de identificação Feige, Fiet e Shamir os parâmetros
 				de segurança são:
@@ -149,7 +149,7 @@
 							O inteiro $\mathbf{r}$, protegido pela fatoração de $n$.
 							Conhecendo-se $\mathbf{r}$ algum mal intencionado
 							poderia enviar o testemunho $x$ para Beto, pois 
-							$x = r^2 \ mod \ n$ com $n$ conhecido e personificar
+							$x = r^2 \modd n$ com $n$ conhecido e personificar
 							Alice.
 						\item[•]
 							O desafio $e$ pode ser considerado um parâmetro de
@@ -158,7 +158,7 @@
 							$y = rs$ no passo 3, já que para $e = 1$ o passo 4
 							seria $y^2 = xv = r^2s^2$. Com o desafio $e = 0$, 
 							mapear todos os valores não auxilia o espião, já que a
-							resposta exige $y = \sqrt{x} \ mod \ n$ e fazer este
+							resposta exige $y = \sqrt{x} \modd n$ e fazer este
 							cálculo sem a fatoração de $n$ é computacionalmente
 							difícil. Portanto, pode-se dizer que o problema da fatoração
 							de $n$ também protege a verificação quando é feito o
@@ -184,57 +184,69 @@
 				\end{center}
 				\begin{center}
 					Cálculo de $v$:\\					
-					$v = s^2 \ mod \ n$\\
-					$v = 17^2 \ mod \ 21$\\
+					$v = s^2 \modd n$\\
+					$v = 17^2 \modd 21$\\
 					$\mathbf{v = 16}$\\
 				\end{center}
 				\begin{center}
 					Cálculo de $x$:\\					
-					$x = r^2 \ mod \ n$\\
-					$x = 13^2 \ mod \ 21$\\
+					$x = r^2 \modd n$\\
+					$x = 13^2 \modd 21$\\
 					$\mathbf{x = 1}$\\
 				\end{center}
 				\newpage
 				Para $e = 0$:
 				\begin{center}
 					Cálculo de $y$:\\					
-					$y = rs^{e} \ mod \ n$\\
-					$y = 13*17^{0} \ mod \ 21$\\					
+					$y = rs^{e} \modd n$\\
+					$y = 13*17^{0} \modd 21$\\					
 					$\mathbf{y = 13}$\\
 				\end{center}		
 				\begin{center}
 					Cálculo de $y^2$:\\					
-					$y^2 \ mod \ n$\\
-					$13^2 \ mod \ 21$\\
+					$y^2 \modd n$\\
+					$13^2 \modd 21$\\
 					$\mathbf{y^2 = 1}$\\
 				\end{center}
 				\begin{center}
-					Cálculo de $xv^e \ mod \ n$:\\					
-					$1*16^0 \ mod \ 21$\\
-					$\mathbf{xv^e \ mod \ n = 1}$\\
+					Cálculo de $xv^e \modd n$:\\					
+					$1*16^0 \modd 21$\\
+					$\mathbf{xv^e \modd n = 1}$\\
 				\end{center}
-				Verificando, portanto, que $y^2 = xv^e \ mod \ n$ para $e = 0$\\
+				Verificando, portanto, que $y^2 = xv^e \modd n$ para $e = 0$\\
 				Para $e = 1$:
 				\begin{center}
 					Cálculo de $y$:\\					
-					$y = rs^{e} \ mod \ n$\\
-					$y = 13*17^{1} \ mod \ 21$\\					
+					$y = rs^{e} \modd n$\\
+					$y = 13*17^{1} \modd 21$\\					
 					$\mathbf{y = 11}$\\
 				\end{center}		
 				\begin{center}
 					Cálculo de $y^2$:\\					
-					$y^2 \ mod \ n$\\
-					$11^2 \ mod \ 21$\\
+					$y^2 \modd n$\\
+					$11^2 \modd 21$\\
 					$\mathbf{y^2 = 16}$\\
 				\end{center}
 				\begin{center}
-					Cálculo de $xv^e \ mod \ n$:\\					
-					$1*16^1 \ mod \ 21$\\
-					$\mathbf{xv^e \ mod \ n = 16}$\\
+					Cálculo de $xv^e \modd n$:\\					
+					$1*16^1 \modd 21$\\
+					$\mathbf{xv^e \modd n = 16}$\\
 				\end{center}
-				Verificando, portanto, que $y^2 = xv^e \ mod \ n$ para $e = 1$	
+				Verificando, portanto, que $y^2 = xv^e \modd n$ para $e = 1$	
 		\end{itemize}				
 	\subsection*{Exercício 3.}
-																					
+		\begin{itemize}
+			\item[1 -]
+				Se $\mathit{s_A}$ for autêntico, então vale que:\\
+				\begin{center}
+					$\mathit{s_A} = (J_A)^{-s}$\\
+					$J_A = (\mathit{s_A})^{-v} \modd n$
+				\end{center}
+				Sabemos que, no protocolo de identificação vale que:\\
+				\begin{center}
+					$x = r^v \modd n$
+
+				\end{center}
+		\end{itemize}																		
 
 \end{document}
