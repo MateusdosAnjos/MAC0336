@@ -434,6 +434,39 @@
 				os parâmetros públicos da Alice verdadeira e como o $e$ foi
 				adivinhado pela falsa Alice, Beto chegará em $e = e'$ validando
 				a falsa Alice.
-											
+			\item[4 -]
+				O sucesso de tal falsificação é dado pela probabilidade da falsa
+				Alice acertar o parâmetro $e$.
+			\item[6 -]
+				Para $p = 17$, $q = 8$, $g = 7$, $x = 12$, $s = 9$, $r = 6$\\
+				Calcular	 $b$, $v$, $u$, Schnorr $(y, e)$ sobre $x$
+				\begin{itemize}
+					\item[]
+						Cálculo de $b$:\\
+						$b = g^{(p-1)/q} \modd p$\\
+						$b = 7^{(17-1)/8} \modd 17$\\
+						$\mathbf{b = 15}$
+					\item[]
+						Cálculo de $v$:\\
+						$v = b^{-s} \modd p$\\
+						$v = 15^{-9} \modd 17$\\
+						$\mathbf{v = 8}$
+					\item[]
+						Cálculo de $u$:\\
+						$u = b^r \modd p$\\
+						$u = 15^6 \modd 17$\\
+						$\mathbf{u = 13}$
+					\item[]
+						Cálculo de $e$:\\
+						$e = h(x||u)$\\
+						$e = h(1213)$\\
+						$\mathbf{e = 12}$	
+					\item[]
+						Cálculo de $y$:\\
+						$y = (s*e + r) \modd q$\\
+						$y = (9*12 + 6) \modd 8$\\
+						$\mathbf{y = 2}$						
+				\end{itemize}	
+			Portanto Schnorr $(y, e) = (2, 12)$	 							
 		\end{itemize}
 \end{document}
