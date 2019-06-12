@@ -428,16 +428,16 @@
 				ordens parecidas.
 			\item[3 -]
 				Para falsificar uma assinatura Schnorr sobre um texto x a falsa
-				Alice deverá adivinhar o $e$ a ser usado pela Alice verdadeira,
-				então a falsa Alice escolhe um $y$ e envia $(y, e)$ para Beto.
+				Alice deverá escolher $r$ a ser usado e calcular $u$ e $e$,
+				então a falsa Alice tenta adivinhar o $y$ e envia $(y, e)$ para Beto.
 				Como ele pensa que recebeu os parâmetros da Alice verdadeira,
 				irá calcular $z = b^yv^e \modd p$, $e' = h(x||z)$ utilizando
-				os parâmetros públicos da Alice verdadeira e como o $e$ foi
+				os parâmetros públicos da Alice verdadeira e como o $y$ foi
 				adivinhado pela falsa Alice, Beto chegará em $e = e'$ validando
 				a falsa Alice.
 			\item[4 -]
 				O sucesso de tal falsificação é dado pela probabilidade da falsa
-				Alice acertar o parâmetro $e$.
+				Alice acertar o parâmetro $y$.
 			\item[5 -]
 				Os parâmetros de segurança são:
 				\begin{itemize}
@@ -497,4 +497,7 @@
 				\end{itemize}		
 				Desta forma verificamos que $e = e' = 12$.									
 		\end{itemize}
+		\begin{center}
+			FIM FIM FIM FIM
+		\end{center}
 \end{document}
