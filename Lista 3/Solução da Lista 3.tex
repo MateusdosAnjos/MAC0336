@@ -51,16 +51,16 @@
 			\item[3 -]
 				Sabemos que $n = pq$.\\		
 				Assumindo que $y = 0$ fosse uma raiz válida que permitisse
-				a Beto obter a fatoração de $n$, uma vez que $y \neq x$ e
+				a Beto obter a fatoração de $n$, temos que $y \neq x$ e
 				$y \neq n - x$.\\
-				Beto conseguiria calcular a fatoração de $n$ apenas com
+				Desta forma Beto conseguiria calcular a fatoração de $n$ apenas com
 				o $x$ escolhido por ele, uma vez que $mdc(x+y, n) = p$ ou $q$, 
 				com $y = 0$ teríamos $mdc(x+0, n) = p$ ou $q$, ou
 				seja $mdc(x, n) = p$ ou $q$, sendo que Beto conhece $x$ e $n$.
-				Como não é possível obter $p$ ou $q$ apenas com $mdc(x, n)$,
-				$y = 0$ é inválido, caracterizando trapaça de Alice que sempre daria a
-				vitória a ela, pelo fato de Beto não conseguir provar que venceu 
-				(obter a fatoração de $n$).
+				Sendo assim, seria possível obter $p$ ou $q$ apenas com $mdc(x, n)$,
+				favorecendo Beto que sempre ganharia o jogo, uma vez que a prova
+				de sua vitória é obter a fatoração de $n$, pois mesmo que Alice 
+				enviasse $x$ ou $n-x$, Beto ainda seria capaz de mostrar que ganhou.
 			\item[4 -]
 				$p = 3$, $q = 7$, $x = 4$, $a = ?$, $y = ?$, $mdc(x + y, n) = ?$\\
 				$n = pq = 21$\\
@@ -142,8 +142,8 @@
 				de segurança são:
 					\begin{itemize}
 						\item[•]
-							O inteiro $\mathbf{s}$ relativamente primo a $n$, escolhido por 
-							Alice, protegido pelo problema da fatoração de $n$, sendo 
+							O inteiro $\mathbf{s}$ relativamente primo a $n$, escolhido 
+							por Alice, protegido pelo problema da fatoração de $n$, sendo 
 							computacionalmente difícil calcular $s$ conhecendo-se apenas
 							$v$ e $n$. O conhecimento de $\mathbf{s}$ facilitaria a
 							personificação de Alice (no passo do envio de $y = rs$ para
@@ -345,6 +345,7 @@
 							$s = v^{-1} \modd \Phi(n)$\\
 							$s = 11^{-1} \modd \Phi(n)$\\
 							$\mathbf{s  = 59}$
+						\newpage	
 						\item[]
 							Cálculo de $s_A$:\\
 							$s_A = (J_A)^{-s} \modd n$\\
@@ -437,6 +438,19 @@
 			\item[4 -]
 				O sucesso de tal falsificação é dado pela probabilidade da falsa
 				Alice acertar o parâmetro $e$.
+			\item[5 -]
+				Os parâmetros de segurança são:
+				\begin{itemize}
+					\item[]
+						$r$, parâmetro NONCE, protegido pelo PLD quando se
+						calcula $u = b^r \modd p$\\
+					\item[]
+						$s$, protegida pelo PLD na operação $v = b^{-s} \modd p$	
+				\end{itemize}	
+				O conhecimento desses parâmetros permite uma falsificação, uma
+				vez que conhecendo $r$ pode-se calcular $u$, com $u$ calcula-se
+				$e = h(x||u)$	 e com $e$ e $r$, conhecendo-se $s$, calcula-se
+				$y = (s*e + r) \modd q$	conseguindo falsificar a assinatura $(y, e)$.	
 			\item[6 -]
 				Para $p = 17$, $q = 8$, $g = 7$, $x = 12$, $s = 9$, $r = 6$\\
 				Calcular	 $b$, $v$, $u$, Schnorr $(y, e)$ sobre $x$
