@@ -467,6 +467,20 @@
 						$y = (9*12 + 6) \modd 8$\\
 						$\mathbf{y = 2}$						
 				\end{itemize}	
-			Portanto Schnorr $(y, e) = (2, 12)$	 							
+			Portanto Schnorr $(y, e) = (2, 12)$	 
+			\item[7 -]
+				Cálculo de $z = b^y v^e  \modd p$ e $e' = h(x||z)$:\\
+				\begin{itemize}
+					\item[]
+						Para $z$ temos:\\
+						$z = 15^2 8^{12}  \modd 17$\\
+						$\mathbf{z = 13}$
+					\item[]
+						Para $e'$ temos:\\
+						$e' = h(12||13)$\\
+						$e' = h(1213)$\\
+						$\mathbf{e' = 12}$	
+				\end{itemize}		
+				Desta forma verificamos que $e = e' = 12$.									
 		\end{itemize}
 \end{document}
