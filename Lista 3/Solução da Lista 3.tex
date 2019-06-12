@@ -394,6 +394,36 @@
 					Como sabemos que $u = b^r\modd p$\\
 					$z = u$\\
 					$\QED$
-				\end{center}				
+				\end{center}	
+			\newpage	
+			\item[2 -]
+				O algoritmo de Assinatura envolve:\\
+					\begin{itemize}
+						\item[1.]
+							Escolha de inteiro aleatório $r$ : $1 \leq r \leq q-1$
+						\item[2.]
+							Cálculo de $u = b^r \modd p$, $e = h(x||u)$ e
+							$y = (s*e + r) \modd q$
+						 \item[3.]
+						 	A assinatura é $(y, e)$		
+					\end{itemize}
+				O algoritmo de Verificação envolve:\\
+					\begin{itemize}
+						\item[1.]
+							Autenticar as informações públicas $p, q, b, v$ utilizando
+							a assinatura $A_T()$ da autoridade idônea $T$
+						\item[2.]
+							Cálculo de $z = b^yv^e \modd p$, $e' = h(x||z)$
+						\item[3.]
+							Verificar se $e = e'$	
+					\end{itemize}		
+				Percebemos que a \textbf{Assinatura} é mais \textbf{rápida} do que a
+				verificação, pois são executadas menos multiplicações (operação mais
+				custosa).  Escolher um inteiro aleatório é relativamente rápido, assim
+				como autenticar as informações públicas. Ambos os algoritmos devem
+				calcular $h()$, porém a assinatura deve calcular apenas uma 
+				exponencial ($b^r$) enquanto a verificação deve fazer duas
+				exponenciais ($b^y$ e $v^e$) sendo que os expoentes são de
+				ordens parecidas.							
 		\end{itemize}
 \end{document}
