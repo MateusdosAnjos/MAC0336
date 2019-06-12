@@ -424,6 +424,16 @@
 				calcular $h()$, porém a assinatura deve calcular apenas uma 
 				exponencial ($b^r$) enquanto a verificação deve fazer duas
 				exponenciais ($b^y$ e $v^e$) sendo que os expoentes são de
-				ordens parecidas.							
+				ordens parecidas.
+			\item[3 -]
+				Para falsificar uma assinatura Schnorr sobre um texto x a falsa
+				Alice deverá adivinhar o $e$ a ser usado pela Alice verdadeira,
+				então a falsa Alice escolhe um $y$ e envia $(y, e)$ para Beto.
+				Como ele pensa que recebeu os parâmetros da Alice verdadeira,
+				irá calcular $z = b^yv^e \modd p$, $e' = h(x||z)$ utilizando
+				os parâmetros públicos da Alice verdadeira e como o $e$ foi
+				adivinhado pela falsa Alice, Beto chegará em $e = e'$ validando
+				a falsa Alice.
+											
 		\end{itemize}
 \end{document}
