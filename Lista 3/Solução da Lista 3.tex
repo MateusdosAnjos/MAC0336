@@ -373,5 +373,27 @@
 	\subsection*{Exercício 4.}
 		\begin{itemize}
 			\item[1 -]
+				Temos que $e = h(x||u)$ e $e' = h(x||z)$, portanto para mostrar
+				que $e = e'$ basta mostrar que $u = z$.\\
+				Temos que $u = b^r \modd p$, $v = b^{-s} \modd p$,
+				$y = (s*e + r) \modd q$.
+				\begin{center}
+					Pela definição de $z$:\\
+					$z = b^{y} \ v^e \modd p$\\
+					Substituindo $y$ por $ (s*e + r) \modd q$:\\
+					$z = b^{(s*e + r)} \ v^e \modd p$\\
+					Distribuindo o expoente $(s*e + r)$:\\
+					$z = b^{(s*e)} b^{r} \ v^e \modd p$\\
+					Unindo os termos com expoente $e$:\\
+					$z = (b^{s}v)^{e} b^{r} \modd p$\\
+					Substituindo $v$ por $b^{-s}$:\\
+					$z = (b^{s}b^{-s})^{e} b^{r} \modd p$\\
+					Percebemos que o termo $[b^{s} \ b^{-s}]^{e}$ é igual
+					a $[b^{s - s}]^{e}$, ou seja $[b^{0}]^{e} = 1$:\\
+					$z = b^r \modd p$\\
+					Como sabemos que $u = b^r\modd p$\\
+					$z = u$\\
+					$\QED$
+				\end{center}				
 		\end{itemize}
 \end{document}
