@@ -437,7 +437,14 @@
 				a falsa Alice.
 			\item[4 -]
 				O sucesso de tal falsificação é dado pela probabilidade da falsa
-				Alice acertar o parâmetro $y$.
+				Alice acertar o parâmetro $y$. Porém como $e$ é calculado
+				a partir de uma função de hash $h(x||u)$ devido às colisões de
+				$h()$ existe mais de um valor de $u$ que resulta num mesmo $e$,
+				sendo assim Alice falsa pode mapear os valores de $r$ para 
+				os quais $h(x||u)$ resultam num mesmo $e$. A partir disso o
+				trabalho de descobrir os valores de $y$ relacionados a $r$
+				são facilitados, pois falsa Alice possui uma nova informação
+				sobre como $y$ é gerado.
 			\item[5 -]
 				Os parâmetros de segurança são:
 				\begin{itemize}
